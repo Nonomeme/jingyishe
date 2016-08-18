@@ -1,47 +1,59 @@
+#coding=utf-8
 from __future__ import unicode_literals
 
-import datetime
-from uuid import uuid4
 from django.db import models
-from django.contrib.auth.models import User
-from django.utils import timezone
-from django.contrib.auth.models import AbstractUser
+# from django.contrib.auth.models import User
+# from django.contrib.auth.models import AbstractUser
+
 
 # Create your models here.
-class NewUser(AbstractUser):
-    mail = models.EmailField(blank=True)
-    tag = models.CharField(max_length=256,blank=True)
-    followingQuestion = models.ManyToManyField('question.Question',blank=True)
-    followingPerson = models.ManyToManyField("self",blank=True)
+# class NewUser(AbstractUser):
+# mail = models.EmailField(blank=True)
+#     tag = models.CharField(max_length=256, blank=True)
+#     followingQuestion = models.ManyToManyField('question.Question', blank=True)
+#     followingPerson = models.ManyToManyField("self", blank=True)
+#
+#     def __unicode__(self):
+#         return self.username
 
-    def __str__(self):
+class User(models.Model):
+    id = models.AutoField(primary_key=True, editable=False)
+    username = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
+    mail = models.EmailField()
+    tag = models.CharField(max_length=256, blank=True)
+    followingQuestion = models.ManyToManyField('question.Question', blank=True)
+    followingPerson = models.ManyToManyField("self", blank=True,symmetrical=False)
+
+    def __unicode__(self):
         return self.username
 
+
 class Question(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    id = models.AutoField(primary_key=True, editable=False)
     title = models.CharField(max_length=256)
     description = models.TextField()
     keyword = models.CharField(max_length=256)
-    isPublic = models.BooleanField()
+    isPublic = models.BooleanField(default=True)
     publishDate = models.DateTimeField(auto_now_add=True)
     attachedFile = models.FileField(blank=True)
-    isSolved = models.BooleanField()
-    questioner = models.ForeignKey(NewUser)
+    isSolved = models.BooleanField(default=False)
+    questioner = models.ForeignKey(User)
 
-    def __str__(self):
-        return self.title.encode('utf8')
+    def __unicode__(self):
+        return self.title
+
 
 class Answer(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    id = models.AutoField(primary_key=True, editable=False)
     content = models.TextField()
     question = models.ForeignKey(Question)
-    answerer = models.ForeignKey(NewUser)
-    isAnonym = models.BooleanField()
+    answerer = models.ForeignKey(User)
     publishDate = models.DateTimeField(auto_now_add=True)
-    attachedFile = models.FileField(blank=True)
+    attachedFile = models.FileField(blank=True, upload_to='./upload/')
     isPublic = models.BooleanField()
     grade = models.IntegerField(default=0)
 
-    def __str__(self):
-        return self.question.title.encode('utf8')
+    def __unicode__(self):
+        return self.question.title
 

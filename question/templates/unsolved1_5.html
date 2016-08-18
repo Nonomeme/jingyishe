@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{{question.title}}</title>
+    <style type="text/css">
+        #nav {
+            width: auto;
+            height: 30px;
+            list-style-type: none;
+            background-color: #000;
+        }
+
+        #nav li {
+            float: left;
+            margin-left: 30px;
+        }
+
+        #nav li a {
+            width: 150px;
+            height: 30px;
+            background: #000;
+            color: #FFF;
+            font-size: 20px;
+            text-align: center;
+            line-height: 30px;
+            text-decoration: none;
+            display: block;
+        }
+
+        #nav li a:hover {
+            color: #000;
+            background: #FFF;
+        }
+
+        #homedaohang #hometop {
+            height: 60px;
+            width: 100%;
+            text-align: right;
+            font-size: large;
+        }
+
+        #homedaohang #hometop #toplogo {
+            height: 50px;
+            width: 98%;
+            margin-top: 0px;
+            margin-right: 0%;
+            margin-bottom: 0px;
+            margin-left: 2%;
+            font-size: large;
+            float: none;
+        }
+
+        #homedaohang #登录注册 {
+            height: 30px;
+            width: 220px;
+            margin-top: 20px;
+            margin-right: 10px;
+            margin-bottom: 0px;
+            margin-left: 850px;
+            text-align: right;
+            font-size: x-large;
+        }
+
+        #homedaohang table {
+            font-size: medium;
+        }
+
+        #homedaohang {
+            height: 700px;
+            width: 100%;
+        }
+
+        #homedaohang #hometop #toplogo #举手 {
+            height: 30px;
+            width: 50px;
+            margin-top: 35px;
+            margin-right: 100px;
+            margin-bottom: 35px;
+            margin-left: 300px;
+        }
+
+        #homedaohang #hometop #toplogo table tr td {
+            font-size: medium;
+        }
+
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+
+        #homedaohang #tablehome {
+            height: 850px;
+            width: 84%;
+            margin-top: 0px;
+            margin-right: 8%;
+            margin-bottom: 0px;
+            margin-left: 8%;
+        }
+
+        .textsize {
+            font-size: large;
+        }
+
+        .hrtop {
+            margin-bottom: 0;
+        }
+
+        .hrbot {
+            margin-top: 0;
+        }
+
+        }
+        .div-a {
+            float: left;
+            width: 49%;
+            border: 0px solid #F00
+        }
+
+        .div-b {
+            float: left;
+            width: 49%;
+            border: 1px solid #F00
+        }
+
+        #homedaohang #top {
+            height: 30px;
+            width: 100%;
+        }
+
+        a:link {
+            text-decoration: none;
+        }
+
+        a:visited {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        a:active {
+            text-decoration: none;
+            font-size: small;
+        }
+
+        .textsize1 {
+            font-size: larger;
+        }
+
+        .textsize2 {
+            font-size: x-large;
+        }
+
+        .style1 {
+            color: #FFF;
+        }
+    </style>
+    <script type="text/javascript">
+        function MM_popupMsg(msg) { //v1.0
+            alert(msg);
+        }
+    </script>
+</head>
+
+<body>
+<div id="homedaohang">
+    <div id="hometop">
+        <div id="toplogo" align="left">
+            <table width="100%" border="0" cellspacing="1" cellpadding="1">
+                <tr>
+                    <td width="12%"><a href="/index"><img src="/static/images/font1.jpg" width="125" height="50"/></a>
+                    </td>
+                    <td width="59%" align="left">
+                        <form id="form3" name="form3" method="post" action="">
+                            <p>
+                                <label for="search"></label>
+                                <input name="search" type="text" id="search"
+                                       style="width: 50; height: 50; font-size: 20px" size="45" maxlength="80"/>
+                                <input type="submit" name="searchbt" id="searchbt" value="搜索"
+                                       style="height:40; width:50; font-size:20px"/>
+                            </p>
+                        </form>
+                    </td>
+                    <td width="29%" align="right"><a href="/index">精益社首页</a> | <a href="/question">提问</a> |
+                        {% if username == '' %}
+                        <a href="/login">登录</a> | <a href="register5.html">注册</a>
+                        {% else %}
+                        {{username}} | <a href="/logout">注销</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+            <br/>
+        </div>
+        <hr/>
+    </div>
+    <div id="tablehome">
+        <table width="100%" height="409" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="37%" height="68" align="left" style=" border-bottom:#999  dashed 1px">
+                    <form method="" action="follow">
+                        {% csrf_token %}
+                        <b class="textsize2"><img src="/static/images/star1.jpg" width="27" height="26"/>{{question.title}}</b>
+                        {% if isFollowing == 2 %}
+                        <input type="submit" onclick="MM_popupMsg('你已取消关注此问题！')"
+                               value="取消关注"/>
+                        {% elif isFollowing == 1 %}
+                        <input type="submit" onclick="MM_popupMsg('你已关注此问题！')"
+                               value="关注问题"/>
+                        {% endif %}
+                    </form>
+                </td>
+                <td width="38%" height="68" align="left" style=" border-bottom:#999  dashed 1px">&nbsp;&nbsp;已发布：{{question.publishDate}}&nbsp;</td>
+                <form method="" action="{{question.questioner.id}}/follow">
+                    <td width="25%" height="68" align="left" style=" border-bottom:#999  dashed 1px">来自 <a
+                            href="/users/{{question.questioner.id}}">{{question.questioner.username}}</a>
+                        {% csrf_token %}
+                        {% if isFollowing2 == 2 %}
+                        <input type="submit" onclick="MM_popupMsg('你已取消关注Ta！')"
+                               value="取消关注"/>
+                        {% elif isFollowing2 == 1 %}
+                        <input type="submit" onclick="MM_popupMsg('你已关注Ta！')"
+                               value="关注Ta"/>
+                        {% endif %}
+                    </td>
+                </form>
+            </tr>
+            <tr>
+                <td height="34" colspan="3" align="left" valign="top" bgcolor="#FAFAFA"><p><b>问题描述：</b></p>
+                    <p>{{question.description}}</p></td>
+            </tr>
+            <tr>
+                <td height="42" colspan="3" align="left" valign="middle" style=" border-bottom:#999 solid 2px">
+                    <label><b>关键词：</b></label>
+                    {{question.keyword}}
+                </td>
+            </tr>
+        </table>
+        <form id="commentForm" name="comment" enctype="multipart/form-data" method="post" action="comment/">
+            {% csrf_token %}
+            {{form.non_field_errors}}
+            <table width="100%" border="0" cellspacing="10" cellpadding="0" style="border:1px solid #CCC">
+                <tr>
+                    <td width="34%"><b class="textsize2">写回答</b></td>
+                    <td width="66%" align="left">
+                        <label for="{{form.attachedFile.id_for_label}}"><img src="/static/images/filePDF.jpg" width="34"
+                                                                             height="32"/>附加文件</label>
+                        {{form.attachedFile}}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label for="{{form.content.id_for_label}}"></label>
+                        {{form.content}}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        {{form.isPublic}}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="right">
+                        <input type="submit" name="tijiao" id="tijiao" style="width:30; height:22; font-size:18px"
+                               value="发布" onclick="check()"/>
+                        &nbsp;
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <p>&nbsp;</p>
+    </div>
+    <div id="bottom"
+         style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#333; color:#FFF"
+         align="center">
+        &nbsp; <a href="/index" class="style1">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
+                                                                         class="style1">最新咨询</a>&nbsp; |&nbsp; <a
+            href="/expert" class="style1">专家咨询</a>&nbsp; |&nbsp; <a href="/case" class="style1">案例分析</a>&nbsp;
+        |&nbsp; <a href="/consultion" class="style1">AI咨询</a>&nbsp; |&nbsp; <a href="/aboutus" class="style1">关于我们</a>&nbsp;
+    </div>
+    <br/>
+</div>
+</body>
+</html>
