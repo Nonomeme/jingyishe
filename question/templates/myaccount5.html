@@ -182,7 +182,7 @@
                     <td width="59%" align="left"><b class="textsize3"><u>{{user.mail}}</u>的主页</b></td>
                     <td width="29%" align="right"><a href="/index">精益社首页</a> | <a href="/question">提问</a> |
                         {% if username == '' %}
-                        <a href="/login">登录</a> | <a href="register5.html">注册</a>
+                        <a href="/login">登录</a> | <a href="/register">注册</a>
                         {% else %}
                         {{username}} | <a href="/logout">注销</a>
                         {% endif %}
@@ -305,6 +305,7 @@
         </table>
         <br/>
 
+        {% if isFollowing == 0%}
         <table width="100%" border="0" cellspacing="10" cellpadding="0" style="border:1px solid #CCC">
             <tr>
                 <td height="21" colspan="6">
@@ -378,7 +379,39 @@
                 </td>
             </tr>
         </table>
+        {% else %}
+        <table width="100%" border="0" cellspacing="10" cellpadding="0" style="border:1px solid #CCC">
+            <tr>
+                <td height="39" colspan="5" align="">
+                    <b class="textsize1">给Ta留言</b>
+                    <input name="radio" type="radio" id="公开2" value="公开" checked="checked"/>
+                    <label for="公开2"></label>
+                    公开 &nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="radio" id="仅提问者可见2" value="仅提问者可见"/>
+                    <label for="仅提问者可见2"></label>
+                    仅Ta可见 </span></td>
+            </tr>
+            <tr>
+                <td height="21" colspan="5">
+                    <form id="form1" name="form1" method="post" action="">
+                        <label for="留言"></label>
+                        <textarea name="留言" id="留言" cols="148" rows="8"></textarea>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td height="21" colspan="5" align="right">
+                    <form id="form2" name="form2" method="post" action="">
 
+                        <input type="submit" name="send" id="send" value="发送"
+                               style="width:30; height:22; font-size:18px"/>
+                        <input type="button" name="cancel" id="cancel" value="取消"
+                               style="width:30; height:22; font-size:18px"/>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        {% endif %}
     </div>
     <div id="bottom"
          style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#333; color:#FFF"

@@ -29,4 +29,5 @@ urlpatterns = [
     url(r'^aboutus/$', views.aboutus, name='aboutus'),
     url(r'^users/(?P<user_id>[0-9]+)/$', views.userInfo, name='userInfo'),
     url(r'^users/(?P<publisher_id>[0-9]+)/follow/$', views.followUser, name='followUser'),
+    url(r'^consultion/$',views.consultion,name='consultion')
 ]

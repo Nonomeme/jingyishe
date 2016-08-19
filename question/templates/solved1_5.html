@@ -193,7 +193,7 @@
                     </td>
                     <td width="29%" align="right"><a href="/index">精益社首页</a> | <a href="/question">提问</a> |
                         {% if username == '' %}
-                        <a href="/login">登录</a> | <a href="register5.html">注册</a>
+                        <a href="/login">登录</a> | <a href="/register">注册</a>
                         {% else %}
                         {{username}} | <a href="/logout">注销</a>
                         {% endif %}
@@ -259,7 +259,7 @@
                 <td height="42" align="left" valign="middle" style=" border-bottom:#999 solid 2px"><b class="textsize1">{{questionFollowers.count}}人关注</b>
                 </td>
                 <td height="42" align="center" valign="middle" style=" border-bottom:#999 solid 2px"><a
-                        href="comment"><img src="/static/images/sign2.jpg" width="51" height="50"/>添加回答</a>
+                        href="answer"><img src="/static/images/sign2.jpg" width="51" height="50"/>添加回答</a>
                 </td>
             </tr>
         </table>
@@ -339,7 +339,7 @@
 
         <br/>
 
-        <form id="commentForm" name="comment" enctype="multipart/form-data" method="post" action="comment/">
+        <form id="answerForm" name="answer" enctype="multipart/form-data" method="post" action="answer/">
             {% csrf_token %}
             {{form.non_field_errors}}
             <table width="100%" border="0" cellspacing="10" cellpadding="0" style="border:1px solid #CCC">

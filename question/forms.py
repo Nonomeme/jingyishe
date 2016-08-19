@@ -38,3 +38,15 @@ class QuestionForm(forms.Form):
     keyword = forms.CharField(widget=forms.TextInput(attrs={'size': '28'}))
     attachedFile = forms.FileField(required=False)
     isPublic = forms.ChoiceField(choices=CHOICES_FOR_QUESTION, widget=forms.RadioSelect, initial='1')
+
+
+class SearchForm(forms.Form):
+    keyword = forms.CharField(required=False,
+                              widget=forms.TextInput(
+                                  attrs={'style': 'width: 60; height: 40; font-size: 18px', 'size': '60',
+                                         'placeholder': '请输入关键词'}))
+    hasPic = forms.BooleanField(required=False)
+    isToday = forms.BooleanField(required=False)
+    isHot = forms.BooleanField(required=False)
+
+

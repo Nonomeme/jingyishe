@@ -1,22 +1,28 @@
 # coding=utf-8
 import datetime
 
+from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 
-from .forms import AnswerForm, UserForm, LoginForm, QuestionForm
-from .models import Question, Answer, User
+from .forms import AnswerForm, UserForm, LoginForm, QuestionForm, SearchForm
+from .models import Question, Answer, User, Expert, Message
 
 
 # Create your views here.
 
 def index(request):
     username = request.session.get('username', '')
-    user = User.objects.get(username=username)
     latest_questions = Question.objects.order_by("publishDate").reverse()[0:8]
     form = QuestionForm()
-    return render(request, 'home5.html',
-                  {'latest_questions': latest_questions, 'username': username, 'form': form, 'user': user})
+    if username == '':
+        return render(request, 'home5.html',
+                      {'latest_questions': latest_questions, 'username': username, 'form': form})
+
+    else:
+        user = User.objects.get(username=username)
+        return render(request, 'home5.html',
+                      {'latest_questions': latest_questions, 'username': username, 'form': form, 'user': user})
 
 
 def login(request):
@@ -28,7 +34,12 @@ def login(request):
             user = User.objects.filter(username__exact=username, password__exact=password)
             if user:
                 request.session['username'] = username
-                return HttpResponseRedirect('/index/')
+                redirectUrl = request.session.get('redirect_after_login', '')
+                if redirectUrl == '':
+                    return HttpResponseRedirect('/index/')
+                else:
+                    del request.session['redirect_after_login']
+                    return HttpResponseRedirect(redirectUrl)
             else:
                 return HttpResponseRedirect('/login')
     else:
@@ -88,9 +99,12 @@ def detail(request, question_id):
     #                    'isFollowing2': isFollowing2, 'form': form})
 
 
-def comment(request, question_id):
+def answer(request, question_id):
     username = request.session.get('username', '')
     if request.method == 'POST':
+        if username == '':
+            request.session['redirect_after_login'] = request.get_full_path()
+            return HttpResponseRedirect('/login')
         form = AnswerForm(request.POST, request.FILES)
         if form.is_valid():
             answer = Answer()
@@ -116,6 +130,9 @@ def comment(request, question_id):
 def question(request):
     username = request.session.get('username', '')
     if request.method == 'POST':
+        if username == '':
+            request.session['redirect_after_login'] = request.get_full_path()
+            return HttpResponseRedirect('/login')
         form = QuestionForm(request.POST, request.FILES)
         if username == '':
             return HttpResponseRedirect('/login')
@@ -171,8 +188,27 @@ def followPerson(request, question_id, publisher_id):
 
 def latestQuestion(request):
     username = request.session.get('username', '')
-    latest_questions = Question.objects.order_by("publishDate")[0:10]
-    return render(request, 'newest_info5_1.html', {'username': username, 'questions': latest_questions})
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            keyword = form.cleaned_data['keyword']
+            questions = Question.objects.filter(
+                Q(title__contains=keyword) | Q(keyword__contains=keyword)).order_by('publishDate').reverse()
+            if form.cleaned_data['hasPic']:
+                questions = questions.exclude(attachedFile='')
+            if form.cleaned_data['isToday']:
+                today = datetime.date.today()
+                questions = questions.filter(publishDate__year=today.year).filter(
+                    publishDate__month=today.month).filter(publishDate__day=today.day)
+            # if form.cleaned_data['isHot']:
+
+            questions = questions[:10]
+
+        return render(request, 'newestinfo.html', {'username': username, 'questions': questions, 'form': form})
+    else:
+        latest_questions = Question.objects.order_by("publishDate").reverse()[0:10]
+        form = SearchForm()
+        return render(request, 'newestinfo.html', {'username': username, 'questions': latest_questions, 'form': form})
 
 
 def aboutus(request):
@@ -212,3 +248,17 @@ def followUser(request, publisher_id):
         user.followingPerson.add(publisher)
 
     return HttpResponseRedirect('/users/' + publisher_id)
+
+
+def consultion(request):
+    username = request.session.get('username', '')
+    if username == '':
+        request.session['redirect_after_login'] = request.get_full_path()
+        return HttpResponseRedirect('/login')
+    return render(request, 'AI5.html', {'username': username})
+
+
+def expert(request):
+    username = request.session.get('username', '')
+    experts = Expert.objects.all()[:10]
+    return render(request,'expert5_1.html',{'username':username,'experts':experts})

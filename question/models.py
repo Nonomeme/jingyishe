@@ -1,7 +1,9 @@
-#coding=utf-8
+# coding=utf-8
 from __future__ import unicode_literals
 
 from django.db import models
+
+
 # from django.contrib.auth.models import User
 # from django.contrib.auth.models import AbstractUser
 
@@ -23,7 +25,7 @@ class User(models.Model):
     mail = models.EmailField()
     tag = models.CharField(max_length=256, blank=True)
     followingQuestion = models.ManyToManyField('question.Question', blank=True)
-    followingPerson = models.ManyToManyField("self", blank=True,symmetrical=False)
+    followingPerson = models.ManyToManyField("self", blank=True, symmetrical=False)
 
     def __unicode__(self):
         return self.username
@@ -57,3 +59,24 @@ class Answer(models.Model):
     def __unicode__(self):
         return self.question.title
 
+
+class Message(models.Model):
+    id = models.AutoField(primary_key=True, editable=False)
+    message = models.TextField()
+    commenter = models.OneToOneField(User)
+    receiver = models.OneToOneField(User, related_name='receiver_id')
+    isPublic = models.BooleanField()
+
+    def __unicode__(self):
+        return self.message
+
+
+class Expert(models.Model):
+    id = models.AutoField(primary_key=True, editable=False)
+    name = models.CharField(max_length=20)
+    university = models.CharField(max_length=50)
+    tag = models.CharField(max_length=200)
+    link = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return self.name
