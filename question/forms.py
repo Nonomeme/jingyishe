@@ -6,6 +6,7 @@ from models import User
 
 CHOICES_FOR_ANSWER = (('1', u'公开'), ('2', u'仅提问者可见'))
 CHOICES_FOR_QUESTION = (('1', u'公开'), ('2', u'仅注册用户可见'))
+CHOICES_FOR_MESSAGE = (('1', u'公开'), ('2', u'仅Ta可见'))
 
 
 class AnswerForm(forms.Form):
@@ -50,3 +51,6 @@ class SearchForm(forms.Form):
     isHot = forms.BooleanField(required=False)
 
 
+class MessageForm(forms.Form):
+    message = forms.CharField(widget=forms.Textarea(attrs={'cols': '148', 'rows': '8'}))
+    isPublic = forms.ChoiceField(choices=CHOICES_FOR_MESSAGE, widget=forms.RadioSelect, initial='1')

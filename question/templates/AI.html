@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>{{question.title}}</title>
+    <title>AI咨询--精益社</title>
     <style type="text/css">
         #nav {
             width: auto;
@@ -93,12 +93,12 @@
         }
 
         #homedaohang #tablehome {
-            height: 850px;
-            width: 84%;
+            height: 700px;
+            width: 90%;
             margin-top: 0px;
-            margin-right: 8%;
+            margin-right: 5%;
             margin-bottom: 0px;
-            margin-left: 8%;
+            margin-left: 5%;
         }
 
         .textsize {
@@ -153,7 +153,7 @@
         }
 
         .textsize2 {
-            font-size: x-large;
+            font-size: xx-large;
         }
 
         .style1 {
@@ -161,8 +161,10 @@
         }
     </style>
     <script type="text/javascript">
-        function MM_popupMsg(msg) { //v1.0
-            alert(msg);
+        function MM_goToURL() { //v3.0
+            var i, args = MM_goToURL.arguments;
+            document.MM_returnValue = false;
+            for (i = 0; i < (args.length - 1); i += 2) eval(args[i] + ".location='" + args[i + 1] + "'");
         }
     </script>
 </head>
@@ -170,25 +172,15 @@
 <body>
 <div id="homedaohang">
     <div id="hometop">
+
         <div id="toplogo" align="left">
             <table width="100%" border="0" cellspacing="1" cellpadding="1">
                 <tr>
-                    <td width="12%"><a href="/index"><img src="/static/images/font1.jpg" width="125" height="50"/></a>
-                    </td>
-                    <td width="59%" align="left">
-                        <form id="form3" name="form3" method="post" action="">
-                            <p>
-                                <label for="search"></label>
-                                <input name="search" type="text" id="search"
-                                       style="width: 50; height: 50; font-size: 20px" size="45" maxlength="80"/>
-                                <input type="submit" name="searchbt" id="searchbt" value="搜索"
-                                       style="height:40; width:50; font-size:20px"/>
-                            </p>
-                        </form>
-                    </td>
+                    <td width="12%"><img src="/static/images/font1.jpg" width="125" height="50"/></td>
+                    <td width="59%" align="left"><b class="textsize2">智能机器人</b></td>
                     <td width="29%" align="right"><a href="/index">精益社首页</a> | <a href="/question">提问</a> |
                         {% if username == '' %}
-                        <a href="/login">登录</a> | <a href="register5.html">注册</a>
+                        <a href="/login">登录</a> | <a href="register.html">注册</a>
                         {% else %}
                         {{username}} | <a href="/logout">注销</a>
                         {% endif %}
@@ -199,80 +191,43 @@
         </div>
         <hr/>
     </div>
+    <form id="form6" name="form6" method="post" action="">
+        <p>&nbsp;&nbsp;</p>
+    </form>
     <div id="tablehome">
-        <table width="100%" height="409" border="0" align="center" cellpadding="0" cellspacing="0">
+        <table width="1089" height="629" border="0" align="center" cellpadding="0" cellspacing="10"
+               style="border:1px solid #CCC  ">
             <tr>
-                <td width="37%" height="68" align="left" style=" border-bottom:#999  dashed 1px">
-                    <form method="" action="follow">
-                        {% csrf_token %}
-                        <b class="textsize2"><img src="/static/images/star1.jpg" width="27" height="26"/>{{question.title}}</b>
-                        {% if isFollowing == 2 %}
-                        <input type="submit" onclick="MM_popupMsg('你已取消关注此问题！')"
-                               value="取消关注"/>
-                        {% elif isFollowing == 1 %}
-                        <input type="submit" onclick="MM_popupMsg('你已关注此问题！')"
-                               value="关注问题"/>
-                        {% endif %}
-                    </form>
-                </td>
-                <td width="38%" height="68" align="left" style=" border-bottom:#999  dashed 1px">&nbsp;&nbsp;已发布：{{question.publishDate}}&nbsp;</td>
-                <form method="" action="{{question.questioner.id}}/follow">
-                    <td width="25%" height="68" align="left" style=" border-bottom:#999  dashed 1px">来自 <a
-                            href="/users/{{question.questioner.id}}">{{question.questioner.username}}</a>
-                        {% csrf_token %}
-                        {% if isFollowing2 == 2 %}
-                        <input type="submit" onclick="MM_popupMsg('你已取消关注Ta！')"
-                               value="取消关注"/>
-                        {% elif isFollowing2 == 1 %}
-                        <input type="submit" onclick="MM_popupMsg('你已关注Ta！')"
-                               value="关注Ta"/>
-                        {% endif %}
-                    </td>
-                </form>
+                <th height="23" colspan="2" align="center" valign="middle">AI咨询</th>
             </tr>
             <tr>
-                <td height="34" colspan="3" align="left" valign="top" bgcolor="#FAFAFA"><p><b>问题描述：</b></p>
-                    <p>{{question.description}}</p></td>
+                <td height="333" colspan="2" align="left" valign="top" bgcolor="#FAFAFA"><img src="/static/images/man_img.jpg"
+                                                                                              width="29" height="29"/>:
+                    亲爱的精益社用户，小益24小时随时为你服务！
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p></td>
             </tr>
             <tr>
-                <td height="42" colspan="3" align="left" valign="middle" style=" border-bottom:#999 solid 2px">
-                    <label><b>关键词：</b></label>
-                    {{question.keyword}}
+                <td height="23" colspan="2" align="left">
+                    <p>请输入你的问题</p></td>
+            </tr>
+            <tr>
+                <td height="149" colspan="2" align="center" valign="top">
+                    <label for="miaso"></label>
+                    <textarea name="miaso" id="miaso" cols="150" rows="10"></textarea>
                 </td>
+            </tr>
+            <tr>
+                <td width="633" height="40" align="left" valign="middle"><img src="/static/images/favorite1.jpg" width="34"
+                                                                              height="26"/>满意度评价
+                </td>
+                <td width="430" align="right" valign="middle"><input type="reset" name="button4" id="button4" value="重置"
+                                                                     style="width:30; height:22; font-size:16px"/>
+                    <input type="submit" name="button3" id="button3" value="提交"
+                           style="width:30; height:22; font-size:16px"/></td>
+                <td width="4" align="left">&nbsp;</td>
             </tr>
         </table>
-        <form id="commentForm" name="comment" enctype="multipart/form-data" method="post" action="comment/">
-            {% csrf_token %}
-            {{form.non_field_errors}}
-            <table width="100%" border="0" cellspacing="10" cellpadding="0" style="border:1px solid #CCC">
-                <tr>
-                    <td width="34%"><b class="textsize2">写回答</b></td>
-                    <td width="66%" align="left">
-                        <label for="{{form.attachedFile.id_for_label}}"><img src="/static/images/filePDF.jpg" width="34"
-                                                                             height="32"/>附加文件</label>
-                        {{form.attachedFile}}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <label for="{{form.content.id_for_label}}"></label>
-                        {{form.content}}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        {{form.isPublic}}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="right">
-                        <input type="submit" name="tijiao" id="tijiao" style="width:30; height:22; font-size:18px"
-                               value="发布" onclick="check()"/>
-                        &nbsp;
-                    </td>
-                </tr>
-            </table>
-        </form>
         <p>&nbsp;</p>
     </div>
     <div id="bottom"

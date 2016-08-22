@@ -245,7 +245,7 @@
                 <td colspan="2" valign="top">
                     <ul>
                         {% for answer in answers %}
-                        <li><a href ="/question/{{answer.question.id}}">{{answer.question.title}}
+                        <li><a href="/question/{{answer.question.id}}">{{answer.question.title}}
                             {% if answer.question.isSolved %}
                             【已解决】
                             {% endif %}
@@ -264,7 +264,8 @@
                         <li>&nbsp; </li>
                     </ul>
                 </td>
-                <td align="center" valign="top"><img src="/static/images/评分.jpg" alt="score" width="227" height="133"/></td>
+                <td align="center" valign="top"><img src="/static/images/评分.jpg" alt="score" width="227" height="133"/>
+                </td>
             </tr>
             <tr>
         </table>
@@ -285,7 +286,7 @@
                         <br/>
                         <li> 关注了 <a href="profile_zs_5.html">王五</a></li>
                         <br/>
-                        <li> 关注了问题 <a href="solved1_5.html">如何计算这个2+2=?</a></li>
+                        <li> 关注了问题 <a href="detail.html">如何计算这个2+2=?</a></li>
                         <br/>
                         <li>&#8230; </li>
                     </ul>
@@ -319,98 +320,65 @@
             <tr>
                 <td height="21" colspan="4" valign="top">
                     <ul>
-                        <li><a href="profile_zs_5.html">张三</a> 留言：请问如何求解1+2=？&#8230;【公开】</li>
-                        <br/>
-                        <li><a href="profile_zs_5.html">洪七</a> 留言：请问问题1+9=？如何求解？&#8230;【私密】</li>
-                        <br/>
-                        <li>王五 留言：请问如何计算4+1=？&#8230;【私密】</li>
-                        <br/>
-                        <li>赵六 留言：请问如何计算4+7=？&#8230;【私密】</li>
-                        <br/>
-                        <li>&#8230;
+                        {% for message in messages %}
+                        <li>
+                            <a href="/users/{{message.commenter}}">{{message.commenter.username}}</a>
+                            留言：{{message.message}}
+                            {% if message.isPublic %}
+                            【公开】
+                            {% else %}
+                            【私密】
+                            {% endif %}
                         </li>
+                        <br/>
+                        {% endfor %}
                     </ul>
                 </td>
-
-
                 <td width="23%" height="21" valign="top">
                     <ul style=" list-style-type:none;margin:0px; padding:0px; margin-top:18px;">
-                        <li>2016-07-05 18:05</li>
+                        {% for message in messages %}
+                        <li>{{message.publishDate|date:"Y-m-d H:i:s"}}</li>
                         <br/>
-                        <li>2016-06-26 13:12</li>
-                        <br/>
-                        <li>2016-06-11 19:24</li>
-                        <br/>
-                        <li>2016-06-03 12:49</li>
-                        <br/>
-                        <li>&nbsp;
-                        </li>
+                        {% endfor %}
                     </ul>
                 </td>
                 <td width="30%" align="center" valign="top">
                     <ul style=" list-style-type:none;margin:0px; padding:0px; margin-top:18px;">
+                        {% for message in messages %}
                         <li>
                             <form id="form1" name="form1" method="post" action="">
                                 <input type="submit" name="ansTa" id="ansTa" value="回答Ta"/>
                             </form>
                         </li>
                         <br/>
-                        <li>
-                            <form id="form1" name="form1" method="post" action="">
-                                <input type="submit" name="ansTa" id="ansTa" value="回答Ta"/>
-                            </form>
-                        </li>
-                        <br/>
-                        <li>
-                            <form id="form1" name="form1" method="post" action="">
-                                <input type="submit" name="ansTa" id="ansTa" value="回答Ta"/>
-                            </form>
-                        </li>
-                        <br/>
-                        <li>
-                            <form id="form1" name="form1" method="post" action="">
-                                <input type="submit" name="ansTa" id="ansTa" value="回答Ta"/>
-                            </form>
-                        </li>
-                        <br/>
-                        <li>&nbsp;
-                        </li>
+                        {% endfor %}
                     </ul>
                 </td>
             </tr>
         </table>
         {% else %}
-        <table width="100%" border="0" cellspacing="10" cellpadding="0" style="border:1px solid #CCC">
-            <tr>
-                <td height="39" colspan="5" align="">
-                    <b class="textsize1">给Ta留言</b>
-                    <input name="radio" type="radio" id="公开2" value="公开" checked="checked"/>
-                    <label for="公开2"></label>
-                    公开 &nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="radio" id="仅提问者可见2" value="仅提问者可见"/>
-                    <label for="仅提问者可见2"></label>
-                    仅Ta可见 </span></td>
-            </tr>
-            <tr>
-                <td height="21" colspan="5">
-                    <form id="form1" name="form1" method="post" action="">
-                        <label for="留言"></label>
-                        <textarea name="留言" id="留言" cols="148" rows="8"></textarea>
-                    </form>
-                </td>
-            </tr>
-            <tr>
-                <td height="21" colspan="5" align="right">
-                    <form id="form2" name="form2" method="post" action="">
-
+        <form action="message/" method="post">
+            {% csrf_token %}
+            <table width="100%" border="0" cellspacing="10" cellpadding="0" style="border:1px solid #CCC">
+                <tr>
+                    <td height="39" colspan="5" align="">
+                        <b class="textsize1">给Ta留言</b>
+                        {{form.isPublic}}
+                    </td>
+                </tr>
+                <tr>
+                    <td height="21" colspan="5">
+                        {{form.message}}
+                    </td>
+                </tr>
+                <tr>
+                    <td height="21" colspan="5" align="right">
                         <input type="submit" name="send" id="send" value="发送"
                                style="width:30; height:22; font-size:18px"/>
-                        <input type="button" name="cancel" id="cancel" value="取消"
-                               style="width:30; height:22; font-size:18px"/>
-                    </form>
-                </td>
-            </tr>
-        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
         {% endif %}
     </div>
     <div id="bottom"

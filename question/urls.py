@@ -10,5 +10,5 @@ urlpatterns = [
     url(r'^(?P<question_id>[0-9]+)/follow/$', views.followQuestion, name='followQuestion'),
     url(r'^(?P<question_id>[0-9]+)/(?P<publisher_id>[0-9]+)/follow/$', views.followPerson, name='followPerson'),
     url(r'^latest/', views.latestQuestion, name='latestQuestion'),
-    url(r'^expert/$', views.expert, name='expert'),
+
 ]

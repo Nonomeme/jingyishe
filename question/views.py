@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 
-from .forms import AnswerForm, UserForm, LoginForm, QuestionForm, SearchForm
+from .forms import AnswerForm, UserForm, LoginForm, QuestionForm, SearchForm, MessageForm
 from .models import Question, Answer, User, Expert, Message
 
 
@@ -16,12 +16,12 @@ def index(request):
     latest_questions = Question.objects.order_by("publishDate").reverse()[0:8]
     form = QuestionForm()
     if username == '':
-        return render(request, 'home5.html',
+        return render(request, 'home.html',
                       {'latest_questions': latest_questions, 'username': username, 'form': form})
 
     else:
         user = User.objects.get(username=username)
-        return render(request, 'home5.html',
+        return render(request, 'home.html',
                       {'latest_questions': latest_questions, 'username': username, 'form': form, 'user': user})
 
 
@@ -44,8 +44,10 @@ def login(request):
                 return HttpResponseRedirect('/login')
     else:
         form = LoginForm()
-
-    return render(request, 'login5.html', {'form': form})
+        info = request.session.get('login_info', '')
+        if not info == '':
+            del request.session['login_info']
+    return render(request, 'login.html', {'form': form, 'info': info})
 
 
 def logout(request):
@@ -58,16 +60,20 @@ def register(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse('regist success!')
+            return HttpResponseRedirect('/login')
     else:
         form = UserForm()
 
-    return render(request, 'register5.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
 
 
 def detail(request, question_id):
     username = request.session.get('username', '')
     question = get_object_or_404(Question, id=question_id)
+    if username == '' and not question.isPublic:
+        request.session['login_info'] = u'该问题仅限注册用户查看,请先登录'
+        return HttpResponseRedirect('/login')
+
     questionFollowers = User.objects.filter(followingQuestion=question_id)
 
     # 判断登陆用户是否关注了问题和题主
@@ -89,14 +95,10 @@ def detail(request, question_id):
     form = AnswerForm()
     # if question.isSolved:
     answers = Answer.objects.filter(question=question_id)
-    return render(request, 'solved1_5.html',
+    return render(request, 'detail.html',
                   {'username': username, 'question': question, 'answers': answers,
                    'questionFollowers': questionFollowers, 'isFollowing': isFollowing, 'isFollowing2': isFollowing2,
                    'form': form})
-    # else:
-    #     return render(request, 'unsolved1_5.html',
-    #                   {'username': username, 'question': question, 'isFollowing': isFollowing,
-    #                    'isFollowing2': isFollowing2, 'form': form})
 
 
 def answer(request, question_id):
@@ -104,6 +106,7 @@ def answer(request, question_id):
     if request.method == 'POST':
         if username == '':
             request.session['redirect_after_login'] = request.get_full_path()
+            request.session['login_info'] = u'请先登陆后回答'
             return HttpResponseRedirect('/login')
         form = AnswerForm(request.POST, request.FILES)
         if form.is_valid():
@@ -124,7 +127,7 @@ def answer(request, question_id):
             return HttpResponse('fail')
     else:
         form = AnswerForm
-        return render(request, 'answer5.html', {'username': username, 'form': form})
+        return render(request, 'answer.html', {'username': username, 'form': form})
 
 
 def question(request):
@@ -132,6 +135,7 @@ def question(request):
     if request.method == 'POST':
         if username == '':
             request.session['redirect_after_login'] = request.get_full_path()
+            request.session['login_info'] = u'请先登陆后提问'
             return HttpResponseRedirect('/login')
         form = QuestionForm(request.POST, request.FILES)
         if username == '':
@@ -151,13 +155,14 @@ def question(request):
             return HttpResponseRedirect('/index')
     else:
         form = QuestionForm()
-        return render(request, 'question5.html', {'username': username, 'form': form})
+        return render(request, 'question.html', {'username': username, 'form': form})
 
 
 def followQuestion(request, question_id):
     username = request.session.get('username', '')
     if username == '':
         request.session['redirect_after_login'] = request.get_full_path()
+        request.session['login_info'] = u'您还未登录'
         return HttpResponseRedirect('/login')
     user = User.objects.get(username=username)
     question = Question.objects.get(id=question_id)
@@ -175,6 +180,7 @@ def followPerson(request, question_id, publisher_id):
     username = request.session.get('username', '')
     if username == '':
         request.session['redirect_after_login'] = request.get_full_path()
+        request.session['login_info'] = u'您还未登录'
         return HttpResponseRedirect('/login')
     user = User.objects.get(username=username)
     publisher = User.objects.get(id=publisher_id)
@@ -213,7 +219,7 @@ def latestQuestion(request):
 
 def aboutus(request):
     username = request.session.get('username', '')
-    return render(request, 'aboutus5.html', {'username': username,})
+    return render(request, 'aboutus.html', {'username': username,})
 
 
 def userInfo(request, user_id):
@@ -227,18 +233,25 @@ def userInfo(request, user_id):
     isFollowing = 1
     if publisher.username == username:
         isFollowing = 0
+        messages = Message.objects.filter(receiver=publisher)
+        return render(request, 'profile.html',
+                      {'user': publisher, 'username': username, 'followers': count, 'questions': questions,
+                       'answers': answers, 'isFollowing': isFollowing, 'messages': messages})
     else:
         if User.objects.filter(followingPerson=publisher).filter(username=username).exists():
             isFollowing = 2
-    return render(request, 'myaccount5.html',
+        form = MessageForm()
+
+    return render(request, 'profile.html',
                   {'user': publisher, 'username': username, 'followers': count, 'questions': questions,
-                   'answers': answers, 'isFollowing': isFollowing})
+                   'answers': answers, 'isFollowing': isFollowing, 'form': form})
 
 
 def followUser(request, publisher_id):
     username = request.session.get('username', '')
     if username == '':
         request.session['redirect_after_login'] = request.get_full_path()
+        request.session['login_info'] = u'您还未登陆'
         return HttpResponseRedirect('/login')
     user = User.objects.get(username=username)
     publisher = User.objects.get(id=publisher_id)
@@ -254,11 +267,38 @@ def consultion(request):
     username = request.session.get('username', '')
     if username == '':
         request.session['redirect_after_login'] = request.get_full_path()
+        request.session['login_info'] = u'您还未登陆'
         return HttpResponseRedirect('/login')
-    return render(request, 'AI5.html', {'username': username})
+    return render(request, 'AI.html', {'username': username})
 
 
 def expert(request):
     username = request.session.get('username', '')
     experts = Expert.objects.all()[:10]
-    return render(request,'expert5_1.html',{'username':username,'experts':experts})
+    return render(request, 'expert.html', {'username': username, 'experts': experts})
+
+
+def leaveMessage(request, user_id):
+    username = request.session.get('username', '')
+    if request.method == 'POST':
+        if username == '':
+            request.session['redirect_after_login'] = request.get_full_path()
+            request.session['login_info'] = u'请先登陆后留言'
+            return HttpResponseRedirect('/login')
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = Message()
+            message.message = form.cleaned_data['message']
+            message.commenter = User.objects.get(username=username)
+            message.receiver = User.objects.get(id=user_id)
+            message.publishDate = datetime.datetime.now()
+            message.isPublic = True
+            if form.cleaned_data['isPublic'] == '2':
+                message.isPublic = False
+            message.save()
+
+            return HttpResponseRedirect('/users/' + user_id + '/')
+        else:
+            return HttpResponse('fail')
+    else:
+        return HttpResponseRedirect('/users/' + user_id + '/')

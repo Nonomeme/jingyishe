@@ -66,6 +66,7 @@ class Message(models.Model):
     commenter = models.OneToOneField(User)
     receiver = models.OneToOneField(User, related_name='receiver_id')
     isPublic = models.BooleanField()
+    publishDate = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return self.message

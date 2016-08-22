@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>回答--精益社</title>
+    <title>登录--精益社</title>
     <style type="text/css">
         #nav {
             width: auto;
@@ -93,16 +93,16 @@
         }
 
         #homedaohang #tablehome {
-            height: 550px;
-            width: 88%;
+            height: 500px;
+            width: 80%;
             margin-top: 0px;
-            margin-right: 6%;
+            margin-right: 10%;
             margin-bottom: 0px;
-            margin-left: 6%;
+            margin-left: 10%;
         }
 
         .textsize {
-            font-size: large;
+            font-size: x-large;
         }
 
         .hrtop {
@@ -145,7 +145,6 @@
 
         a:active {
             text-decoration: none;
-            font-size: small;
         }
 
         .textsize1 {
@@ -154,10 +153,6 @@
 
         .textsize2 {
             font-size: xx-large;
-        }
-
-        .textsize11 {
-            font-size: large;
         }
 
         .style1 {
@@ -176,67 +171,72 @@
 <body>
 <div id="homedaohang">
     <div id="hometop">
-
         <div id="toplogo" align="left">
             <table width="100%" border="0" cellspacing="1" cellpadding="1">
                 <tr>
-                    <td width="12%"><img src="/static/images/font1.jpg" width="125" height="50"/></td>
-                    <td width="59%" align="left"><b class="textsize2">回答</b></td>
-                    <td width="29%" align="right"><a href="/index">精益社首页</a> | <a href="/question">提问</a> |
-                        {% if username == '' %}
-                        <a href="/login">登录</a> | <a href="/register">注册</a>
-                        {% else %}
-                        {{username}} | <a href="/logout">注销</a>
-                        {% endif %}
+                    <td width="13%"><a href="/index"><img src="/static/images/font1.jpg" width="125" height="50"/></a>
                     </td>
+                    <td width="58%" align="left"><b class="textsize2">用户登录</b></td>
+
+                    <td width="29%" align="right"><a href="/index">精益社首页</a> | <a href="/question">提问</a> | <a
+                            href="/login">登录</a> | <a href="/register">注册</a></td>
                 </tr>
             </table>
             <br/>
         </div>
-        <hr/>
     </div>
-    <div id="tablehome"><br/>
-        <br/>
-        <form enctype="multipart/form-data" method="post" action="">
+
+    <div id="tablehome" style="text-align:center" align="center">
+        <p>{{info}}</p>
+
+        <form method='post' enctype="multipart/form-data">
             {% csrf_token %}
-            <table width="100%" height="430" border="0" align="center" cellpadding="0" cellspacing="15"
-                   style="border:1px solid #CCC  ">
+            <table width="435" height="280" border="0" align="center" cellpadding="0" cellspacing="10"
+                   style="border:1px solid #CCC">
                 <tr>
-                    <th height="23" colspan="3" align="left">请填写内容</th>
+                    <th height="51" colspan="2" align="center" valign="middle" class="border" bgcolor="#F6F6F6">
+                        <b class="textsize1">用户登录</b>
+                    </th>
                 </tr>
                 <tr>
-                    <td height="166" colspan="3" align="left" valign="top">
-                        <label for="{{form.content.id_for_label}}"></label>
-                        {{form.content}}
+                    <td width="120" height="50" align="left">
+                        <label for="{{form.username.id_for_label}}">用户名</label>
+                    </td>
+                    <td width="283" height="50">
+                        {{form.username}}
                     </td>
                 </tr>
                 <tr>
-                    <td width="33%" height="43" align="left">
-                        {{form.isPublic}}
+                    <td align="left">
+                        <label for="{{form.password.id_for_label}}">密码</label>
                     </td>
-                    <td width="40%" align="center">
-                        <label for="{{form.attachedFile.id_for_label}}"><img src="/static/images/filePDF.jpg" width="34"
-                                                                             height="32"/>附加文件</label>
-                        {{form.attachedFile}}
+                    <td width="283" height="50">
+                        {{form.password}}
                     </td>
-                    <td width="27%" align="right">
-                        <input name="submit" type="submit" id="submit" style="width:30; height:22; font-size:18px"
-                               value="发布"/>
-                        <input type="submit" name="cancel" id="cancel" style="width:30; height:22; font-size:18px"
-                               value="取消"/>
+                </tr>
+                <tr>
+                    <td height="40" colspan="2" align="center" valign="middle" bgcolor="#F6F6F6">
+                        <input type="submit" style="width:30; height:20; font-size:20px;border:0; background:#F6F6F6" value="登 录"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="27" colspan="2" align="center" valign="middle"><p><strong class="style"><a
+                            href="/index"
+                            style="color:blue">
+                        &gt;&gt;返回首页</a> | <a href="/register" style="color:blue">新用户注册</a> | 忘记密码</strong></p>
                     </td>
                 </tr>
             </table>
+            <p>&nbsp;</p>
         </form>
-        <p>&nbsp;</p>
     </div>
     <div id="bottom"
          style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#333; color:#FFF"
          align="center">
-        &nbsp; <a href="home5.html" class="style1">网站首页</a>&nbsp; |&nbsp; <a href="newest_info5_1.html" class="style1">最新咨询</a>&nbsp;
-        |&nbsp; <a href="expert5.html" class="style1">专家咨询</a>&nbsp; |&nbsp; <a href="case5.html"
-                                                                                class="style1">案例分析</a>&nbsp; |&nbsp; <a
-            href="AI5.html" class="style1">AI咨询</a>&nbsp; |&nbsp; <a href="aboutus5.html" class="style1">关于我们</a>&nbsp;
+        &nbsp; <a href="/index" class="style1">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
+                                                                         class="style1">最新咨询</a>&nbsp; |&nbsp; <a
+            href="/expert" class="style1">专家咨询</a>&nbsp; |&nbsp; <a href="/case" class="style1">案例分析</a>&nbsp;
+        |&nbsp; <a href="/consultion" class="style1">AI咨询</a>&nbsp; |&nbsp; <a href="/aboutus" class="style1">关于我们</a>&nbsp;
     </div>
     <br/>
 </div>

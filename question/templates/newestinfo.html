@@ -211,7 +211,7 @@
     <table width="100%" height="48" border="0" cellpadding="0 " cellspacing="0">
         <tr>
             <td width="71%" height="38" class="hrtop" style=" border-bottom: #ABABAB solid 2px" bgcolor="#F4F4F4"><a
-                    href="home5.html">精益社</a>&gt;
+                    href="home.html">精益社</a>&gt;
                 <label for="newest_info_list1"></label>
                 <select name="newest_info_list1" id="newest_info_list1">
                     <option>最新咨询</option>
@@ -345,6 +345,8 @@
             <div class="div2">
                 <table width="80%" border="0" cellspacing="1" cellpadding="1">
                     {% for question in questions %}
+                    {% if username == '' and not question.isPublic %}
+                    {% else %}
                     <tr>
                         <td width="38" align="center" valign="bottom"><img src="/static/images/star1.jpg" alt="star1"
                                                                            width="27"
@@ -361,6 +363,7 @@
                             {{question.publishDate|date:"Y-m-d H:i:s"}}
                         </td>
                     </tr>
+                    {% endif %}
                     {% endfor %}
                 </table>
             </div>
