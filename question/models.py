@@ -24,8 +24,10 @@ class User(models.Model):
     password = models.CharField(max_length=50)
     mail = models.EmailField()
     tag = models.CharField(max_length=256, blank=True)
-    followingQuestion = models.ManyToManyField('question.Question', blank=True)
-    followingPerson = models.ManyToManyField("self", blank=True, symmetrical=False)
+    followingQuestion = models.ManyToManyField('question.Question', blank=True, through='QuestionFollow',
+                                               through_fields=('questionFollower', 'followingQuestion'))
+    followingPerson = models.ManyToManyField("self", blank=True, symmetrical=False, through='PersonFollow',
+                                             through_fields=('userFollower', 'followingPerson'))
 
     def __unicode__(self):
         return self.username
@@ -64,7 +66,7 @@ class Message(models.Model):
     id = models.AutoField(primary_key=True, editable=False)
     message = models.TextField()
     commenter = models.OneToOneField(User)
-    receiver = models.OneToOneField(User, related_name='receiver_id')
+    receiver = models.OneToOneField(User, related_name='receiver')
     isPublic = models.BooleanField()
     publishDate = models.DateTimeField(auto_now_add=True)
 
@@ -81,3 +83,15 @@ class Expert(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class PersonFollow(models.Model):
+    userFollower = models.ForeignKey(User, related_name='userFollower', on_delete=models.CASCADE)
+    followingPerson = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True)
+
+
+class QuestionFollow(models.Model):
+    questionFollower = models.ForeignKey(User, on_delete=models.CASCADE)
+    followingQuestion = models.ForeignKey(Question, on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True)

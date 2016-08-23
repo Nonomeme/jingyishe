@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 
 from .forms import AnswerForm, UserForm, LoginForm, QuestionForm, SearchForm, MessageForm
-from .models import Question, Answer, User, Expert, Message
+from .models import Question, Answer, User, Expert, Message, QuestionFollow, PersonFollow
 
 
 # Create your views here.
@@ -166,10 +166,14 @@ def followQuestion(request, question_id):
         return HttpResponseRedirect('/login')
     user = User.objects.get(username=username)
     question = Question.objects.get(id=question_id)
+
     if user.followingQuestion.filter(id=question_id).exists():
-        user.followingQuestion.remove(question)
+        relation = QuestionFollow.objects.get(questionFollower=user, followingQuestion=question)
+        relation.delete()
     else:
-        user.followingQuestion.add(question)
+        relation = QuestionFollow.objects.create(questionFollower=user, followingQuestion=question,
+                                                 date=datetime.date.today())
+        relation.save()
 
     # return render(request, 'unsolved1_5.html', {'username': username, 'question': question, 'user': user})
 
@@ -185,9 +189,11 @@ def followPerson(request, question_id, publisher_id):
     user = User.objects.get(username=username)
     publisher = User.objects.get(id=publisher_id)
     if user.followingPerson.filter(id=publisher_id).exists():
-        user.followingPerson.remove(publisher)
+        relation = PersonFollow.objects.get(userFollower=user, followingPerson=publisher)
+        relation.delete()
     else:
-        user.followingPerson.add(publisher)
+        relation = PersonFollow.objects.create(userFollower=user, followingPerson=publisher, date=datetime.date.today())
+        relation.save()
 
     return HttpResponseRedirect('/question/' + question_id)
 
@@ -256,9 +262,11 @@ def followUser(request, publisher_id):
     user = User.objects.get(username=username)
     publisher = User.objects.get(id=publisher_id)
     if user.followingPerson.filter(id=publisher_id).exists():
-        user.followingPerson.remove(publisher)
+        relation = PersonFollow.objects.get(userFollower=user, followingPerson=publisher)
+        relation.delete()
     else:
-        user.followingPerson.add(publisher)
+        relation = PersonFollow.objects.create(userFollower=user, followingPerson=publisher)
+        relation.save()
 
     return HttpResponseRedirect('/users/' + publisher_id)
 
