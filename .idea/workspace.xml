@@ -2,14 +2,69 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be6aac9d-6beb-4d61-adac-6dc049ea5bd7" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/question/migrations/0002_auto_20160816_1856.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/question/migrations/0003_auto_20160816_2249.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/question/migrations/0004_auto_20160819_1406.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/question/migrations/0005_expert.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/question/migrations/0006_message_publishdate.py" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/question/static/images/collect.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/question/static/images/file.bmp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/question/static/images/file.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/question/static/images/pic.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/question/static/images/pic2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/question/static/images/thumbup1.bmp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/question/static/images/thumbup1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/question/static/images/write.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/question/templates/caseDetail.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/1.bmp" afterPath="$PROJECT_DIR$/question/static/images/1.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/2.bmp" afterPath="$PROJECT_DIR$/question/static/images/2.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/3.bmp" afterPath="$PROJECT_DIR$/question/static/images/3.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/Email1.jpg" afterPath="$PROJECT_DIR$/question/static/images/Email1.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/bulboff.jpg" afterPath="$PROJECT_DIR$/question/static/images/bulboff.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/bulbon.jpg" afterPath="$PROJECT_DIR$/question/static/images/bulbon.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/download.jpg" afterPath="$PROJECT_DIR$/question/static/images/download.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/email.bmp" afterPath="$PROJECT_DIR$/question/static/images/email.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/email.jpg" afterPath="$PROJECT_DIR$/question/static/images/email.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/eyes.jpg" afterPath="$PROJECT_DIR$/question/static/images/eyes.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/favorite1.jpg" afterPath="$PROJECT_DIR$/question/static/images/favorite1.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/favorite2.jpg" afterPath="$PROJECT_DIR$/question/static/images/favorite2.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/filePDF.jpg" afterPath="$PROJECT_DIR$/question/static/images/filePDF.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/fire.jpg" afterPath="$PROJECT_DIR$/question/static/images/fire.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/flower.jpg" afterPath="$PROJECT_DIR$/question/static/images/flower.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/font1.jpg" afterPath="$PROJECT_DIR$/question/static/images/font1.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/home.bmp" afterPath="$PROJECT_DIR$/question/static/images/home.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/home.jpg" afterPath="$PROJECT_DIR$/question/static/images/home.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/home1.jpg" afterPath="$PROJECT_DIR$/question/static/images/home1.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/kuangjia.jpg" afterPath="$PROJECT_DIR$/question/static/images/kuangjia.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/locate.jpg" afterPath="$PROJECT_DIR$/question/static/images/locate.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/man_img.jpg" afterPath="$PROJECT_DIR$/question/static/images/man_img.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/people.jpg" afterPath="$PROJECT_DIR$/question/static/images/people.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/profile.jpg" afterPath="$PROJECT_DIR$/question/static/images/profile.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/right.jpg" afterPath="$PROJECT_DIR$/question/static/images/right.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/search.bmp" afterPath="$PROJECT_DIR$/question/static/images/search.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/search.jpg" afterPath="$PROJECT_DIR$/question/static/images/search.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/sign1.jpg" afterPath="$PROJECT_DIR$/question/static/images/sign1.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/sign2.jpg" afterPath="$PROJECT_DIR$/question/static/images/sign2.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/star.jpg" afterPath="$PROJECT_DIR$/question/static/images/star.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/star1.bmp" afterPath="$PROJECT_DIR$/question/static/images/star1.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/star1.jpg" afterPath="$PROJECT_DIR$/question/static/images/star1.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/star2.jpg" afterPath="$PROJECT_DIR$/question/static/images/star2.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/starscore.jpg" afterPath="$PROJECT_DIR$/question/static/images/starscore.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/sun.jpg" afterPath="$PROJECT_DIR$/question/static/images/sun.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/text.jpg" afterPath="$PROJECT_DIR$/question/static/images/text.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/thumbup.jpg" afterPath="$PROJECT_DIR$/question/static/images/thumbup.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/upload.jpg" afterPath="$PROJECT_DIR$/question/static/images/upload.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/woman_img.jpg" afterPath="$PROJECT_DIR$/question/static/images/woman_img.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/五角星2.jpg" afterPath="$PROJECT_DIR$/question/static/images/五角星2.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/伟人.jpg" afterPath="$PROJECT_DIR$/question/static/images/伟人.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/伟人2.jpg" afterPath="$PROJECT_DIR$/question/static/images/伟人2.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/伟人3.jpg" afterPath="$PROJECT_DIR$/question/static/images/伟人3.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/大于等于号.bmp" afterPath="$PROJECT_DIR$/question/static/images/大于等于号.bmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/大于等于号.jpg" afterPath="$PROJECT_DIR$/question/static/images/大于等于号.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/static/images/评分.jpg" afterPath="$PROJECT_DIR$/question/static/images/评分.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/question/migrations/0001_initial.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mysite/urls.py" afterPath="$PROJECT_DIR$/mysite/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/admin.py" afterPath="$PROJECT_DIR$/question/admin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/models.py" afterPath="$PROJECT_DIR$/question/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/templates/case.html" afterPath="$PROJECT_DIR$/question/templates/case.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/templates/login.html" afterPath="$PROJECT_DIR$/question/templates/login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/templates/newestinfo.html" afterPath="$PROJECT_DIR$/question/templates/newestinfo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/tests.py" afterPath="$PROJECT_DIR$/question/tests.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/views.py" afterPath="$PROJECT_DIR$/question/views.py" />
     </list>
     <ignored path="jingyishe.iws" />
@@ -21,6 +76,9 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/jingyishe$tests.coverage" NAME="tests Coverage Results" MODIFIED="1471960483348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/question" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -34,23 +92,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/question/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="700">
-              <caret line="268" column="23" selection-start-line="268" selection-start-column="23" selection-end-line="268" selection-end-column="23" />
-              <folding>
-                <element signature="e#15#30#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/question/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="704">
-              <caret line="88" column="43" selection-start-line="88" selection-start-column="43" selection-end-line="88" selection-end-column="43" />
+            <state relative-caret-position="-1777">
+              <caret line="30" column="93" selection-start-line="30" selection-start-column="93" selection-end-line="30" selection-end-column="93" />
               <folding>
                 <element signature="e#15#54#0" expanded="true" />
               </folding>
@@ -58,42 +104,72 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="case.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/question/templates/case.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="112">
+              <caret line="163" column="12" selection-start-line="163" selection-start-column="12" selection-end-line="163" selection-end-column="12" />
+              <folding>
+                <element signature="e#5310#5314#0" expanded="true" />
+                <element signature="e#5314#5318#0" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#a#0;n#td#2;n#tr#1;n#table#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/question/templates/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28">
-              <caret line="189" column="17" selection-start-line="189" selection-start-column="17" selection-end-line="189" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="804">
+              <caret line="246" column="0" selection-start-line="246" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#table#0;n#form#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#0;n#tr#3;n#table#0;n#form#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#strong#0;n#p#0;n#td#0;n#tr#4;n#table#0;n#form#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#6243#6247#0" expanded="true" />
+                <element signature="e#6247#6251#0" expanded="true" />
+                <element signature="n#style#0;n#a#1;n#strong#0;n#p#0;n#td#0;n#tr#4;n#table#0;n#form#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#6415#6421#1" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#6620#6626#0" expanded="true" />
+                <element signature="e#6667#6673#0" expanded="true" />
+                <element signature="e#6675#6681#0" expanded="true" />
+                <element signature="e#6805#6811#0" expanded="true" />
+                <element signature="e#6813#6819#0" expanded="true" />
+                <element signature="e#6873#6879#0" expanded="true" />
+                <element signature="e#6881#6887#0" expanded="true" />
+                <element signature="e#6927#6933#0" expanded="true" />
+                <element signature="e#6943#6949#0" expanded="true" />
+                <element signature="e#6995#7001#0" expanded="true" />
+                <element signature="e#7003#7009#0" expanded="true" />
+                <element signature="e#7052#7058#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="expert.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/question/templates/expert.html">
+      <file leaf-file-name="register.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/question/templates/register.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6524">
-              <caret line="233" column="17" selection-start-line="233" selection-start-column="17" selection-end-line="233" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="-532">
+              <caret line="201" column="36" selection-start-line="201" selection-start-column="36" selection-end-line="201" selection-end-column="36" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/question/templates/home.html">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/question/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7392">
-              <caret line="264" column="39" selection-start-line="264" selection-start-column="31" selection-end-line="264" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="detail.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/question/templates/detail.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7728">
-              <caret line="276" column="63" selection-start-line="276" selection-start-column="44" selection-end-line="276" selection-end-column="63" />
-              <folding />
+            <state relative-caret-position="646">
+              <caret line="365" column="45" selection-start-line="365" selection-start-column="45" selection-end-line="365" selection-end-column="45" />
+              <folding>
+                <element signature="e#15#30#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -101,8 +177,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mysite/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="704">
-              <caret line="31" column="44" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
+            <state relative-caret-position="660">
+              <caret line="36" column="81" selection-start-line="36" selection-start-column="81" selection-end-line="36" selection-end-column="81" />
               <folding>
                 <element signature="e#639#680#0" expanded="true" />
               </folding>
@@ -110,30 +186,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="profile.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/question/templates/profile.html">
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/question/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="728">
-              <caret line="363" column="54" selection-start-line="363" selection-start-column="54" selection-end-line="363" selection-end-column="54" />
-              <folding>
-                <element signature="e#4894#4900#0" expanded="true" />
-                <element signature="e#5098#5104#0" expanded="true" />
-                <element signature="e#5170#5176#0" expanded="true" />
-                <element signature="e#5225#5231#0" expanded="true" />
-                <element signature="n#style#0;n#table#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/question/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="11" column="66" selection-start-line="11" selection-start-column="66" selection-end-line="11" selection-end-column="66" />
-              <folding>
-                <element signature="e#21#53#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="645">
+              <caret line="53" column="30" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -150,7 +208,6 @@
         <option value="$PROJECT_DIR$/question/templatetags/range.py" />
         <option value="$PROJECT_DIR$/question/templatetags/mkrange.py" />
         <option value="$PROJECT_DIR$/question/templatetags/num_range.py" />
-        <option value="$PROJECT_DIR$/question/admin.py" />
         <option value="$PROJECT_DIR$/mysite/settings.py" />
         <option value="$PROJECT_DIR$/question/templates/unsolved1_5.html" />
         <option value="$PROJECT_DIR$/question/templates/newest_info5_1.html" />
@@ -166,14 +223,18 @@
         <option value="$PROJECT_DIR$/question/templates/register5.html" />
         <option value="$PROJECT_DIR$/question/urls.py" />
         <option value="$PROJECT_DIR$/question/templates/expert.html" />
-        <option value="$PROJECT_DIR$/question/templates/newestinfo.html" />
         <option value="$PROJECT_DIR$/question/templates/home.html" />
-        <option value="$PROJECT_DIR$/question/templates/login.html" />
         <option value="$PROJECT_DIR$/question/forms.py" />
-        <option value="$PROJECT_DIR$/mysite/urls.py" />
         <option value="$PROJECT_DIR$/question/templates/profile.html" />
+        <option value="$PROJECT_DIR$/question/templates/newestinfo.html" />
+        <option value="$PROJECT_DIR$/question/tests.py" />
+        <option value="$PROJECT_DIR$/question/admin.py" />
         <option value="$PROJECT_DIR$/question/models.py" />
+        <option value="$PROJECT_DIR$/mysite/urls.py" />
         <option value="$PROJECT_DIR$/question/views.py" />
+        <option value="$PROJECT_DIR$/question/templates/caseDetail.html" />
+        <option value="$PROJECT_DIR$/question/templates/case.html" />
+        <option value="$PROJECT_DIR$/question/templates/login.html" />
       </list>
     </option>
   </component>
@@ -185,9 +246,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-1920" />
-    <option name="y" value="-82" />
+    <option name="y" value="-59" />
     <option name="width" value="1920" />
-    <option name="height" value="1080" />
+    <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -274,14 +335,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="question" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jingyishe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jingyishe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="mysite" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -292,24 +371,37 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="FullScreen" value="true" />
-  </component>
-  <component name="PyConsoleOptionsProvider">
-    <option name="myPythonConsoleState">
-      <console-settings />
-    </option>
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/question/templates" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/question/static/images" />
       <recent name="$PROJECT_DIR$/question/templates" />
       <recent name="$PROJECT_DIR$/question/templatetags" />
       <recent name="$PROJECT_DIR$/question/static" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/question/templates" />
+    </key>
   </component>
-  <component name="RunManager" selected="Django server.jingyishe">
+  <component name="RunManager" selected="Python.tests">
+    <configuration default="false" name="tests" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/question" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="jingyishe" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/question/tests.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -565,9 +657,15 @@
       <option name="customRunCommand" value="" />
       <method />
     </configuration>
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Django server.jingyishe" />
+      <item index="1" class="java.lang.String" itemvalue="Python.tests" />
     </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Python.tests" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -586,10 +684,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1920" y="-82" width="1920" height="1080" extended-state="0" />
+    <frame x="-1920" y="-59" width="1920" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12193823" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12300319" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -604,7 +702,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -649,7 +747,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/question/models.py</url>
-          <line>68</line>
+          <line>69</line>
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="1" />
@@ -657,20 +755,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/question/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mysite/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/question/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -692,9 +776,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="10" column="50" selection-start-line="10" selection-start-column="50" selection-end-line="10" selection-end-column="50" />
-          <folding>
-            <element signature="e#45#69#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -856,20 +938,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/question/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mysite/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="136" column="0" selection-start-line="136" selection-start-column="0" selection-end-line="142" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/question/templates/index.html" />
     <entry file="file://$PROJECT_DIR$/question/templates/unsolved1_5.html" />
     <entry file="file://$PROJECT_DIR$/question/templates/newest_info5_1.html" />
@@ -894,20 +962,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/question/tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/question/templates/register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="193" column="69" selection-start-line="193" selection-start-column="69" selection-end-line="193" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/question/templates/aboutus.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="373">
@@ -920,14 +974,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6524">
           <caret line="233" column="17" selection-start-line="233" selection-start-column="17" selection-end-line="233" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/question/templates/newestinfo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="347" column="20" selection-start-line="347" selection-start-column="20" selection-end-line="348" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -942,7 +988,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7728">
           <caret line="276" column="63" selection-start-line="276" selection-start-column="44" selection-end-line="276" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -950,49 +995,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7392">
           <caret line="264" column="39" selection-start-line="264" selection-start-column="31" selection-end-line="264" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mysite/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="120" column="59" selection-start-line="120" selection-start-column="59" selection-end-line="120" selection-end-column="59" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/question/templates/profile.html">
+    <entry file="file://$PROJECT_DIR$/question/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="728">
-          <caret line="363" column="54" selection-start-line="363" selection-start-column="54" selection-end-line="363" selection-end-column="54" />
-          <folding>
-            <element signature="e#4894#4900#0" expanded="true" />
-            <element signature="e#5098#5104#0" expanded="true" />
-            <element signature="e#5170#5176#0" expanded="true" />
-            <element signature="e#5225#5231#0" expanded="true" />
-            <element signature="n#style#0;n#table#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/question/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="53" column="30" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
-          <folding>
-            <element signature="e#45#69#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/question/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="189" column="17" selection-start-line="189" selection-start-column="17" selection-end-line="189" selection-end-column="17" />
+        <state relative-caret-position="168">
+          <caret line="6" column="63" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="63" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mysite/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="31" column="44" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
-          <folding>
-            <element signature="e#639#680#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1001,27 +1019,141 @@
         <state relative-caret-position="308">
           <caret line="11" column="66" selection-start-line="11" selection-start-column="66" selection-end-line="11" selection-end-column="66" />
           <folding>
-            <element signature="e#21#53#0" expanded="true" />
+            <element signature="e#21#53#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/question/models.py">
+    <entry file="file://$PROJECT_DIR$/question/templates/profile.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="88" column="43" selection-start-line="88" selection-start-column="43" selection-end-line="88" selection-end-column="43" />
+        <state relative-caret-position="728">
+          <caret line="363" column="54" selection-start-line="363" selection-start-column="54" selection-end-line="363" selection-end-column="54" />
           <folding>
-            <element signature="e#15#54#0" expanded="true" />
+            <element signature="e#4894#4900#0" expanded="false" />
+            <element signature="e#5098#5104#0" expanded="false" />
+            <element signature="e#5170#5176#0" expanded="false" />
+            <element signature="e#5225#5231#0" expanded="false" />
+            <element signature="n#style#0;n#table#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/question/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/question/templates/newestinfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="524">
+          <caret line="330" column="10" selection-start-line="323" selection-start-column="4" selection-end-line="330" selection-end-column="10" />
+          <folding>
+            <element signature="e#8045#8049#0" expanded="true" />
+            <element signature="e#8049#8053#0" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#p#0;n#td#0;n#tr#0;n#table#0;n#div#1;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/question/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="268" column="23" selection-start-line="268" selection-start-column="23" selection-end-line="268" selection-end-column="23" />
+        <state relative-caret-position="646">
+          <caret line="365" column="45" selection-start-line="365" selection-start-column="45" selection-end-line="365" selection-end-column="45" />
           <folding>
             <element signature="e#15#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/question/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="53" column="30" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mysite/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="36" column="81" selection-start-line="36" selection-start-column="81" selection-end-line="36" selection-end-column="81" />
+          <folding>
+            <element signature="e#639#680#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/question/templates/caseDetail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="171" column="9" selection-start-line="171" selection-start-column="9" selection-end-line="171" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/question/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1777">
+          <caret line="30" column="93" selection-start-line="30" selection-start-column="93" selection-end-line="30" selection-end-column="93" />
+          <folding>
+            <element signature="e#15#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/question/templates/case.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="163" column="12" selection-start-line="163" selection-start-column="12" selection-end-line="163" selection-end-column="12" />
+          <folding>
+            <element signature="e#5310#5314#0" expanded="true" />
+            <element signature="e#5314#5318#0" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#a#0;n#td#2;n#tr#1;n#table#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/question/templates/register.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-532">
+          <caret line="201" column="36" selection-start-line="201" selection-start-column="36" selection-end-line="201" selection-end-column="36" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/question/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="804">
+          <caret line="246" column="0" selection-start-line="246" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#form#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#0;n#tr#3;n#table#0;n#form#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#strong#0;n#p#0;n#td#0;n#tr#4;n#table#0;n#form#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#6243#6247#0" expanded="true" />
+            <element signature="e#6247#6251#0" expanded="true" />
+            <element signature="n#style#0;n#a#1;n#strong#0;n#p#0;n#td#0;n#tr#4;n#table#0;n#form#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#6415#6421#1" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#6620#6626#0" expanded="true" />
+            <element signature="e#6667#6673#0" expanded="true" />
+            <element signature="e#6675#6681#0" expanded="true" />
+            <element signature="e#6805#6811#0" expanded="true" />
+            <element signature="e#6813#6819#0" expanded="true" />
+            <element signature="e#6873#6879#0" expanded="true" />
+            <element signature="e#6881#6887#0" expanded="true" />
+            <element signature="e#6927#6933#0" expanded="true" />
+            <element signature="e#6943#6949#0" expanded="true" />
+            <element signature="e#6995#7001#0" expanded="true" />
+            <element signature="e#7003#7009#0" expanded="true" />
+            <element signature="e#7052#7058#0" expanded="true" />
           </folding>
         </state>
       </provider>

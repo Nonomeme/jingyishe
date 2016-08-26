@@ -32,4 +32,8 @@ urlpatterns = [
     url(r'^users/(?P<user_id>[0-9]+)/message/$', views.leaveMessage, name='leaveMessage'),
     url(r'^consultion/$', views.consultion, name='consultion'),
     url(r'^expert/$', views.expert, name='expert'),
+    url(r'^case/$', views.case, name='case'),
+    url(r'^case/(?P<case_id>[0-9]+)/$', views.caseDetail, name='caseDetail'),
+    url(r'^case/(?P<case_id>[0-9]+)/follow/$', views.caseFollow, name='caseFollow'),
+
 ]

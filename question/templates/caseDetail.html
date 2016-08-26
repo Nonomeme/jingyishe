@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>案例分析--精益社</title>
+    <title>新教师工作满意度分析--案例分析--精益社</title>
     <style type="text/css">
         #nav {
             width: auto;
@@ -68,7 +68,7 @@
         }
 
         #homedaohang {
-            height: 700px;
+            height: 1000px;
             width: 100%;
         }
 
@@ -93,12 +93,12 @@
         }
 
         #homedaohang #tablehome {
-            height: 700px;
-            width: 92%;
+            height: 950px;
+            width: 88%;
             margin-top: 0px;
-            margin-right: 4%;
+            margin-right: 6%;
             margin-bottom: 0px;
-            margin-left: 4%;
+            margin-left: 6%;
         }
 
         .textsize {
@@ -152,76 +152,107 @@
             font-size: larger;
         }
 
+        .textsize2 {
+            font-size: xx-large;
+        }
+
+        .textsize11 {
+            font-size: large;
+        }
+
         .style1 {
             color: #FFF;
         }
     </style>
+    <script type="text/javascript">
+        function MM_goToURL() { //v3.0
+            var i, args = MM_goToURL.arguments;
+            document.MM_returnValue = false;
+            for (i = 0; i < (args.length - 1); i += 2) eval(args[i] + ".location='" + args[i + 1] + "'");
+        }
+    </script>
 </head>
 
 <body>
-<form id="form" name="form6" method="post" action="">
-
-    <table width="100%" height="48" border="0" cellpadding="0" cellspacing="0">
-        <tr>
-            <td width="71%" height="38" class="hrtop" style=" border-bottom: #ABABAB solid 2px" bgcolor="#F4F4F4"><a
-                    href="home2.html">精益社</a>&gt;
-                <label for="newest_info_list1"></label>
-                <select name="newest_info_list1" id="newest_info_list1">
-                    <option>案例分析</option>
-                    <option>专家咨询</option>
-                    <option>最新咨询</option>
-                </select>
-                &gt;
-                <!--<select name="newest_info_list2" size="1" id="newest_info_list2">-->
-                    <!--<option value="所有" selected="selected">所有</option>-->
-                    <!--<option value="统计分析">统计分析</option>-->
-                    <!--<option value="机器学习">机器学习</option>-->
-                    <!--<option value="软件应用">软件应用</option>-->
-                <!--</select></td>-->
-            <td width="29%" align="right" style="border-bottom: #ABABAB solid 2px" bgcolor="#F4F4F4"><a href="/index">精益社首页</a>
-                | <a href="/question">提问</a> |
-                {% if username == '' %}
-                <a href="/login">登录</a> | <a href="/register">注册</a>
-                {% else %}
-                {{username}} | <a href="/logout">注销</a>
-                {% endif %}
-            </td>
-        </tr>
-    </table>
-
-</form>
 <div id="homedaohang">
-    <div id="tablehome">
-        <table width="100%" border="0" cellspacing="1" cellpadding="1">
+    <div id="hometop">
+
+        <div id="toplogo" align="left">
+            <table width="100%" border="0" cellspacing="1" cellpadding="1">
+                <tr>
+                    <td width="12%"><img src="/static/images/font1.jpg" width="125" height="50"/></td>
+                    <td width="59%" align="left"><b class="textsize2">案例分析</b></td>
+                    <td width="29%" align="right"><a href="/index">精益社首页</a>
+                        | <a href="/question">提问</a> |
+                        {% if username == '' %}
+                        <a href="/login">登录</a> | <a href="/register">注册</a>
+                        {% else %}
+                        {{username}} | <a href="/logout">注销</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+            <br/>
+        </div>
+        <hr/>
+    </div>
+    <div id="tablehome"><img src="/static/images/collect.jpg" width="24" height="28"/><a href="follow/"><b>
+        {% if isFollowing %}
+        取消{% endif %}收藏</b></a><br/><br/>
+        <table width="100%" height="766" border="0" align="center" cellpadding="0" cellspacing="10"
+               style="border:1px solid #CCC  ">
             <tr>
-                <th align="left">
-                </th>
-                <th width="10" rowspan="21" align="left" bgcolor="#CCCCCC">&nbsp;</th>
-                <th colspan="2" align="left">
-                    <form action="" method="get">
-                        <p><b class="textsize1">&lt;&lt;</b>
-                            {{form.keyword}}
-                            <input type="submit" value="搜索"
-                                   style="width:30; height:20; font-size:18px"/>
-                        </p>
-                    </form>
+                <th width="100%" height="72" align="center" class="textsize2" style=" border-bottom:#999 solid 2px">
+                    {{case.title}}
                 </th>
             </tr>
-            {% for case in cases %}
             <tr>
-                <td width="39" align="center" valign="bottom">&nbsp;</td>
-                <td width="64" align="center" valign="bottom"><img src="/static/images/star1.jpg" alt="star1" width="27"
-                                                                   height="26"/></td>
-                <td width="878" valign="bottom" height="30"><a href="/case/{{case.id}}/"><span style=" border-bottom:1px dashed #000">{{case.caseType}}案例之：{{case.domain}}：{{case.title}}</span></a>
+                <td height="12" align="left"><b class="textsize1">问题描述</b></td>
+            </tr>
+            <tr>
+                <td height="80" align="left" valign="top" style=" border-bottom:#CCC solid 1px"><p
+                        style="text-indent:2em;">
+                    {{case.questionDescription}}</td>
+            </tr>
+            <tr>
+                <td height="12" align="left"><b class="textsize1">数据描述</b></td>
+            </tr>
+            <tr>
+                <td height="23" align="left" valign="top" style=" border-bottom:#CCC solid 1px"><p
+                        style="text-indent:2em;">
+                    {{case.dataDescription}}</p>
                 </td>
             </tr>
-            {% endfor %}
             <tr>
-                <td>&nbsp;</td>
-                <td height="500">&nbsp;</td>
-                <td width="878" valign="top">&nbsp;</td>
+                <td height="12" align="left"><b class="textsize1">分析与解决</b></td>
+            </tr>
+            <tr>
+                <td height="100" align="left" valign="top" style=" border-bottom:#CCC solid 1px">
+                    {{case.solution}}
+                </td>
+            </tr>
+            <tr>
+                <td height="30" align="left" valign="top" style=" border-bottom:#CCC solid 1px"><b class="textsize1">关键词：</b>
+                    {{case.keyword}}
+                </td>
+            </tr>
+            <tr>
+                <td height="12" align="left"><b class="textsize1">案例来源</b></td>
+            </tr>
+            <tr>
+                <td height="13" align="left" valign="top" style=" border-bottom:#CCC solid 1px"><p
+                        style="text-indent:2em;">{{case.source}}</p></td>
+            </tr>
+            <tr>
+                <td height="12" align="left" valign="top"><b class="textsize1">相关参考</b></td>
+            </tr>
+            <tr>
+                <td height="44" align="left" valign="top">
+                    {{case.reference}}
+                </td>
             </tr>
         </table>
+        <br/>
         <p>&nbsp;</p>
     </div>
     <div id="bottom"

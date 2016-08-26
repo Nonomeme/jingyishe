@@ -1,12 +1,13 @@
 # coding=utf-8
 import datetime
 
+import pytz
 from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 
-from .forms import AnswerForm, UserForm, LoginForm, QuestionForm, SearchForm, MessageForm
-from .models import Question, Answer, User, Expert, Message, QuestionFollow, PersonFollow
+from .forms import AnswerForm, UserForm, LoginForm, QuestionForm, MessageForm, SearchForm
+from .models import Question, Answer, User, Expert, Message, QuestionFollow, PersonFollow, Case, CaseFollow
 
 
 # Create your views here.
@@ -115,7 +116,7 @@ def answer(request, question_id):
             answer.isPublic = True
             if form.cleaned_data['isPublic'] == '2':
                 answer.isPublic = False
-            answer.publishDate = datetime.datetime.now()
+            answer.publishDate = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
             answer.question = Question.objects.get(id=question_id)
             answer.answerer = User.objects.get(username=username)
             if form.cleaned_data['attachedFile'] != '':
@@ -147,7 +148,7 @@ def question(request):
             question.keyword = form.cleaned_data['keyword']
             if form.cleaned_data['isPublic'] == '2':
                 question.isPublic = False
-            question.publishDate = datetime.datetime.now()
+            question.publishDate = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
             if form.cleaned_data['attachedFile'] != '':
                 question.attachedFile = form.cleaned_data['attachedFile']
             question.questioner = User.objects.get(username=username)
@@ -200,27 +201,34 @@ def followPerson(request, question_id, publisher_id):
 
 def latestQuestion(request):
     username = request.session.get('username', '')
-    if request.method == 'POST':
-        form = SearchForm(request.POST)
-        if form.is_valid():
-            keyword = form.cleaned_data['keyword']
-            questions = Question.objects.filter(
-                Q(title__contains=keyword) | Q(keyword__contains=keyword)).order_by('publishDate').reverse()
-            if form.cleaned_data['hasPic']:
-                questions = questions.exclude(attachedFile='')
-            if form.cleaned_data['isToday']:
-                today = datetime.date.today()
-                questions = questions.filter(publishDate__year=today.year).filter(
-                    publishDate__month=today.month).filter(publishDate__day=today.day)
-            # if form.cleaned_data['isHot']:
+    questions = Question.objects.all().order_by('publishDate').reverse()
+    keyword = ''
+    hasPic = False
+    isToday = False
+    isHot = False
 
-            questions = questions[:10]
+    if 'keyword' in request.GET:  # GET是一个dict，使用文本框的name作为key
+        keyword = request.GET['keyword']
+        questions = questions.filter(
+            Q(title__contains=keyword) | Q(keyword__contains=keyword))
+    if 'hasPic' in request.GET:
+        hasPic = True
+        questions = questions.exclude(attachedFile='')
+    if 'isToday' in request.GET:
+        isToday = True
+        today = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
+        questions = questions.filter(
+            Q(publishDate__year=today.year) & Q(publishDate__month=today.month) & Q(publishDate__day=today.day))
 
-        return render(request, 'newestinfo.html', {'username': username, 'questions': questions, 'form': form})
-    else:
-        latest_questions = Question.objects.order_by("publishDate").reverse()[0:10]
+    if 'isHot' in request.GET:
+        isHot = True
+
+    questions = questions[:10]
+
+    form = SearchForm({'keyword': keyword, 'hasPic': hasPic, 'isToday': isToday, 'isHot': isHot})
+    if not form.is_valid():
         form = SearchForm()
-        return render(request, 'newestinfo.html', {'username': username, 'questions': latest_questions, 'form': form})
+    return render(request, 'newestinfo.html', {'username': username, 'questions': questions, 'form': form})
 
 
 def aboutus(request):
@@ -299,7 +307,7 @@ def leaveMessage(request, user_id):
             message.message = form.cleaned_data['message']
             message.commenter = User.objects.get(username=username)
             message.receiver = User.objects.get(id=user_id)
-            message.publishDate = datetime.datetime.now()
+            message.publishDate = datetime.datetime.now(datetime.datetime.now)
             message.isPublic = True
             if form.cleaned_data['isPublic'] == '2':
                 message.isPublic = False
@@ -310,3 +318,53 @@ def leaveMessage(request, user_id):
             return HttpResponse('fail')
     else:
         return HttpResponseRedirect('/users/' + user_id + '/')
+
+
+def case(request):
+    username = request.session.get('username', '')
+    cases = Case.objects.all()
+    keyword = ''
+
+    if 'keyword' in request.GET:  # GET是一个dict，使用文本框的name作为key
+        keyword = request.GET['keyword']
+        cases = cases.filter(Q(title__contains=keyword) | Q(keyword__contains=keyword))
+
+    cases = cases[:10]
+
+    form = SearchForm({'keyword': keyword, 'hasPic': False, 'isToday': False, 'isHot': False})
+    if not form.is_valid():
+        form = SearchForm()
+    return render(request, 'case.html', {'username': username, 'cases': cases, 'form': form})
+
+
+def caseDetail(request, case_id):
+    username = request.session.get('username', '')
+    case = Case.objects.get(id=case_id)
+    isFollowing = False
+
+    if not username == '':
+        user = User.objects.get(username=username)
+        if user.followingCase.filter(id=case_id).exists():
+            isFollowing = True
+
+    return render(request, 'caseDetail.html', {'username': username, 'case': case, 'isFollowing': isFollowing})
+
+
+def caseFollow(request, case_id):
+    username = request.session.get('username', '')
+    if username == '':
+        request.session['redirect_after_login'] = request.get_full_path()
+        request.session['login_info'] = u'您还未登录'
+        return HttpResponseRedirect('/login')
+    user = User.objects.get(username=username)
+    case = Case.objects.get(id=case_id)
+
+    if user.followingCase.filter(id=case_id).exists():
+        relation = CaseFollow.objects.get(caseFollower=user, followingCase=case)
+        relation.delete()
+    else:
+        relation = CaseFollow.objects.create(caseFollower=user, followingCase=case,
+                                             date=datetime.date.today())
+        relation.save()
+
+    return HttpResponseRedirect('/case/' + case_id)

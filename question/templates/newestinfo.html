@@ -239,8 +239,7 @@
 </form>
 <div id="homedaohang">
     <div id="tablehome">
-        <form action="" method="post">
-            {% csrf_token %}
+        <form action="" method="get">
             <div id="tableinfo" class="div1">
                 <table width="100%" border="0" cellspacing="1" cellpadding="1">
                     <tr>
@@ -277,64 +276,15 @@
                     <tr>
                         <td height="600" align="left">&nbsp;</td>
                     </tr>
-                    <!-- <tr>
-                      <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td height="30" align="left">&nbsp;</td>
-                    </tr> -->
                 </table>
             </div>
             <div id="tableinfo_r" class="div1">
                 <table width="85%" border="0" cellspacing="1" cellpadding="1">
                     <tr>
                         <td>
-                            {% csrf_token %}
                             <p> &lt;&lt;
                                 {{form.keyword}}
-                                <input type="submit" value="搜索" name="keywordSearch"
+                                <input type="submit" value="搜索"
                                        style="width:30; height:20; font-size:18px"/>
                             </p>
 

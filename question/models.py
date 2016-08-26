@@ -28,6 +28,7 @@ class User(models.Model):
                                                through_fields=('questionFollower', 'followingQuestion'))
     followingPerson = models.ManyToManyField("self", blank=True, symmetrical=False, through='PersonFollow',
                                              through_fields=('userFollower', 'followingPerson'))
+    followingCase = models.ManyToManyField('question.Case', blank=True, through='CaseFollow')
 
     def __unicode__(self):
         return self.username
@@ -94,4 +95,26 @@ class PersonFollow(models.Model):
 class QuestionFollow(models.Model):
     questionFollower = models.ForeignKey(User, on_delete=models.CASCADE)
     followingQuestion = models.ForeignKey(Question, on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True)
+
+
+class Case(models.Model):
+    id = models.AutoField(primary_key=True, editable=False)
+    title = models.CharField(max_length=100)
+    questionDescription = models.TextField()
+    dataDescription = models.TextField()
+    solution = models.TextField()
+    keyword = models.CharField(max_length=256)
+    source = models.CharField(max_length=256)
+    reference = models.TextField()
+    caseType = models.CharField(max_length=20)
+    domain = models.CharField(max_length=20)
+
+    def __unicode__(self):
+        return self.title
+
+
+class CaseFollow(models.Model):
+    caseFollower = models.ForeignKey(User, on_delete=models.CASCADE)
+    followingCase = models.ForeignKey(Case, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
