@@ -1,13 +1,19 @@
 # coding=utf-8
 import datetime
+import os
+import sys
 
 import pytz
 from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponse
+from django.http import StreamingHttpResponse
 from django.shortcuts import render, get_object_or_404
 
 from .forms import AnswerForm, UserForm, LoginForm, QuestionForm, MessageForm, SearchForm
 from .models import Question, Answer, User, Expert, Message, QuestionFollow, PersonFollow, Case, CaseFollow
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 
 # Create your views here.
@@ -96,8 +102,13 @@ def detail(request, question_id):
     form = AnswerForm()
     # if question.isSolved:
     answers = Answer.objects.filter(question=question_id)
+    keywords = question.keyword.split(';')
+    q = Q()
+    for keyword in keywords:
+        q.add(Q(keyword__contains=keyword), Q.OR)
+    relatedQuestions = Question.objects.filter(q).exclude(id=question_id)
     return render(request, 'detail.html',
-                  {'username': username, 'question': question, 'answers': answers,
+                  {'username': username, 'question': question, 'answers': answers, 'relatedQuestions': relatedQuestions,
                    'questionFollowers': questionFollowers, 'isFollowing': isFollowing, 'isFollowing2': isFollowing2,
                    'form': form})
 
@@ -122,6 +133,10 @@ def answer(request, question_id):
             if form.cleaned_data['attachedFile'] != '':
                 answer.attachedFile = form.cleaned_data['attachedFile']
             answer.save()
+
+            question = Question.objects.get(id=question_id)
+            question.answerNum += 1
+            question.save()
 
             return HttpResponseRedirect('/question/' + question_id + '/')
         else:
@@ -368,3 +383,91 @@ def caseFollow(request, case_id):
         relation.save()
 
     return HttpResponseRedirect('/case/' + case_id)
+
+
+def download(request, question_id):
+    username = request.session.get('username', '')
+    if username == '':
+        request.session['redirect_after_login'] = request.get_full_path()
+        request.session['login_info'] = u'请先登录后下载'
+        return HttpResponseRedirect('/login')
+
+    def file_iterator(file_name, chunk_size=512):
+        with open(file_name) as f:
+            while True:
+                c = f.read(chunk_size)
+                if c:
+                    yield c
+                else:
+                    break
+
+    question = Question.objects.get(id=question_id)
+    prefix = os.getcwd() + '/media/'
+    fileName = os.path.split(question.attachedFile.name)[1]
+    response = StreamingHttpResponse(file_iterator(prefix + fileName))
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(fileName)
+
+    return response
+
+
+def downloadAnswer(request, answer_id):
+    username = request.session.get('username', '')
+    if username == '':
+        request.session['redirect_after_login'] = request.get_full_path()
+        request.session['login_info'] = u'请先登录后下载'
+        return HttpResponseRedirect('/login')
+
+    def file_iterator(file_name, chunk_size=512):
+        with open(file_name) as f:
+            while True:
+                c = f.read(chunk_size)
+                if c:
+                    yield c
+                else:
+                    break
+
+    answer = Answer.objects.get(id=answer_id)
+    prefix = os.getcwd() + '/media/'
+    fileName = os.path.split(answer.attachedFile.name)[1]
+    response = StreamingHttpResponse(file_iterator(prefix + fileName))
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(fileName)
+
+    return response
+
+
+def relatedQuestions(request, question_id):
+    username = request.session.get('username', '')
+    question = get_object_or_404(Question, id=question_id)
+    if username == '' and not question.isPublic:
+        request.session['login_info'] = u'该问题仅限注册用户查看,请先登录'
+        return HttpResponseRedirect('/login')
+
+    questionFollowers = User.objects.filter(followingQuestion=question_id)
+
+    # 判断登陆用户是否关注了问题和题主
+    # 首先判断用户是否就是题主 isFollowing=0表示用户就是题主,1表示用户未关注,2表示已关注
+    isFollowing = 1
+    isFollowing2 = 1
+    if question.questioner.username == username:
+        isFollowing = 0
+        isFollowing2 = 0
+    else:
+        if questionFollowers.filter(username=username).exists():  # 判断用户是否已关注这个问题
+            isFollowing = 2
+
+        publisher = question.questioner  # 判断用户是否已关注题主
+        publisherFollowers = User.objects.filter(followingPerson=publisher.id)
+        if publisherFollowers.filter(username=username).exists():
+            isFollowing2 = 2
+
+    keywords = question.keyword.split(';')
+    q = Q()
+    for keyword in keywords:
+        q.add(Q(keyword__contains=keyword), Q.OR)
+    relatedQuestions = Question.objects.filter(q).exclude(id=question_id)
+
+    return render(request, 'related_question.html',
+                  {'username': username, 'question': question, 'relatedQuestions': relatedQuestions,
+                   'isFollowing': isFollowing, 'isFollowing2': isFollowing2,})

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>新教师工作满意度分析--案例分析--精益社</title>
+    <title>问题如何求解1+2=？【已解决】--精益社</title>
     <style type="text/css">
         #nav {
             width: auto;
@@ -65,10 +65,11 @@
 
         #homedaohang table {
             font-size: medium;
+            width: 100%;
         }
 
         #homedaohang {
-            height: 1000px;
+            height: 800px;
             width: 100%;
         }
 
@@ -93,12 +94,12 @@
         }
 
         #homedaohang #tablehome {
-            height: 950px;
-            width: 88%;
+            height: auto;
+            width: 84%;
             margin-top: 0px;
-            margin-right: 6%;
+            margin-right: 8%;
             margin-bottom: 0px;
-            margin-left: 6%;
+            margin-left: 8%;
         }
 
         .textsize {
@@ -153,11 +154,11 @@
         }
 
         .textsize2 {
-            font-size: xx-large;
+            font-size: x-large;
         }
 
-        .textsize11 {
-            font-size: large;
+        .textsize3 {
+            font-size: small;
         }
 
         .style1 {
@@ -170,6 +171,9 @@
             document.MM_returnValue = false;
             for (i = 0; i < (args.length - 1); i += 2) eval(args[i] + ".location='" + args[i + 1] + "'");
         }
+        function MM_popupMsg(msg) { //v1.0
+            alert(msg);
+        }
     </script>
 </head>
 
@@ -178,12 +182,22 @@
     <div id="hometop">
 
         <div id="toplogo" align="left">
+
             <table width="100%" border="0" cellspacing="1" cellpadding="1">
                 <tr>
                     <td width="12%"><img src="/static/images/font1.jpg" width="125" height="50"/></td>
-                    <td width="59%" align="left"><b class="textsize2">案例分析</b></td>
-                    <td width="29%" align="right"><a href="/index">精益社首页</a>
-                        | <a href="/question">提问</a> |
+                    <td width="59%" align="left">
+                        <form id="form3" name="form3" method="post" action="">
+                            <p>
+                                <label for="search"></label>
+                                <input name="search" type="text" id="search"
+                                       style="width: 50; height: 50; font-size: 20px" size="45" maxlength="80"/>
+                                <input type="submit" name="searchbt" id="searchbt" value="搜索"
+                                       style="height:40; width:50; font-size:20px"/>
+                            </p>
+                        </form>
+                    </td>
+                    <td width="29%" align="right"><a href="/index">精益社首页</a> | <a href="/question">提问</a> |
                         {% if username == '' %}
                         <a href="/login">登录</a> | <a href="/register">注册</a>
                         {% else %}
@@ -196,62 +210,92 @@
         </div>
         <hr/>
     </div>
-    <div id="tablehome"><img src="/static/images/collect.jpg" width="24" height="28"/><a href="follow/"><b>
-        {% if isFollowing %}
-        取消{% endif %}收藏</b></a><br/><br/>
-        <table width="100%" height="766" border="0" align="center" cellpadding="0" cellspacing="10"
-               style="border:1px solid #CCC  ">
+    <div id="tablehome">
+        <br/>
+        <table width="100%" height="376" border="0" align="center" cellpadding="0" cellspacing="10"
+               style="border:1px solid #CCC">
             <tr>
-                <th width="100%" height="72" align="center" class="textsize2" style=" border-bottom:#999 solid 2px">
-                    {{case.title}}
-                </th>
+                <td width="43%" height="64" align="left" style=" border-bottom:#999  dashed 1px">
+                    <form method="" action="follow">
+                        {% csrf_token %}
+                        <b class="textsize2"><img src="/static/images/star1.jpg" width="27" height="26"/>{{question.title}}
+                            {% if question.isSolved %}
+                            【已解决】
+                            {% else %}
+                            {% endif %}
+                        </b>
+                        {% if isFollowing == 2 %}
+                        <input type="submit" onclick="MM_popupMsg('你已取消关注此问题！')"
+                               value="取消关注"/>
+                        {% elif isFollowing == 1 %}
+                        <input type="submit" onclick="MM_popupMsg('你已关注此问题！')"
+                               value="关注问题"/>
+                        {% endif %}
+                    </form>
+                </td>
+                <td width="23%" height="64" align="left" style=" border-bottom:#999  dashed 1px">
+                    &nbsp;&nbsp;已发布：{{question.publishDate|date:"Y-m-d H:i:s"}}
+                </td>
+                <form method="" action="{{question.questioner.id}}/follow">
+                    <td width="34%" height="64" align="center" style=" border-bottom:#999  dashed 1px">来自 <a
+                            href="/users/{{question.questioner.id}}">{{question.questioner.username}}</a>
+                        {% csrf_token %}
+                        {% if isFollowing2 == 2 %}
+                        <input type="submit" onclick="MM_popupMsg('你已取消关注Ta！')"
+                               value="取消关注"/>
+                        {% elif isFollowing2 == 1 %}
+                        <input type="submit" onclick="MM_popupMsg('你已关注Ta！')"
+                               value="关注Ta"/>
+                        {% endif %}
+                    </td>
+                </form>
             </tr>
+
             <tr>
-                <td height="12" align="left"><b class="textsize1">问题描述</b></td>
-            </tr>
-            <tr>
-                <td height="80" align="left" valign="top" style=" border-bottom:#CCC solid 1px"><p
-                        style="text-indent:2em;">
-                    {{case.questionDescription|linebreaks}}</td>
-            </tr>
-            <tr>
-                <td height="12" align="left"><b class="textsize1">数据描述</b></td>
-            </tr>
-            <tr>
-                <td height="23" align="left" valign="top" style=" border-bottom:#CCC solid 1px"><p
-                        style="text-indent:2em;">
-                    {{case.dataDescription|linebreaks}}</p>
+                <td height="215" colspan="3" align="left" valign="top" bgcolor="#FAFAFA"><p><b>问题描述：</b></p>
+                    {{question.description|linebreaks}}
                 </td>
             </tr>
             <tr>
-                <td height="12" align="left"><b class="textsize1">分析与解决</b></td>
-            </tr>
-            <tr>
-                <td height="100" align="left" valign="top" style=" border-bottom:#CCC solid 1px">
-                    {{case.solution|linebreaks}}
+                <td height="42" colspan="2" align="left" valign="middle">
+                    <label><b>关键词：</b></label>
+                    {{question.keyword}}
+                </td>
+                <td height="42" align="left" valign="middle">
+                    {% if not question.attachedFile == '' %}
+                    <a href="attachedFile/"> <img src="/static/images/download.jpg" width="32" height="29"/><b
+                            class="textsize3">{{question.attachedFile|cut:"./"}}</b></a>
+                    {% endif %}
                 </td>
             </tr>
-            <tr>
-                <td height="30" align="left" valign="top" style=" border-bottom:#CCC solid 1px"><b class="textsize1">关键词：</b>
-                    {{case.keyword|linebreaks}}
-                </td>
-            </tr>
-            <tr>
-                <td height="12" align="left"><b class="textsize1">案例来源</b></td>
-            </tr>
-            <tr>
-                <td height="13" align="left" valign="top" style=" border-bottom:#CCC solid 1px"><p
-                        style="text-indent:2em;">{{case.source|linebreaks}}</p></td>
-            </tr>
-            <tr>
-                <td height="12" align="left" valign="top"><b class="textsize1">相关参考</b></td>
-            </tr>
-            <tr>
-                <td height="44" align="left" valign="top">
-                    {{case.reference|linebreaks}}
-                </td>
-            </tr>
+
         </table>
+        <br/>
+
+
+        <table width="100%" border="0" cellspacing="10" cellpadding="1" style="border:1px solid #CCC">
+            <tr>
+                <td height="50" align="left" style=" border-bottom:#999 solid 2px"><b class="textsize1">关于{{question.title}}的问题&#8230;&#8230;（全部{{relatedQuestions.count}}问题）</b>
+                </td>
+                <td width="33%" height="50" align="center" style=" border-bottom:#999 solid 2px">
+                    <input name="我要提问" type="submit" id="我要提问" style="width:30; height:20; font-size:18px"
+                           onclick="MM_goToURL('parent','/question');return document.MM_returnValue"
+                           value="我来提问"/>
+                </td>
+            </tr>
+            {% for question in relatedQuestions %}
+            <tr>
+                <td height="30" align="left" style=" border-bottom:1px dashed #000">
+                    <a href="/question/{{question.id}}/"> 标题：{{question.title}}</a>
+                </td>
+                <td width="33%" height="30" align="center" style=" border-bottom:1px dashed #000">
+                    {{question.answerNum}}人回答
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+
         <br/>
         <p>&nbsp;</p>
     </div>

@@ -223,7 +223,7 @@
                             {% for question in latest_questions %}
                             {% if username == '' and not question.isPublic %}
                             {% else %}
-                            <li style=" border-bottom:1px dashed #000"><a href="/question/{{question.id}}">{{question.title}}
+                            <li style=" border-bottom:1px dashed #000"><a href="/question/{{question.id}}">{{question.title|truncatechars:8}}
                                 {% if question.isSolved %}
                                 【已解决】
                                 {% endif %}

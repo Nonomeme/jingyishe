@@ -44,6 +44,7 @@ class Question(models.Model):
     attachedFile = models.FileField(blank=True)
     isSolved = models.BooleanField(default=False)
     questioner = models.ForeignKey(User)
+    answerNum = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.title
@@ -55,7 +56,8 @@ class Answer(models.Model):
     question = models.ForeignKey(Question)
     answerer = models.ForeignKey(User)
     publishDate = models.DateTimeField(auto_now_add=True)
-    attachedFile = models.FileField(blank=True, upload_to='./upload/')
+    attachedFile = models.FileField(blank=True)
+    # attachedFile = models.FileField(blank=True, upload_to='./upload/')
     isPublic = models.BooleanField()
     grade = models.IntegerField(default=0)
 

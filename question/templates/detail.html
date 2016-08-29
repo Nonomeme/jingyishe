@@ -225,7 +225,9 @@
                         {% endif %}
                     </form>
                 </td>
-                <td width="38%" height="68" align="left" style=" border-bottom:#999  dashed 1px">&nbsp;&nbsp;已发布：{{question.publishDate|date:"Y-m-d H:i:s"}}</td>
+                <td width="38%" height="68" align="left" style=" border-bottom:#999  dashed 1px">
+                    &nbsp;&nbsp;已发布：{{question.publishDate|date:"Y-m-d H:i:s"}}
+                </td>
                 <form method="" action="{{question.questioner.id}}/follow">
                     <td width="25%" height="68" align="left" style=" border-bottom:#999  dashed 1px">来自 <a
                             href="/users/{{question.questioner.id}}">{{question.questioner.username}}</a>
@@ -242,16 +244,22 @@
             </tr>
             <tr>
                 <td height="34" colspan="3" align="left" valign="top" bgcolor="#FAFAFA"><p><b>问题描述：</b></p>
-                    <p>
-                        {{question.description}}
-                    </p>
+                    {{question.description|linebreaks}}
                 </td>
             </tr>
             <tr>
-                <td height="42" colspan="3" align="left" valign="middle" style=" border-bottom:#999 solid 2px">
+                <td height="42" colspan="2" align="left" valign="middle" style=" border-bottom:#999 solid 2px">
                     <label><b>关键词：</b></label>
                     {{question.keyword}}
                 </td>
+
+                <td height="42" align="left" valign="middle" style=" border-bottom:#999 solid 2px">
+                    {% if not question.attachedFile == '' %}
+                    <a href="attachedFile/"> <img src="/static/images/download.jpg" width="32" height="29"/><b
+                            class="textsize3">{{question.attachedFile|cut:"./"}}</b></a>
+                    {% endif %}
+                </td>
+
             </tr>
             <tr>
                 <td height="42" align="left" valign="middle" style=" border-bottom:#999 solid 2px"><b class="textsize1">{{answers.count}}个回答
@@ -265,9 +273,12 @@
         </table>
         <div id="D"
              style="display:none;border:1px solid #CCC;margin-top:10px; margin-bottom:5px;width:88;line-height:100%;">
-            <table width="100%" border="0" cellspacing="1" cellpadding="1">
+            <table width="100%" border="0" cellspacing="2" cellpadding="0">
                 {% for answer in answers %}
-                <tr>
+                <tr style="font-size:14px;">
+                    <td width="5%" align="left" valign="middle"><img src="/static/images/thumbup1.jpg" width="27"
+                                                                     height="28"/>{{answer.grade}}
+                    </td>
                     <td height="26" colspan="2" align="left" valign="middle">
                         {% if answer.isAnonym %}
                         匿名者&nbsp;
@@ -275,13 +286,15 @@
                         <a href="users/{{answer.answerer.id}}">{{answer.answerer.username}}</a> &nbsp;
                         {% endif %}
                         {{answer.publishDate|date:"Y-m-d H:i:s"}}
-                    <td height="26" align="left" valign="middle">
-                        <b class="textsize">{{answer.grade}}</b>&nbsp;&nbsp;<img src="/static/images/sun.jpg" width="20"
-                                                                                 height="21"/></td>
+                    <td width="32%" height="26" align="left" valign="middle">
+                        {% if not answer.attachedFile == '' %}
+                        <a href="/question/answer/{{answer.id}}/attachedFile/"><b class="textsize3">{{answer.attachedFile|cut:"./"}}</b></a>
+                        {% endif %}
                     </td>
                 </tr>
-                <tr>
-                    <td height="26" colspan="3" style=" border-bottom:1px dashed #000" align="left">{{answer.content}}
+                <tr tyle="font-size:14px;">
+                    <td height="26" colspan="4" style=" border-bottom:1px dashed #000" align="left" valign="middle">
+                        &nbsp;&nbsp;{{answer.content}}
                     </td>
                 </tr>
                 {% endfor %}
@@ -303,37 +316,27 @@
 
         <table width="100%" border="0" cellspacing="1" cellpadding="1">
             <tr>
-                <td height="50" colspan="2" align="left" style=" border-bottom:#999 solid 2px"><b class="textsize1">关于{{question.title}}的问题&#8230;&#8230;（全部15问题）</b>
+                <td height="50" colspan="2" align="left" style=" border-bottom:#999 solid 2px"><b class="textsize1">关于{{question.title}}的问题&#8230;&#8230;（全部{{relatedQuestions.count}}问题）</b>
                 </td>
                 <td width="33%" height="50" align="center" style=" border-bottom:#999 solid 2px">
-                    <form method="post" action="">
-                        <input name="我要提问" type="submit" id="我要提问" style="width:30; height:20; font-size:18px"
-                               onclick="MM_goToURL('parent','question5.html');return document.MM_returnValue"
-                               value="我来提问"/>
-                    </form>
+                    <input name="我要提问" type="submit" id="我要提问" style="width:30; height:20; font-size:18px"
+                           onclick="MM_goToURL('parent','/question');return document.MM_returnValue"
+                           value="我来提问"/>
                 </td>
             </tr>
+            {% for question in relatedQuestions %}
             <tr>
                 <td height="30" colspan="2" align="left" style=" border-bottom:1px dashed #000">
-                    标题：问题如何解决1+1=？XXXXXXXXXXXX
+                    <a href="/question/{{question.id}}/"> 标题：{{question.title}}</a>
                 </td>
-                <td width="33%" height="30" align="center" style=" border-bottom:1px dashed #000">4人回答</td>
-            </tr>
-            <tr>
-                <td height="30" colspan="2" align="left" style=" border-bottom:1px dashed #000">
-                    标题：问题如何解决1+2+1=？XXXXXXXXXXXXXXX
+                <td width="33%" height="30" align="center" style=" border-bottom:1px dashed #000">
+                    {{question.answerNum}}人回答
                 </td>
-                <td height="30" align="center" style=" border-bottom:1px dashed #000">0人回答</td>
             </tr>
+            {% endfor %}
             <tr>
-                <td height="30" colspan="2" align="left" style=" border-bottom:1px dashed #000">
-                    标题：问题如何解决1-1=？XXXXXXXXXXXXXXXXX
-                </td>
-                <td height="30" align="center" style=" border-bottom:1px dashed #000">2人回答</td>
-            </tr>
-            <tr>
-                <td height="30" colspan="2" align="left" style=" border-bottom:1px dashed #000" bgcolor="#F6F6F6">&gt;&gt;更多</td>
-                <td height="30" align="center" style=" border-bottom:1px dashed #000" bgcolor="#F6F6F6">&nbsp;</td>
+                <td height="30" colspan="2" align="left" style=" border-bottom:1px dashed #000" bgcolor="#F6F6F6"><a
+                        href="relatedQuestions/">&gt;&gt;更多</a></td>
             </tr>
         </table>
 
