@@ -45,6 +45,8 @@ class Question(models.Model):
     isSolved = models.BooleanField(default=False)
     questioner = models.ForeignKey(User)
     answerNum = models.IntegerField(default=0)
+    attachedDescription = models.TextField(default='')
+
 
     def __unicode__(self):
         return self.title

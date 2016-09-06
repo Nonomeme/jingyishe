@@ -7,10 +7,11 @@ from models import User
 CHOICES_FOR_ANSWER = (('1', u'公开'), ('2', u'仅提问者可见'))
 CHOICES_FOR_QUESTION = (('1', u'公开'), ('2', u'仅注册用户可见'))
 CHOICES_FOR_MESSAGE = (('1', u'公开'), ('2', u'仅Ta可见'))
+CHOICES_FOR_UPDATE = (('1', u'待解决'), ('2', u'已解决'))
 
 
 class AnswerForm(forms.Form):
-    content = forms.CharField(widget=forms.Textarea(attrs={'placeholder': '输入回答内容', 'cols': '152', 'rows': '12'}))
+    content = forms.CharField(widget=forms.Textarea(attrs={'placeholder': '输入回答内容', 'cols': '161', 'rows': '20'}))
     isPublic = forms.ChoiceField(choices=CHOICES_FOR_ANSWER, widget=forms.RadioSelect, initial='1')
     attachedFile = forms.FileField(required=False)
 
@@ -34,11 +35,13 @@ class LoginForm(forms.Form):
 
 
 class QuestionForm(forms.Form):
-    title = forms.CharField(widget=forms.TextInput(attrs={'size': '45'}))
+    title = forms.CharField(widget=forms.TextInput(attrs={'size': '66', 'maxlength': '100'}))
     description = forms.CharField(widget=forms.Textarea(attrs={'cols': '80', 'rows': '15'}))
-    keyword = forms.CharField(widget=forms.TextInput(attrs={'size': '28'}))
-    attachedFile = forms.FileField(required=False)
+    keyword = forms.CharField(widget=forms.TextInput(attrs={'size': '72', 'maxlength': '60'}))
+    attachedFile = forms.FileField(required=False, widget=forms.ClearableFileInput())
     isPublic = forms.ChoiceField(choices=CHOICES_FOR_QUESTION, widget=forms.RadioSelect, initial='1')
+    # isSolved = forms.ChoiceField(choices=CHOICES_FOR_UPDATE, widget=forms.RadioSelect, initial='1')
+    attachedDescription = forms.CharField(required=False, widget=forms.Textarea(attrs={'cols': '80', 'rows': '10'}))
 
 
 class SearchForm(forms.Form):
@@ -46,7 +49,7 @@ class SearchForm(forms.Form):
                               widget=forms.TextInput(
                                   attrs={'style': 'width: 60; height: 40; font-size: 18px', 'size': '60',
                                          'placeholder': '请输入关键词'}))
-    hasPic = forms.BooleanField(required=False)
+    # hasPic = forms.BooleanField(required=False)
     isToday = forms.BooleanField(required=False)
     isHot = forms.BooleanField(required=False)
 

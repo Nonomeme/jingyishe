@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>回答--精益社</title>
+    <title>问题如何求解1+1=？--精益社</title>
     <style type="text/css">
         #nav {
             width: auto;
@@ -93,12 +93,12 @@
         }
 
         #homedaohang #tablehome {
-            height: 550px;
-            width: 88%;
+            height: 800px;
+            width: 84%;
             margin-top: 0px;
-            margin-right: 6%;
+            margin-right: 8%;
             margin-bottom: 0px;
-            margin-left: 6%;
+            margin-left: 8%;
         }
 
         .textsize {
@@ -153,35 +153,38 @@
         }
 
         .textsize2 {
-            font-size: xx-large;
+            font-size: x-large;
         }
 
-        .textsize11 {
-            font-size: large;
+        .textsize3 {
+            font-size: small;
         }
 
         .style1 {
             color: #FFF;
         }
     </style>
-    <script type="text/javascript">
-        function MM_goToURL() { //v3.0
-            var i, args = MM_goToURL.arguments;
-            document.MM_returnValue = false;
-            for (i = 0; i < (args.length - 1); i += 2) eval(args[i] + ".location='" + args[i + 1] + "'");
-        }
-    </script>
 </head>
 
 <body>
 <div id="homedaohang">
     <div id="hometop">
-
         <div id="toplogo" align="left">
             <table width="100%" border="0" cellspacing="1" cellpadding="1">
                 <tr>
-                    <td width="12%"><img src="/static/images/font1.jpg" width="125" height="50"/></td>
-                    <td width="59%" align="left"><b class="textsize2">回答</b></td>
+                    <td width="12%"><a href="home5.html"><img src="/static/images/font1.jpg" width="125"
+                                                              height="50"/></a></td>
+                    <td width="59%" align="left">
+                        <form id="form3" name="form3" method="post" action="">
+                            <p>
+                                <label for="search"></label>
+                                <input name="search" type="text" id="search"
+                                       style="width: 50; height: 50; font-size: 20px" size="45" maxlength="80"/>
+                                <input type="submit" name="searchbt" id="searchbt" value="搜索"
+                                       style="height:40; width:50; font-size:20px"/>
+                            </p>
+                        </form>
+                    </td>
                     <td width="29%" align="right"><a href="/index">精益社首页</a> | <a href="/question">提问</a> |
                         {% if username == '' %}
                         <a href="/login">登录</a> | <a href="/register">注册</a>
@@ -196,32 +199,54 @@
         <hr/>
     </div>
     <div id="tablehome"><br/>
-        <br/>
-        <form enctype="multipart/form-data" method="post" action="">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <table width="100%" height="430" border="0" align="center" cellpadding="0" cellspacing="15"
-                   style="border:1px solid #CCC  ">
+            <table width="100%" height="587" border="0" align="center" cellpadding="0" cellspacing="5"
+                   style="border:1px solid #CCC">
                 <tr>
-                    <td height="23" colspan="2" align="left"><b class="textsize1">请填写内容</b>&nbsp; &nbsp;&nbsp; &nbsp;
-                        <img src="/static/images/filePDF.jpg" width="34" height="32"/>附加文件</label>
+                    <td width="41%" height="68" align="left" style=" border-bottom:#999  dashed 1px">
+                        <b class="textsize2"><img src="/static/images/star1.jpg" width="27" height="26"/>{{question.title}}</b>
+                        &nbsp;&nbsp;<img src="/static/images/write.jpg" width="27" height="26"/>编辑
+                    </td>
+                    <td width="11%" align="left" style=" border-bottom:#999  dashed 1px" class="textsize3">
+
+                    </td>
+                    <td width="48%" height="68" align="right" style=" border-bottom:#999  dashed 1px">
+                        &nbsp;已发布：{{question.publishDate|date:"Y-m-d H:i:s"}}&nbsp;
+                    </td>
+                </tr>
+
+                <tr>
+                    <td height="34" colspan="3" align="left" valign="top" bgcolor="#FAFAFA"><p><b>问题描述：</b></p>
+                        {{form.description}}
+                    </td>
+                </tr>
+                <tr>
+                    <td height="42" colspan="2" align="left" valign="middle" style=" border-bottom:#999 solid 2px">
+                        <label><b>关键词：</b></label>
+                        {{form.keyword}}
+                    </td>
+                    <td height="42" align="left" valign="middle" style=" border-bottom:#999 solid 2px">上传附件:
+                        <!--{% if not question.attachedFile == '' %}-->
+                        <!--<a href="attachedFile/"> <img src="/static/images/download.jpg" width="32" height="29"/><b-->
+                        <!--class="textsize3">{{question.attachedFile|cut:"./"}}</b></a>-->
+                        <!--{% endif %}-->
                         {{form.attachedFile}}
                     </td>
                 </tr>
                 <tr>
-                    <td height="166" colspan="2" align="left" valign="top">
-                        <label for="{{form.content.id_for_label}}"></label>
-                        {{form.content}}
+                    <td height="57" colspan="3" style=" border-top:#CCC solid 2px">
+                        {{form.isPublic}}
                     </td>
                 </tr>
                 <tr>
-                    <td width="43%" height="43" align="left">
-                        {{form.isPublic}}
+                    <td height="74" colspan="3" align="left"><p><b>补充：</b></p>
+                        {{form.attachedDescription}}
                     </td>
-                    <td width="27%" align="right">
-                        <input name="submit" type="submit" id="submit" style="width:30; height:22; font-size:18px"
-                               value="发布"/>
-                        <input type="submit" name="cancel" id="cancel" style="width:30; height:22; font-size:18px"
-                               value="取消"/>
+                </tr>
+                <tr>
+                    <td height="30" colspan="3" align="right">
+                        <input type="submit" name="tijiao" id="tijiao" style="width:30; height:22; font-size:18px"
                     </td>
                 </tr>
             </table>
@@ -231,10 +256,10 @@
     <div id="bottom"
          style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#333; color:#FFF"
          align="center">
-        &nbsp; <a href="home.html" class="style1">网站首页</a>&nbsp; |&nbsp; <a href="newest_info5_1.html" class="style1">最新咨询</a>&nbsp;
-        |&nbsp; <a href="expert5.html" class="style1">专家咨询</a>&nbsp; |&nbsp; <a href="case.html"
-                                                                                class="style1">案例分析</a>&nbsp; |&nbsp; <a
-            href="AI.html" class="style1">AI咨询</a>&nbsp; |&nbsp; <a href="aboutus.html" class="style1">关于我们</a>&nbsp;
+        &nbsp; <a href="/index" class="style1">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
+                                                                         class="style1">最新咨询</a>&nbsp; |&nbsp; <a
+            href="/expert" class="style1">专家咨询</a>&nbsp; |&nbsp; <a href="/case" class="style1">案例分析</a>&nbsp;
+        |&nbsp; <a href="/consultion" class="style1">AI咨询</a>&nbsp; |&nbsp; <a href="/aboutus" class="style1">关于我们</a>&nbsp;
     </div>
     <br/>
 </div>

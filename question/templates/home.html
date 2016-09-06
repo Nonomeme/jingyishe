@@ -157,7 +157,6 @@
             document.MM_returnValue = false;
             for (i = 0; i < (args.length - 1); i += 2) eval(args[i] + ".location='" + args[i + 1] + "'");
         }
-
     </script>
 </head>
 
@@ -182,7 +181,7 @@
                     <td width="25%"><img src="/static/images/font1.jpg" width="251" height="99"/></td>
                     <td width="13%" align="left"><h2>&nbsp;</h2></td>
                     <td width="62%">
-                        <form id="form3" name="form3" method="post" action="">
+                        <form method="post" action="">
                             <p>
                                 <label for="search"></label><br/>
                             </p>
@@ -251,18 +250,20 @@
                     </td>
                     <td width="2%" rowspan="3" align="" valign="top">&nbsp;</td>
                     <td height="348" valign="top">
-                        <label for="{{form.title.id_for_label}}"><b>标题:&nbsp;</b></label>
+                        <label for="{{form.title.id_for_label}}"><b>标题:&nbsp;&nbsp;&nbsp;</b></label>
                         {{form.title}}
                         &lt;50字 <br/>
-                        <label for="{{form.description.id_for_label}}"><b>描述: </b></label><br/>
-                        {{form.description}}&lt;1000字<br/>
-                        <label for="{{form.keyword.id_for_label}}"><b>关键词:</b></label>
-                        {{form.keyword}}
-                        <label for="{{form.attachedile}}">
-                            <img src="/static/images/filePDF.jpg" width="34" height="32"/>附加文件
-                        </label>
-                        {{form.attachedFile}}
-                        {{form.isPublic}}
+                        <p><b>描述：</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label for="{{form.attachedile}}">
+                                <img src="/static/images/filePDF.jpg" width="34"
+                                     height="32"/>附加文件</label>
+                            {{form.attachedFile}}
+                            <br/>
+                            {{form.description}}&lt;1000字<br/></p>
+                            <label for="{{form.keyword.id_for_label}}"><p><b>关键词:</b>&nbsp;&nbsp;</label>
+                            {{form.keyword}}
+                            {{form.isPublic}}
+                        </p>
                     </td>
                 </tr>
                 <tr>

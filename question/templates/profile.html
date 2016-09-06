@@ -210,22 +210,28 @@
                     <p>&nbsp;| 关注了 {{user.followingQuestion.count}} 个问题</p></td>
             </tr>
             <tr>
+                <td align="center">
+                    {% if isFollowing == 1%}
+                    <a href="follow/"><input type="button" value="关注Ta"/></a>
+                    {% elif isFollowing == 2%}
+                    <a href="follow/"><input type="button" value="取消关注"/></a>
+                    {% else %}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
                 <td height="5" colspan="4">
                     <hr/>
                 </td>
             </tr>
             <tr>
                 <td height="29" class="textstyle"><img src="/static/images/home1.jpg" width="34" height="29"/></td>
-                <td width="37%" align="center"><b class="textsize1">提问 {{questions.count}}</b></td>
-                <td width="23%" align="center"><b class="textsize1">回答 {{answers.count}}</b></td>
-                <td width="25%" align="center"><b class="textsize1">
-                    {% if isFollowing == 1%}
-                    <a href="follow/">收藏</a></b>
-                    {% elif isFollowing == 2%}
-                    <a href="follow/">取消收藏</a></b>
-                    {% else %}
-                    {% endif %}
-                </td>
+                <td width="37%" align="center"><b class="textsize1"><a href="questions/" style="color:#000">提问
+                    {{questions.count}}</a></b></td>
+                <td width="23%" align="center"><b class="textsize1"><a href="answers/" style="color:#000">回答
+                    {{answerNum}}</a></b></td>
+                <td width="25%" align="center"><b class="textsize1"><a href="cases/" style="color:#000">收藏
+                    {{num}}</a></b></td>
             </tr>
 
         </table>
@@ -233,41 +239,34 @@
 
         <table width="100%" border="0" cellspacing="10" cellpadding="0" style="border:1px solid #CCC">
             <tr>
-                <td height="23" colspan="3"><b class="textsize1">回答</b></td>
-                <td width="33%" height="23">&nbsp;</td>
+                <td height="23" colspan="4"><b class="textsize1">回答 </b></td>
             </tr>
             <tr>
                 <td height="5" colspan="4">
                     <hr noshade="noshade"/>
                 </td>
             </tr>
+            {% for answer in answers %}
             <tr>
-                <td colspan="2" valign="top">
-                    <ul>
-                        {% for answer in answers %}
-                        <li><a href="/question/{{answer.question.id}}">{{answer.question.title}}
-                            {% if answer.question.isSolved %}
-                            【已解决】
-                            {% endif %}
-                        </a></li>
-                        <br/>
-                        {% endfor %}
-                        <li>&#8230; </li>
-                    </ul>
+                <td width="7%" align="center">
+                    <img src="/static/images/thumbup1.jpg" width="27" height="28"/>{{answer.grade}}
                 </td>
-                <td width="21%" valign="top">
-                    <ul style=" list-style-type:none;margin:0px; padding:0px; margin-top:18px;">
-                        {% for answer in answers %}
-                        <li>{{answer.publishDate|date:"Y-m-d H:i:s"}}</li>
-                        <br/>
-                        {% endfor %}
-                        <li>&nbsp; </li>
-                    </ul>
+                <td colspan="2">
+                    <a href="/question/{{answer.question.id}}/">
+                        {{answer.question.title}}
+                        {% if answer.qustion.isSolved %}
+                        【已解决】
+                        {% endif %}
+                    </a>
                 </td>
-                <td align="center" valign="top"><img src="/static/images/评分.jpg" alt="score" width="227" height="133"/>
-                </td>
+                <td width="30%">{{answer.publishDate|date:"Y-m-d H:i:s"}}</td>
             </tr>
+            {% endfor %}
             <tr>
+                <td align="center"><a href="answers/">&#8230;</a></td>
+                <td colspan="2"><a href="answers/">&#8230;</a></td>
+                <td width="30%"><a href="answers/">&#8230;</a></td>
+            </tr>
         </table>
         <br/>
         <table width="100%" border="0" cellspacing="10" cellpadding="0" style="border:1px solid #CCC">
@@ -279,26 +278,29 @@
                     <hr noshade="noshade"/>
                 </td>
             </tr>
+
             <tr>
                 <td colspan="3" valign="top">
                     <ul>
-                        <li> 关注了问题 <a href="unsolved1_5.html">如何计算1+2=?</a></li>
+                        {% for item in following %}
+                        <li>
+                            {% if item.type == 1%}
+                            关注了问题 <a href="/question/{{item.url}}/">{{item.name}}</a>
+                            {% else %}
+                            关注了 <a href="/users/{{item.url}}/">{{item.name}}</a>
+                            {% endif %}
+                        </li>
                         <br/>
-                        <li> 关注了 <a href="profile_zs_5.html">王五</a></li>
-                        <br/>
-                        <li> 关注了问题 <a href="detail.html">如何计算这个2+2=?</a></li>
-                        <br/>
+                        {% endfor %}
                         <li>&#8230; </li>
                     </ul>
                 </td>
                 <td width="54%">
                     <ul style=" list-style-type:none;margin:0px; padding:0px; margin-top:18px;">
-                        <li> 06天前</li>
+                        {% for item in following %}
+                        <li> {{item.timeDelta}}天前</li>
                         <br/>
-                        <li> 10天前</li>
-                        <br/>
-                        <li> 12天前</li>
-                        <br/>
+                        {% endfor %}
                         <li>&nbsp;</li>
                     </ul>
                 </td>
@@ -317,6 +319,13 @@
                     <hr noshade="noshade"/>
                 </td>
             </tr>
+            {% if messages.count == 0 %}
+            <tr>
+                <td>
+                    Ta还没有任何留言
+                </td>
+            </tr>
+            {% else %}
             <tr>
                 <td height="21" colspan="4" valign="top">
                     <ul>
@@ -355,6 +364,7 @@
                     </ul>
                 </td>
             </tr>
+            {% endif %}
         </table>
         {% else %}
         <form action="message/" method="post">

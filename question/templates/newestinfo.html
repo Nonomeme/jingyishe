@@ -2,6 +2,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>最新咨询--精益社</title>
     <style type="text/css">
@@ -197,6 +198,15 @@
         }
     </style>
     <script type="text/javascript">
+        $(document).ready(function () {
+            url = window.location.pathname;
+//            console.log()
+            $("#newest_info_list2").get(0).selectedIndex=url.split("/")[3];
+            $("#newest_info_list2").change(function () {
+                var checkIndex=$("#newest_info_list2").get(0).selectedIndex;
+                location.href="/question/latest/"+checkIndex
+            });
+        });
         function MM_goToURL() { //v3.0
             var i, args = MM_goToURL.arguments;
             document.MM_returnValue = false;
@@ -218,12 +228,12 @@
                     <option>专家咨询</option>
                     <option>案例分析</option>
                 </select>
-                &gt;
                 <select name="newest_info_list2" size="1" id="newest_info_list2">
                     <option value="所有">所有</option>
-                    <option value="统计分析">统计分析</option>
+                    <option value="数据分析">数据分析</option>
                     <option value="机器学习">机器学习</option>
-                    <option value="软件应用">软件应用</option>
+                    <option value="算法软件">算法软件</option>
+                    <option value="人工智能">人工智能</option>
                 </select></td>
             <td width="29%" align="right" style="border-bottom: #ABABAB solid 2px" bgcolor="#F4F4F4"><a href="/index">精益社首页</a>
                 | <a href="/question">提问</a> |
@@ -247,13 +257,7 @@
                         <th width="10" rowspan="22" align="left" bgcolor="#CCCCCC">&nbsp;</th>
                     </tr>
                     <tr>
-                      <td height="20" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td height="30">
-                            {{form.hasPic}}
-                            <label for="{{form.hasPic.id_for_label}}">有图片</label>
-                        </td>
+                        <td height="20" align="left">&nbsp;</td>
                     </tr>
                     <tr>
                         <td height="30">
@@ -269,9 +273,9 @@
                         </td>
                     </tr>
                     <!--<tr>-->
-                        <!--<td height="30" align="left">-->
-                            <!--<input type="submit" name="search2" id="search2" value="搜索"/>-->
-                        <!--</td>-->
+                    <!--<td height="30" align="left">-->
+                    <!--<input type="submit" name="search2" id="search2" value="搜索"/>-->
+                    <!--</td>-->
                     <!--</tr>-->
                     <tr>
                         <td height="600" align="left">&nbsp;</td>

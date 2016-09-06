@@ -93,12 +93,12 @@
         }
 
         #homedaohang #tablehome {
-            height: 700px;
-            width: 92%;
+            height: 770px;
+            width: 90%;
             margin-top: 0px;
-            margin-right: 4%;
+            margin-right: 5%;
             margin-bottom: 0px;
-            margin-left: 4%;
+            margin-left: 5%;
         }
 
         .textsize {
@@ -116,13 +116,13 @@
         }
         .div-a {
             float: left;
-            width: 49%;
+            width: 85%;
             border: 0px solid #F00
         }
 
         .div-b {
             float: left;
-            width: 49%;
+            width: 85%;
             border: 1px solid #F00
         }
 
@@ -155,29 +155,89 @@
         .style1 {
             color: #FFF;
         }
+
+        #homedaohang #tablehome #tabler {
+            height: 600px;
+            width: 70%;
+            margin-top: 0px;
+            margin-right: 15%;
+            margin-bottom: 0px;
+            margin-left: 5%;
+        }
+
+        #homedaohang #tablehome #tableinfo {
+        }
+
+        #homedaohang #tablehome #tableinfo {
+            width: 5%;
+            margin-top: 0px;
+            margin-right: 0%;
+            margin-bottom: 0px;
+            margin-left: 0%;
+        }
+
+        #homedaohang #tablehome #tableinfo_r {
+        }
+
+        .div1 {
+            width: 15%;
+            height: auto;
+            float: left;
+        }
+
+        .div2 {
+            width: 95%;
+            height: auto;
+            float: left;
+        }
+
+        #homedaohang #tablehome #tableinfo_r {
+            width: 95%;
+            margin: 0px;
+        }
+
+        .test span {
+            display: none;
+        }
+
+        .test:hover span {
+            display: block;
+        }
+
+        body, td, th {
+            font-family: "Times New Roman", Times, serif;
+        }
     </style>
+    <script type="text/javascript">
+        function MM_goToURL() { //v3.0
+            var i, args = MM_goToURL.arguments;
+            document.MM_returnValue = false;
+            for (i = 0; i < (args.length - 1); i += 2) eval(args[i] + ".location='" + args[i + 1] + "'");
+        }
+    </script>
 </head>
 
 <body>
 <form id="form" name="form6" method="post" action="">
 
-    <table width="100%" height="48" border="0" cellpadding="0" cellspacing="0">
+    <table width="100%" height="48" border="0" cellpadding="0 " cellspacing="0">
         <tr>
             <td width="71%" height="38" class="hrtop" style=" border-bottom: #ABABAB solid 2px" bgcolor="#F4F4F4"><a
-                    href="home2.html">精益社</a>&gt;
+                    href="home5.html">精益社</a>&gt;
                 <label for="newest_info_list1"></label>
                 <select name="newest_info_list1" id="newest_info_list1">
-                    <option>案例分析</option>
-                    <option>专家咨询</option>
-                    <option>最新咨询</option>
+                    <option value="案例分析">案例分析</option>
+                    <option value="专家咨询">专家咨询</option>
+                    <option value="最新咨询">最新咨询</option>
                 </select>
                 &gt;
-                <!--<select name="newest_info_list2" size="1" id="newest_info_list2">-->
-                    <!--<option value="所有" selected="selected">所有</option>-->
-                    <!--<option value="统计分析">统计分析</option>-->
-                    <!--<option value="机器学习">机器学习</option>-->
-                    <!--<option value="软件应用">软件应用</option>-->
-                <!--</select></td>-->
+                <select name="newest_info_list2" size="1" id="newest_info_list2">
+                    <option value="所有">所有</option>
+                    <option value="数据分析">数据分析</option>
+                    <option value="机器学习">机器学习</option>
+                    <option value="算法软件">算法软件</option>
+                    <option value="人工智能">人工智能</option>
+                </select></td>
             <td width="29%" align="right" style="border-bottom: #ABABAB solid 2px" bgcolor="#F4F4F4"><a href="/index">精益社首页</a>
                 | <a href="/question">提问</a> |
                 {% if username == '' %}
@@ -192,38 +252,56 @@
 </form>
 <div id="homedaohang">
     <div id="tablehome">
-        <table width="100%" border="0" cellspacing="1" cellpadding="1">
-            <tr>
-                <th align="left">
-                </th>
-                <th width="10" rowspan="21" align="left" bgcolor="#CCCCCC">&nbsp;</th>
-                <th colspan="2" align="left">
-                    <form action="" method="get">
-                        <p><b class="textsize1">&lt;&lt;</b>
-                            {{form.keyword}}
-                            <input type="submit" value="搜索"
-                                   style="width:30; height:20; font-size:18px"/>
-                        </p>
-                    </form>
-                </th>
-            </tr>
-            {% for case in cases %}
-            <tr>
-                <td width="39" align="center" valign="bottom">&nbsp;</td>
-                <td width="64" align="center" valign="bottom"><img src="/static/images/star1.jpg" alt="star1" width="27"
-                                                                   height="26"/></td>
-                <td width="878" valign="bottom" height="30"><a href="/case/{{case.id}}/"><span style=" border-bottom:1px dashed #000">{{case.caseType}}案例之：{{case.domain}}：{{case.title}}</span></a>
-                </td>
-            </tr>
-            {% endfor %}
-            <tr>
-                <td>&nbsp;</td>
-                <td height="500">&nbsp;</td>
-                <td width="878" valign="top">&nbsp;</td>
-            </tr>
-        </table>
+
+        <div id="tableinfo" class="div1">
+            <table width="90%" border="0" cellspacing="1" cellpadding="1" style="border-right:#CCC solid 8px">
+                <tr>
+                    <th width="125" height="37" align="left">&nbsp;</th>
+                </tr>
+                <tr>
+                    <td height="660" align="left">&nbsp;</td>
+                </tr>
+            </table>
+        </div>
+        <div id="tableinfo_r" class="div1">
+            <table width="85%" border="0" cellspacing="1" cellpadding="1">
+                <tr>
+                    <td>
+                        <form action="" method="get">
+                            <p><b class="textsize1">&lt;&lt;</b>
+                                {{form.keyword}}
+                                <input type="submit" value="搜索"
+                                       style="width:30; height:20; font-size:18px"/>
+                            </p>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="div2">
+            <table width="100%" border="0" cellspacing="1" cellpadding="0">
+                {% for case in cases %}
+                <tr>
+                    <td width="30" height="30" align="center" valign="bottom">
+                        <img src="/static/images/star1.jpg" alt="star1" width="27" height="26"/>
+                    </td>
+                    <td width="518" valign="bottom"><span style=" border-bottom:1px dashed #000"><a
+                            href="/case/{{case.id}}/">{{case.caseType}}案例之：{{case.domain}}：{{case.title}}</a></span>
+                    </td>
+                </tr>
+                {% endfor %}
+
+                <tr>
+                    <td align="left">&nbsp;</td>
+                    <td height="360" align="left">&nbsp;</td>
+                </tr>
+            </table>
+        </div>
+
+
         <p>&nbsp;</p>
     </div>
+
     <div id="bottom"
          style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#333; color:#FFF"
          align="center">
@@ -234,5 +312,6 @@
     </div>
     <br/>
 </div>
+
 </body>
 </html>

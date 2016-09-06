@@ -1,9 +1,11 @@
 # coding=utf-8
 import datetime
 import os
+import re
 import sys
 
 import pytz
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponse
 from django.http import StreamingHttpResponse
@@ -214,11 +216,11 @@ def followPerson(request, question_id, publisher_id):
     return HttpResponseRedirect('/question/' + question_id)
 
 
-def latestQuestion(request):
+def latestQuestion(request, type="0"):
     username = request.session.get('username', '')
     questions = Question.objects.all().order_by('publishDate').reverse()
     keyword = ''
-    hasPic = False
+    # hasPic = False
     isToday = False
     isHot = False
 
@@ -226,8 +228,8 @@ def latestQuestion(request):
         keyword = request.GET['keyword']
         questions = questions.filter(
             Q(title__contains=keyword) | Q(keyword__contains=keyword))
-    if 'hasPic' in request.GET:
-        hasPic = True
+        # if 'hasPic' in request.GET:
+        #     hasPic = True
         questions = questions.exclude(attachedFile='')
     if 'isToday' in request.GET:
         isToday = True
@@ -240,7 +242,7 @@ def latestQuestion(request):
 
     questions = questions[:10]
 
-    form = SearchForm({'keyword': keyword, 'hasPic': hasPic, 'isToday': isToday, 'isHot': isHot})
+    form = SearchForm({'keyword': keyword, 'isToday': isToday, 'isHot': isHot})
     if not form.is_valid():
         form = SearchForm()
     return render(request, 'newestinfo.html', {'username': username, 'questions': questions, 'form': form})
@@ -257,15 +259,72 @@ def userInfo(request, user_id):
     publisher = User.objects.get(id=user_id)
     followers = User.objects.filter(followingPerson=publisher)
     count = followers.count()
-    questions = Question.objects.filter(questioner=publisher).order_by('publishDate').reverse()[0:3]
-    answers = Answer.objects.filter(answerer=publisher).order_by('publishDate').reverse()[0:3]
+    questions = Question.objects.filter(questioner=publisher).order_by('publishDate').reverse()
+    answers = Answer.objects.filter(answerer=publisher).order_by('publishDate').reverse()
+    answerNum = answers.count()
+    answers = answers[:3]
+    followingQuestions = QuestionFollow.objects.filter(questionFollower=user_id).order_by('date').reverse()[:3]
+    followingPersons = PersonFollow.objects.filter(userFollower=user_id).order_by('date').reverse()[:3]
+    followinglist, questionlist, personlist = [], [], []
+    today = datetime.date.today()
+    for question in followingQuestions:
+        delta = today - question.date
+        questionlist.append({'name': question.followingQuestion.title,
+                             'timeDelta': int(delta.total_seconds() / 86400),
+                             'type': 1,
+                             'url': question.followingQuestion.id})
+
+    for person in followingPersons:
+        delta = today - person.date
+        personlist.append({'name': person.followingPerson.username,
+                           'timeDelta': int(delta.total_seconds() / 86400),
+                           'type': 2,
+                           'url': person.followingPerson.id})
+    i = j = 0
+    while i < len(questionlist) and j < len(personlist):
+        if questionlist[i]['timeDelta'] < personlist[j]['timeDelta']:
+            followinglist.append(questionlist[i])
+            i += 1
+        else:
+            followinglist.append(personlist[j])
+            j += 1
+
+    while i < len(questionlist):
+        followinglist.append(questionlist[i])
+        i += 1
+    while j < len(personlist):
+        followinglist.append(personlist[j])
+        j += 1
+    # for question in followingQuestions:
+    #     for person in followingPersons:
+    #         if question.date < person.date:
+    #             delta = today - question.date
+    #             followinglist .append(
+    #                 {'name': question.followingQuestion.title,
+    #                  'timeDelta': int(delta.total_seconds()/86400),
+    #                  'type': 1,
+    #                  'url': question.followingQuestion.id})
+    #             break
+    #         else:
+    #             if
+    #             delta = today - person.date
+    #             followinglist.append({
+    #                 'name': person.followingPerson.username,
+    #                 'timeDelta': int(delta.total_seconds()/86400),
+    #                 'type': 2,
+    #                 'url': person.followingPerson.id
+    #             })
+
+    followingCases = publisher.followingCase.all()
+    num = followingCases.count()
     isFollowing = 1
     if publisher.username == username:
         isFollowing = 0
         messages = Message.objects.filter(receiver=publisher)
         return render(request, 'profile.html',
                       {'user': publisher, 'username': username, 'followers': count, 'questions': questions,
-                       'answers': answers, 'isFollowing': isFollowing, 'messages': messages})
+                       'answers': answers, 'isFollowing': isFollowing, 'messages': messages, 'num': num,
+                       'answerNum': answerNum, 'following': followinglist})
     else:
         if User.objects.filter(followingPerson=publisher).filter(username=username).exists():
             isFollowing = 2
@@ -273,7 +332,8 @@ def userInfo(request, user_id):
 
     return render(request, 'profile.html',
                   {'user': publisher, 'username': username, 'followers': count, 'questions': questions,
-                   'answers': answers, 'isFollowing': isFollowing, 'form': form})
+                   'answers': answers, 'isFollowing': isFollowing, 'form': form, 'num': num, 'answerNum': answerNum,
+                   'following': followinglist})
 
 
 def followUser(request, publisher_id):
@@ -346,7 +406,7 @@ def case(request):
 
     cases = cases[:10]
 
-    form = SearchForm({'keyword': keyword, 'hasPic': False, 'isToday': False, 'isHot': False})
+    form = SearchForm({'keyword': keyword, 'isToday': False, 'isHot': False})
     if not form.is_valid():
         form = SearchForm()
     return render(request, 'case.html', {'username': username, 'cases': cases, 'form': form})
@@ -462,7 +522,8 @@ def relatedQuestions(request, question_id):
         if publisherFollowers.filter(username=username).exists():
             isFollowing2 = 2
 
-    keywords = question.keyword.split(';')
+    # keywords = question.keyword.split(';')
+    keywords = re.split(r'[,;]', question.keyword)
     q = Q()
     for keyword in keywords:
         q.add(Q(keyword__contains=keyword), Q.OR)
@@ -471,3 +532,82 @@ def relatedQuestions(request, question_id):
     return render(request, 'related_question.html',
                   {'username': username, 'question': question, 'relatedQuestions': relatedQuestions,
                    'isFollowing': isFollowing, 'isFollowing2': isFollowing2,})
+
+
+def myquestions(request, user_id):
+    username = request.session.get('username', '')
+    user = User.objects.get(id=user_id)
+    questions = Question.objects.filter(questioner=user).order_by('publishDate').reverse()
+    return render(request, 'myquestions.html', {'username': username, 'user': user, 'questions': questions})
+
+
+def myanswers(request, user_id):
+    username = request.session.get('username', '')
+    user = User.objects.get(id=user_id)
+    answers = Answer.objects.filter(answerer=user).order_by('publishDate').reverse()
+    return render(request, 'myanswers.html', {'username': username, 'user': user, 'answers': answers})
+
+
+def mycases(request, user_id):
+    username = request.session.get('username', '')
+    user = User.objects.get(id=user_id)
+    # cases = user.followingCase.all().order_by('publishDate').reverse()
+    cases = CaseFollow.objects.filter(caseFollower=user)
+    return render(request, 'mycases.html', {'username': username, 'user': user, 'cases': cases})
+
+
+def updateQuestion(request, question_id):
+    username = request.session.get('username', '')
+    user = User.objects.get(username=username)
+    if request.method == 'POST':
+        question = Question.objects.get(id=question_id)
+        question.description = request.POST['description']
+        question.keyword = request.POST['keyword']
+        if request.POST['isPublic'] == '2':
+            question.isPublic = False
+        else:
+            question.isPublic = True
+        question.attachedFile = request.FILES.get('attachedFile', None)
+        question.attachedDescription = request.POST['attachedDescription']
+        question.save()
+        return HttpResponseRedirect('/users/' + str(user.id) + '/questions/')
+
+        # # print request.FILES.get('attachedFile', None)
+        # form = QuestionForm(
+        #     {'title': question.title, 'description': request.POST['description'], 'keyword': request.POST['keyword'],
+        #      'attachedFile': request.FILES.get('attachedFile', None), 'isPublic': request.POST['isPublic'],
+        #      'attachedDescription': request.POST['attachedDescription']})
+        # print request.FILES.get('attachedFile', None)
+        # if form.is_valid():
+        #     print form.cleaned_data
+        #     question = Question.objects.get(id=question_id)
+        #     question.description = form.cleaned_data['description']
+        #     question.keyword = form.cleaned_data['keyword']
+        #     if form.cleaned_data['isPublic'] == '2':
+        #         question.isPublic = False
+        #     else:
+        #         question.isPublic = True
+        #     if form.cleaned_data['attachedFile'] != '':
+        #         question.attachedFile = form.cleaned_data['attachedFile']
+        #     question.attachedDescription = form.cleaned_data['attachedDescription']
+        #     question.save()
+        #     return HttpResponseRedirect('/users/' + str(user.id) + '/questions/')
+        # else:
+        #     return HttpResponseRedirect(request.path)
+    else:
+        question = Question.objects.get(id=question_id)
+        if question.isPublic:
+            choice = 1
+        else:
+            choice = 2
+        data = {'title': question.title, 'description': question.description, 'keyword': question.keyword,
+                'isPublic': choice, 'attachedDescription': question.attachedDescription}
+        file_data = {'attachedFile': SimpleUploadedFile(question.attachedFile.name, question.attachedFile.read())}
+
+        form = QuestionForm(data, file_data)
+        # if form.is_valid():
+        #     print 'valid'
+        #     print form.cleaned_data['attachedFile']
+        # else:
+        #     print 'wrong'
+        return render(request, 'updateQuestion.html', {'username': username, 'question': question, 'form': form})
