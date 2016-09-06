@@ -57,3 +57,10 @@ class SearchForm(forms.Form):
 class MessageForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea(attrs={'cols': '148', 'rows': '8'}))
     isPublic = forms.ChoiceField(choices=CHOICES_FOR_MESSAGE, widget=forms.RadioSelect, initial='1')
+
+
+class GlobalSearchForm(forms.Form):
+    keyword = forms.CharField(required=False,
+                              widget=forms.TextInput(
+                                  attrs={'style': 'width:50;height:50;font-size:22px', 'size': '35'}
+                              ))

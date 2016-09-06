@@ -181,17 +181,13 @@
                     <td width="25%"><img src="/static/images/font1.jpg" width="251" height="99"/></td>
                     <td width="13%" align="left"><h2>&nbsp;</h2></td>
                     <td width="62%">
-                        <form method="post" action="">
+                        <form method="get" action="/search">
                             <p>
                                 <label for="search"></label><br/>
                             </p>
                             <p>
-                                <input name="search" type="text" id="search" size="35" maxlength="80"
-                                       style="width: 50; height: 50; font-size: 22px"/>
-                                <input name="searchbt" type="submit" id="searchbt"
-                                       style="height:40; width:50; font-size:22px"
-                                       onclick="MM_goToURL('parent','global_search5.html');return document.MM_returnValue"
-                                       value="搜索"/>
+                                {{searchForm.keyword}}
+                                <input type="submit" style="height:40; width:50; font-size:22px" value="搜索"/>
                             </p>
                             <p>生存分析 用户行为分析 可靠性统计 半参数模型 机器学习 </p>
                         </form>
@@ -260,9 +256,9 @@
                             {{form.attachedFile}}
                             <br/>
                             {{form.description}}&lt;1000字<br/></p>
-                            <label for="{{form.keyword.id_for_label}}"><p><b>关键词:</b>&nbsp;&nbsp;</label>
-                            {{form.keyword}}
-                            {{form.isPublic}}
+                        <label for="{{form.keyword.id_for_label}}"><p><b>关键词:</b>&nbsp;&nbsp;</label>
+                        {{form.keyword}}
+                        {{form.isPublic}}
                         </p>
                     </td>
                 </tr>

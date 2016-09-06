@@ -41,7 +41,7 @@
         }
 
         #homedaohang #hometop #toplogo {
-            height: 50px;
+            height: 52px;
             width: 98%;
             margin-top: 0px;
             margin-right: 0%;
@@ -181,13 +181,10 @@
                     <td width="12%"><a href="/index"><img src="/static/images/font1.jpg" width="125" height="50"/></a>
                     </td>
                     <td width="59%" align="left">
-                        <form id="form3" name="form3" method="post" action="">
+                        <form method="get" action="/search">
                             <p>
-                                <label for="search"></label>
-                                <input name="search" type="text" id="search"
-                                       style="width: 50; height: 50; font-size: 20px" size="45" maxlength="80"/>
-                                <input type="submit" name="searchbt" id="searchbt" value="搜索"
-                                       style="height:40; width:50; font-size:20px"/>
+                                {{searchForm.keyword}}
+                                <input type="submit" value="搜索" style="height:40; width:50; font-size:20px"/>
                             </p>
                         </form>
                     </td>

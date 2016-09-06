@@ -11,7 +11,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.http import StreamingHttpResponse
 from django.shortcuts import render, get_object_or_404
 
-from .forms import AnswerForm, UserForm, LoginForm, QuestionForm, MessageForm, SearchForm
+from .forms import AnswerForm, UserForm, LoginForm, QuestionForm, MessageForm, SearchForm, GlobalSearchForm
 from .models import Question, Answer, User, Expert, Message, QuestionFollow, PersonFollow, Case, CaseFollow
 
 reload(sys)
@@ -24,14 +24,17 @@ def index(request):
     username = request.session.get('username', '')
     latest_questions = Question.objects.order_by("publishDate").reverse()[0:8]
     form = QuestionForm()
+    searchForm = GlobalSearchForm()
     if username == '':
         return render(request, 'home.html',
-                      {'latest_questions': latest_questions, 'username': username, 'form': form})
+                      {'latest_questions': latest_questions, 'username': username, 'form': form,
+                       'searchForm': searchForm})
 
     else:
         user = User.objects.get(username=username)
         return render(request, 'home.html',
-                      {'latest_questions': latest_questions, 'username': username, 'form': form, 'user': user})
+                      {'latest_questions': latest_questions, 'username': username, 'form': form, 'user': user,
+                       'searchForm': searchForm})
 
 
 def login(request):
@@ -102,6 +105,7 @@ def detail(request, question_id):
             isFollowing2 = 2
 
     form = AnswerForm()
+    searchForm = GlobalSearchForm()
     # if question.isSolved:
     answers = Answer.objects.filter(question=question_id)
     keywords = question.keyword.split(';')
@@ -112,7 +116,7 @@ def detail(request, question_id):
     return render(request, 'detail.html',
                   {'username': username, 'question': question, 'answers': answers, 'relatedQuestions': relatedQuestions,
                    'questionFollowers': questionFollowers, 'isFollowing': isFollowing, 'isFollowing2': isFollowing2,
-                   'form': form})
+                   'form': form, 'searchForm': searchForm})
 
 
 def answer(request, question_id):
@@ -230,7 +234,7 @@ def latestQuestion(request, type="0"):
             Q(title__contains=keyword) | Q(keyword__contains=keyword))
         # if 'hasPic' in request.GET:
         #     hasPic = True
-        questions = questions.exclude(attachedFile='')
+        #     questions = questions.exclude(attachedFile='')
     if 'isToday' in request.GET:
         isToday = True
         today = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
@@ -611,3 +615,21 @@ def updateQuestion(request, question_id):
         # else:
         #     print 'wrong'
         return render(request, 'updateQuestion.html', {'username': username, 'question': question, 'form': form})
+
+
+def search(request):
+    username = request.session.get('username', '')
+    keyword = ''
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        cases = Case.objects.filter(Q(title__contains=keyword) | Q(keyword__contains=keyword))[:5]
+        questions = Question.objects.filter(Q(title__contains=keyword) | Q(keyword__contains=keyword)).order_by(
+            'publishDate').reverse()[:5]
+        experts = Expert.objects.filter(tag__contains=keyword)[:5]
+        searchForm = GlobalSearchForm({'keyword': keyword})
+        return render(request, 'globalSearch.html',
+                      {'username': username, 'questions': questions, 'experts': experts, 'cases': cases,
+                       'searchForm': searchForm})
+    else:
+        searchForm = GlobalSearchForm()
+        return render(request, 'globalSearch.html', {'username': username, 'searchForm': searchForm})

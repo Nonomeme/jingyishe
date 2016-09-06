@@ -38,6 +38,6 @@ urlpatterns = [
     url(r'^case/$', views.case, name='case'),
     url(r'^case/(?P<case_id>[0-9]+)/$', views.caseDetail, name='caseDetail'),
     url(r'^case/(?P<case_id>[0-9]+)/follow/$', views.caseFollow, name='caseFollow'),
-    
+    url(r'search/$', views.search, name='search')
 
 ]
