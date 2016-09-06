@@ -37,11 +37,23 @@ class LoginForm(forms.Form):
 class QuestionForm(forms.Form):
     title = forms.CharField(widget=forms.TextInput(attrs={'size': '66', 'maxlength': '100'}))
     description = forms.CharField(widget=forms.Textarea(attrs={'cols': '80', 'rows': '15'}))
-    keyword = forms.CharField(widget=forms.TextInput(attrs={'size': '72', 'maxlength': '60'}))
+    keyword = forms.CharField(widget=forms.TextInput(attrs={'size': '72', 'maxlength': '100'}))
     attachedFile = forms.FileField(required=False, widget=forms.ClearableFileInput())
     isPublic = forms.ChoiceField(choices=CHOICES_FOR_QUESTION, widget=forms.RadioSelect, initial='1')
     # isSolved = forms.ChoiceField(choices=CHOICES_FOR_UPDATE, widget=forms.RadioSelect, initial='1')
-    attachedDescription = forms.CharField(required=False, widget=forms.Textarea(attrs={'cols': '80', 'rows': '10'}))
+    attachedDescription = forms.CharField(required=False, widget=forms.Textarea(attrs={'cols': '140', 'rows': '10'}))
+
+
+class QuestionForm2(forms.Form):
+    title = forms.CharField(widget=forms.TextInput(
+        attrs={'size': '60', 'maxlength': '100', 'style': 'width:60; height:40; font-size:18px'}))
+    description = forms.CharField(widget=forms.Textarea(attrs={'cols': '140', 'rows': '15'}))
+    keyword = forms.CharField(widget=forms.TextInput(
+        attrs={'size': '55', 'maxlength': '100', 'style': 'width:60; height:40; font-size:16px'}))
+    attachedFile = forms.FileField(required=False, widget=forms.ClearableFileInput())
+    isPublic = forms.ChoiceField(choices=CHOICES_FOR_QUESTION, widget=forms.RadioSelect, initial='1')
+    # isSolved = forms.ChoiceField(choices=CHOICES_FOR_UPDATE, widget=forms.RadioSelect, initial='1')
+    attachedDescription = forms.CharField(required=False, widget=forms.Textarea(attrs={'cols': '140', 'rows': '10'}))
 
 
 class SearchForm(forms.Form):
@@ -62,5 +74,8 @@ class MessageForm(forms.Form):
 class GlobalSearchForm(forms.Form):
     keyword = forms.CharField(required=False,
                               widget=forms.TextInput(
-                                  attrs={'style': 'width:50;height:50;font-size:22px', 'size': '35'}
-                              ))
+                                  attrs={'style': 'width:50;height:50;font-size:22px', 'size': '35'}))
+
+
+class MessageAnswerForm(forms.Form):
+    answer = forms.CharField(widget=forms.Textarea(attrs={'cols': '148', 'rows': '10'}))

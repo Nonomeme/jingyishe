@@ -30,6 +30,8 @@ class User(models.Model):
                                              through_fields=('userFollower', 'followingPerson'))
     followingCase = models.ManyToManyField('question.Case', blank=True, through='CaseFollow')
 
+    gradeAnswer = models.ManyToManyField('question.Answer',blank=True)
+
     def __unicode__(self):
         return self.username
 
@@ -46,7 +48,6 @@ class Question(models.Model):
     questioner = models.ForeignKey(User)
     answerNum = models.IntegerField(default=0)
     attachedDescription = models.TextField(default='')
-
 
     def __unicode__(self):
         return self.title
@@ -77,6 +78,12 @@ class Message(models.Model):
 
     def __unicode__(self):
         return self.message
+
+class MessageAnswer(models.Model):
+    id = models.AutoField(primary_key=True,editable=False)
+    answer = models.TextField()
+    message = models.ForeignKey(Message)
+    publishDate = models.DateTimeField(auto_now_add=True)
 
 
 class Expert(models.Model):
@@ -122,3 +129,4 @@ class CaseFollow(models.Model):
     caseFollower = models.ForeignKey(User, on_delete=models.CASCADE)
     followingCase = models.ForeignKey(Case, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
+

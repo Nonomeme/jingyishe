@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^users/(?P<user_id>[0-9]+)/$', views.userInfo, name='userInfo'),
     url(r'^users/(?P<publisher_id>[0-9]+)/follow/$', views.followUser, name='followUser'),
     url(r'^users/(?P<user_id>[0-9]+)/message/$', views.leaveMessage, name='leaveMessage'),
+    url(r'^users/(?P<user_id>[0-9]+)/message/(?P<message_id>[0-9]+)/$', views.answerMessage, name='answerMessage'),
     url(r'^users/(?P<user_id>[0-9]+)/questions/$', views.myquestions, name='myquestions'),
     url(r'^users/(?P<user_id>[0-9]+)/answers/$', views.myanswers, name='myanswers'),
     url(r'^users/(?P<user_id>[0-9]+)/cases/$', views.mycases, name='mycases'),
@@ -38,6 +39,7 @@ urlpatterns = [
     url(r'^case/$', views.case, name='case'),
     url(r'^case/(?P<case_id>[0-9]+)/$', views.caseDetail, name='caseDetail'),
     url(r'^case/(?P<case_id>[0-9]+)/follow/$', views.caseFollow, name='caseFollow'),
-    url(r'search/$', views.search, name='search')
+    url(r'search/$', views.search, name='search'),
+    url(r'^answer/(?P<answer_id>[0-9]+)/agree/$', views.grade, name='grade'),
 
 ]

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>提问--精益社</title>
+    <title>查看留言--给我的留言--精益社</title>
     <style type="text/css">
         #nav {
             width: auto;
@@ -68,7 +68,7 @@
         }
 
         #homedaohang {
-            height: 700px;
+            height: 500px;
             width: 100%;
         }
 
@@ -93,12 +93,12 @@
         }
 
         #homedaohang #tablehome {
-            height: 620px;
-            width: 90%;
+            height: 610px;
+            width: 80%;
             margin-top: 0px;
-            margin-right: 5%;
+            margin-right: 10%;
             margin-bottom: 0px;
-            margin-left: 5%;
+            margin-left: 10%;
         }
 
         .textsize {
@@ -156,6 +156,14 @@
             font-size: xx-large;
         }
 
+        .textsize3 {
+            font-size: x-large;
+        }
+
+        .textstyle {
+            font-weight: bold;
+        }
+
         .style1 {
             color: #FFF;
         }
@@ -177,7 +185,7 @@
             <table width="100%" border="0" cellspacing="1" cellpadding="1">
                 <tr>
                     <td width="12%"><img src="/static/images/font1.jpg" width="125" height="50"/></td>
-                    <td width="59%" align="left"><b class="textsize2">提问</b></td>
+                    <td width="59%" align="left"><b class="textsize3"><u>{{user.mail}}</u>的主页</b></td>
                     <td width="29%" align="right"><a href="/index">精益社首页</a> | <a href="/question">提问</a> |
                         {% if username == '' %}
                         <a href="/login">登录</a> | <a href="/register">注册</a>
@@ -192,60 +200,41 @@
         <hr/>
     </div>
     <div id="tablehome"><br/><br/>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <table width="92%" height="525" border="0" align="center" cellpadding="0" cellspacing="15"
-                   style="border:1px solid #CCC  ">
+        <table width="100%" height="272" border="0" align="center" cellpadding="0" cellspacing="10"
+               style="border:1px solid #CCC">
+            <tr>
+                <td width="100%" height="27"><b class="textsize3">{{message.commenter}}：</b></td>
+            </tr>
+            <tr>
+                <td height="30">
+                    {{message.message}}
+                </td>
+            </tr>
+            <tr>
+                <td height="30" style=" border-bottom:#999 solid 2px;font-size:14px;">
+                    {{message.publishDate|date:"Y-m-d H:i:s"}}
+                </td>
+            </tr>
+            <form method="post" action="">
+                {% csrf_token %}
                 <tr>
-                    <td height="48" colspan="2" align="left">
-                        <label for="{{form.title.id_for_label}}"><b class="textsize1">标题:</b></label>
-                        {{form.title}}
-                        &lt;50字
-                        <!--<form id="form2" name="form2" method="post" action="">-->
-                        <!--<label for="title"><b class="textsize1">标题：</b></label>-->
-                        <!--<input name="title" type="text" id="title" size="60" maxlength="100"-->
-                        <!--style="width:60; height:40; font-size:18px"/>-->
-                        <!--&lt;50字-->
-                        <!--</form>-->
+                    <td>
+                        <br/>
+                        {{form.answer}}
                     </td>
                 </tr>
                 <tr>
-                    <td width="293" height="34" align="left"><b class="textsize1">描述：</b></td>
-                    <td width="759" align="left">
-                        <label for="{{form.attachedile}}">
-                            <img src="/static/images/filePDF.jpg" width="34" height="32"/>附加文件
-                        </label>
-                        {{form.attachedFile}}
+                    <td height="30" align="right">
+                        <input type="submit" style="width:30; height:22; font-size:18px"
+                               value="回复"/>
+                        </form>| <input type="submit" style="width:30; height:22; font-size:18px"
+                                                     value="删除"/>
                     </td>
                 </tr>
-                <tr>
-                    <td height="196" colspan="2" align="left" valign="top">
-                        {{form.description}}
-                        &lt;1000字
-                    </td>
-                </tr>
-                <tr>
-                    <td height="43" colspan="2" align="left">
-                        <label for="{{form.keyword.id_for_label}}"><b class="textsize1">关键词:</b></label>
-                        {{form.keyword}}
-                    </td>
-                </tr>
-                <tr>
-                    <td height="42" colspan="2" align="left">
-                        {{form.isPublic}}
-                    </td>
-                </tr>
-                <tr>
-                    <td height="32" colspan="3" align="right" valign="middle">
-                        <input type="submit" name="button3" id="button3" value="发布"
-                               style="width:30; height:22; font-size:18px"/>
-                        <input type="button" name="button4" id="button4" value="取消"
-                               style="width:30; height:22; font-size:18px"/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                </tr>
-            </table>
-        </form>
-        <p>&nbsp;</p>
+        </table>
+        <br/>
+        <br/>
+        <br/>
     </div>
     <div id="bottom"
          style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#333; color:#FFF"

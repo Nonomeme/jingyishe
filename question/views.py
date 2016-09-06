@@ -11,8 +11,12 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.http import StreamingHttpResponse
 from django.shortcuts import render, get_object_or_404
 
-from .forms import AnswerForm, UserForm, LoginForm, QuestionForm, MessageForm, SearchForm, GlobalSearchForm
-from .models import Question, Answer, User, Expert, Message, QuestionFollow, PersonFollow, Case, CaseFollow
+from .forms import AnswerForm, UserForm, LoginForm, QuestionForm, MessageForm, SearchForm, GlobalSearchForm, \
+    MessageAnswerForm, QuestionForm2
+
+QuestionForm2
+from .models import Question, Answer, User, Expert, Message, QuestionFollow, PersonFollow, Case, CaseFollow, \
+    MessageAnswer
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -107,7 +111,10 @@ def detail(request, question_id):
     form = AnswerForm()
     searchForm = GlobalSearchForm()
     # if question.isSolved:
-    answers = Answer.objects.filter(question=question_id)
+    answers = Answer.objects.filter(question=question_id).order_by('grade').reverse()
+    # 排除仅题主可见的回答
+    if not isFollowing == 0:
+        answers.exclude(isPublic=False)
     keywords = question.keyword.split(';')
     q = Q()
     for keyword in keywords:
@@ -176,7 +183,7 @@ def question(request):
             question.save()
             return HttpResponseRedirect('/index')
     else:
-        form = QuestionForm()
+        form = QuestionForm2()
         return render(request, 'question.html', {'username': username, 'form': form})
 
 
@@ -399,6 +406,22 @@ def leaveMessage(request, user_id):
         return HttpResponseRedirect('/users/' + user_id + '/')
 
 
+def answerMessage(request, user_id, message_id):
+    username = request.session.get('username', '')
+    message = Message.objects.get(id=message_id)
+    if request.method == 'POST':
+        form = MessageAnswerForm(request.POST)
+        if form.is_valid():
+            answer = MessageAnswer()
+            answer.answer = form.cleaned_data['answer']
+            answer.message = message
+        return HttpResponseRedirect('/users/' + user_id + '/')
+    else:
+        user = User.objects.get(id=user_id)
+        form = MessageAnswerForm()
+        return render(request, 'mymessage.html', {'username': username, 'user': user, 'message': message, 'form': form})
+
+
 def case(request):
     username = request.session.get('username', '')
     cases = Case.objects.all()
@@ -608,13 +631,15 @@ def updateQuestion(request, question_id):
                 'isPublic': choice, 'attachedDescription': question.attachedDescription}
         file_data = {'attachedFile': SimpleUploadedFile(question.attachedFile.name, question.attachedFile.read())}
 
-        form = QuestionForm(data, file_data)
+        form = QuestionForm2(data, file_data)
         # if form.is_valid():
         #     print 'valid'
         #     print form.cleaned_data['attachedFile']
         # else:
         #     print 'wrong'
-        return render(request, 'updateQuestion.html', {'username': username, 'question': question, 'form': form})
+        searchForm = GlobalSearchForm()
+        return render(request, 'updateQuestion.html',
+                      {'username': username, 'question': question, 'form': form, 'searchForm': searchForm})
 
 
 def search(request):
@@ -633,3 +658,31 @@ def search(request):
     else:
         searchForm = GlobalSearchForm()
         return render(request, 'globalSearch.html', {'username': username, 'searchForm': searchForm})
+
+
+def closeQuestion(request, question_id):
+    question = Question.objects.get(id=question_id)
+    question.isSolved = True
+    question.save()
+
+    return HttpResponseRedirect('question/' + question_id + '/')
+
+
+def grade(request, answer_id):
+    username = request.session.get('username', '')
+    if username == "":
+        request.session['redirect_after_login'] = request.get_full_path()
+        request.session['login_info'] = u'您还未登陆'
+        return HttpResponseRedirect('/login')
+    user = User.objects.get(username=username)
+    answer = Answer.objects.get(id=answer_id)
+    if user.gradeAnswer.all().filter(id=answer_id).exists():
+        user.gradeAnswer.remove(answer)
+        answer.grade -= 1
+        answer.save()
+    else:
+        user.gradeAnswer.add(answer)
+        answer.grade += 1
+        answer.save()
+
+    return HttpResponseRedirect('/question/' + str(answer.question_id) + '/')

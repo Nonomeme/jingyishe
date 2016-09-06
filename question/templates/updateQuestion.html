@@ -42,7 +42,7 @@
         }
 
         #homedaohang #hometop #toplogo {
-            height: 50px;
+            height: 52px;
             width: 98%;
             margin-top: 0px;
             margin-right: 0%;
@@ -175,13 +175,10 @@
                     <td width="12%"><a href="home5.html"><img src="/static/images/font1.jpg" width="125"
                                                               height="50"/></a></td>
                     <td width="59%" align="left">
-                        <form id="form3" name="form3" method="post" action="">
+                        <form method="get" action="/search">
                             <p>
-                                <label for="search"></label>
-                                <input name="search" type="text" id="search"
-                                       style="width: 50; height: 50; font-size: 20px" size="45" maxlength="80"/>
-                                <input type="submit" name="searchbt" id="searchbt" value="搜索"
-                                       style="height:40; width:50; font-size:20px"/>
+                                {{searchForm.keyword}}
+                                <input type="submit" value="搜索" style="height:40; width:50; font-size:20px"/>
                             </p>
                         </form>
                     </td>
@@ -215,18 +212,17 @@
                         &nbsp;已发布：{{question.publishDate|date:"Y-m-d H:i:s"}}&nbsp;
                     </td>
                 </tr>
-
                 <tr>
-                    <td height="34" colspan="3" align="left" valign="top" bgcolor="#FAFAFA"><p><b>问题描述：</b></p>
+                    <td height="34" colspan="3" align="left" valign="top" bgcolor="#FAFAFA">
+                        <p><b>问题描述：</b></p>
                         {{form.description}}
                     </td>
                 </tr>
                 <tr>
-                    <td height="42" colspan="2" align="left" valign="middle" style=" border-bottom:#999 solid 2px">
-                        <label><b>关键词：</b></label>
-                        {{form.keyword}}
+                    <td height="42" colspan="2" align="left" valign="middle">
+                        <b>关键词：</b>{{form.keyword}}
                     </td>
-                    <td height="42" align="left" valign="middle" style=" border-bottom:#999 solid 2px">上传附件:
+                    <td height="42" align="left" valign="middle">上传附件:
                         <!--{% if not question.attachedFile == '' %}-->
                         <!--<a href="attachedFile/"> <img src="/static/images/download.jpg" width="32" height="29"/><b-->
                         <!--class="textsize3">{{question.attachedFile|cut:"./"}}</b></a>-->
@@ -235,12 +231,12 @@
                     </td>
                 </tr>
                 <tr>
-                    <td height="57" colspan="3" style=" border-top:#CCC solid 2px">
+                    <td height="57" colspan="3">
                         {{form.isPublic}}
                     </td>
                 </tr>
                 <tr>
-                    <td height="74" colspan="3" align="left"><p><b>补充：</b></p>
+                    <td height="74" colspan="3" align="left"  style=" border-top:#CCC solid 2px"><p><b>补充：</b></p>
                         {{form.attachedDescription}}
                     </td>
                 </tr>

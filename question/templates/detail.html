@@ -240,10 +240,18 @@
                 </form>
             </tr>
             <tr>
-                <td height="34" colspan="3" align="left" valign="top" bgcolor="#FAFAFA"><p><b>问题描述：</b></p>
+                <td height="40" colspan="3" align="left" valign="top" bgcolor="#FAFAFA"><p><b>问题描述：</b></p>
                     {{question.description|linebreaks}}
                 </td>
             </tr>
+            {% if not question.attachedDescription == '' %}
+            <tr>
+                <td height="20" colspan="3" align="left" valign="top" bgcolor="#FAFAFA"
+                    style="border-top:#999 dashed 1px ;">
+                    <p><b>补充:</b></p>{{question.attachedDescription|linebreaks}}
+                </td>
+            </tr>
+            {% endif %}
             <tr>
                 <td height="42" colspan="2" align="left" valign="middle" style=" border-bottom:#999 solid 2px">
                     <label><b>关键词：</b></label>
@@ -273,8 +281,10 @@
             <table width="100%" border="0" cellspacing="2" cellpadding="0">
                 {% for answer in answers %}
                 <tr style="font-size:14px;">
-                    <td width="5%" align="left" valign="middle"><img src="/static/images/thumbup1.jpg" width="27"
-                                                                     height="28"/>{{answer.grade}}
+                    <td width="5%" align="left" valign="middle">
+                        <a href="/answer/{{answer.id}}/agree/">
+                            <img src="/static/images/thumbup1.jpg" width="27" height="28"/>{{answer.grade}}
+                        </a>
                     </td>
                     <td height="26" colspan="2" align="left" valign="middle">
                         {% if answer.isAnonym %}

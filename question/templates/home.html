@@ -216,15 +216,15 @@
                     <td width="20%" rowspan="3" align="left" valign="top">
                         <ul>
                             {% for question in latest_questions %}
-                            {% if username == '' and not question.isPublic %}
-                            {% else %}
+                            <!--{% if username == '' and not question.isPublic %}-->
+                            <!--{% else %}-->
                             <li style=" border-bottom:1px dashed #000"><a href="/question/{{question.id}}">{{question.title|truncatechars:8}}
                                 {% if question.isSolved %}
                                 【已解决】
                                 {% endif %}
                             </a></li>
                             <br/>
-                            {% endif %}
+                            <!--{% endif %}-->
                             {% endfor %}
                             <li style=" border-bottom:1px dashed #000"><a href="/question/latest">&#8226; &#8226;
                                 &#8226;</a></li>
@@ -234,12 +234,12 @@
                     <td width="17%" rowspan="3" align="right" valign="top">
                         <ul style=" list-style-type:none;margin:0px; padding:0px; margin-top:18px;">
                             {% for question in latest_questions %}
-                            {% if username == '' and not question.isPublic %}
-                            {% else %}
+                            <!--{% if username == '' and not question.isPublic %}-->
+                            <!--{% else %}-->
                             <li style=" border-bottom:1px dashed #000; ">{{question.publishDate|date:"Y-m-d H:i:s"}}
                             </li>
                             <br/>
-                            {% endif %}
+                            <!--{% endif %}-->
                             {% endfor %}
                             <li style=" border-bottom:1px dashed #000; list-style:none;"> &nbsp;</li>
                         </ul>
