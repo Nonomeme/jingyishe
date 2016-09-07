@@ -15,5 +15,5 @@ urlpatterns = [
     url(r'^answer/(?P<answer_id>[0-9]+)/attachedFile/$', views.downloadAnswer, name='downloadAnswer'),
     url(r'^(?P<question_id>[0-9]+)/relatedQuestions/$', views.relatedQuestions, name='relatedQuestions'),
     url(r'^(?P<question_id>[0-9]+)/update/$', views.updateQuestion, name='updateQuestion'),
-
+    url(r'^(?P<question_id>[0-9]+)/close/$', views.closeQuestion, name='closeQuestion'),
 ]

@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <script src="/static/jquery.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>专家咨询--精益社</title>
     <style type="text/css">
@@ -213,6 +214,17 @@
             document.MM_returnValue = false;
             for (i = 0; i < (args.length - 1); i += 2) eval(args[i] + ".location='" + args[i + 1] + "'");
         }
+        $(document).ready(function () {
+            $("#newest_info_list1").change(function () {
+                var checkIndex = $("#newest_info_list1").get(0).selectedIndex;
+                if (checkIndex == 0)
+                    location.href = "/question/latest"
+                if (checkIndex == 1)
+                    location.href = "/expert/"
+                if (checkIndex == 2)
+                    location.href = "/case/"
+            });
+        });
     </script>
 </head>
 
@@ -223,8 +235,8 @@
                 href="/index">精益社</a>&gt;
             <label for="newest_info_list1"></label>
             <select name="newest_info_list1" id="newest_info_list1">
-                <option value="专家咨询">专家咨询</option>
                 <option value="最新咨询">最新咨询</option>
+                <option value="专家咨询" selected="selected">专家咨询</option>
                 <option value="案例分析">案例分析</option>
             </select>
             &gt;
@@ -264,11 +276,10 @@
             <table width="85%" border="0" cellspacing="1" cellpadding="1">
                 <tr>
                     <td>
-                        <form onsubmit="highlight(this.s.value);return false;">
-                            <p> &lt;&lt;
-                                <input name="inputkw" id="inputkw" title="搜索内容：" value="请输入关键词" size="60"
-                                       maxlength="100" style="width: 60; height: 40; font-size: 18px"/>
-                                <input name="search2" type="submit" id="search2" value="搜索"
+                        <form action="" method="get">
+                            <p><b class="textsize1">&lt;&lt;</b>
+                                {{form.keyword}}
+                                <input type="submit" value="搜索"
                                        style="width:30; height:20; font-size:18px"/>
                             </p>
                         </form>

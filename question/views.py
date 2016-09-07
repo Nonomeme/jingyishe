@@ -376,8 +376,18 @@ def consultion(request):
 
 def expert(request):
     username = request.session.get('username', '')
-    experts = Expert.objects.all()[:10]
-    return render(request, 'expert.html', {'username': username, 'experts': experts})
+    experts = Expert.objects.all()
+    keyword = ''
+    if 'keyword' in request.GET:  # GET是一个dict，使用文本框的name作为key
+        keyword = request.GET['keyword']
+        experts = experts.filter(Q(name__contains=keyword) | Q(university__contains=keyword) | Q(tag__contains=keyword))
+
+    experts = experts[:10]
+
+    form = SearchForm({'keyword': keyword, 'isToday': False, 'isHot': False})
+    if not form.is_valid():
+        form = SearchForm()
+    return render(request, 'expert.html', {'username': username, 'experts': experts, 'form': form})
 
 
 def leaveMessage(request, user_id):
@@ -429,8 +439,8 @@ def case(request):
 
     if 'keyword' in request.GET:  # GET是一个dict，使用文本框的name作为key
         keyword = request.GET['keyword']
-        cases = cases.filter(Q(title__contains=keyword) | Q(keyword__contains=keyword))
-
+        cases = cases.filter(Q(title__contains=keyword) | Q(keyword__contains=keyword) | Q(caseType=keyword) | Q(
+            domain__contains=keyword))
     cases = cases[:10]
 
     form = SearchForm({'keyword': keyword, 'isToday': False, 'isHot': False})
@@ -665,7 +675,7 @@ def closeQuestion(request, question_id):
     question.isSolved = True
     question.save()
 
-    return HttpResponseRedirect('question/' + question_id + '/')
+    return HttpResponseRedirect('/question/' + question_id + '/')
 
 
 def grade(request, answer_id):

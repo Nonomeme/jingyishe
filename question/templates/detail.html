@@ -205,22 +205,21 @@
         <table width="100%" height="409" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
                 <td width="37%" height="68" align="left" style=" border-bottom:#999  dashed 1px">
-                    <form method="" action="follow">
-                        {% csrf_token %}
-                        <b class="textsize2"><img src="/static/images/star1.jpg" width="27" height="26"/>{{question.title}}
-                            {% if question.isSolved %}
-                            【已解决】
-                            {% else %}
-                            {% endif %}
-                        </b>
-                        {% if isFollowing == 2 %}
-                        <input type="submit" onclick="MM_popupMsg('你已取消关注此问题！')"
-                               value="取消关注"/>
-                        {% elif isFollowing == 1 %}
-                        <input type="submit" onclick="MM_popupMsg('你已关注此问题！')"
-                               value="关注问题"/>
+                    <b class="textsize2"><img src="/static/images/star1.jpg" width="27" height="26"/>{{question.title}}
+                        {% if question.isSolved %}
+                        【已解决】
+                        {% else %}
+                        {% if isFollowing == 0 %}
+                        <a href="/question/{{question.id}}/close/">
+                            <input type="button" value="关闭问题"/></a>
                         {% endif %}
-                    </form>
+                        {% endif %}
+                    </b>
+                    {% if isFollowing == 2 %}
+                    <a href="follow/"> <input type="submit" value="取消关注"/></a>
+                    {% elif isFollowing == 1 %}
+                    <a href="follow/"><input type="submit" value="关注问题"/></a>
+                    {% endif %}
                 </td>
                 <td width="38%" height="68" align="left" style=" border-bottom:#999  dashed 1px">
                     &nbsp;&nbsp;已发布：{{question.publishDate|date:"Y-m-d H:i:s"}}

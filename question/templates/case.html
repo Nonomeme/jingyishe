@@ -2,6 +2,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <script src="/static/jquery.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>案例分析--精益社</title>
     <style type="text/css">
@@ -214,6 +215,17 @@
             document.MM_returnValue = false;
             for (i = 0; i < (args.length - 1); i += 2) eval(args[i] + ".location='" + args[i + 1] + "'");
         }
+        $(document).ready(function () {
+            $("#newest_info_list1").change(function () {
+                var checkIndex = $("#newest_info_list1").get(0).selectedIndex;
+                if (checkIndex == 0)
+                    location.href = "/question/latest"
+                if(checkIndex == 1)
+                    location.href = "/expert/"
+                if(checkIndex == 2)
+                    location.href = "/case/"
+            });
+        });
     </script>
 </head>
 
@@ -226,9 +238,9 @@
                     href="home5.html">精益社</a>&gt;
                 <label for="newest_info_list1"></label>
                 <select name="newest_info_list1" id="newest_info_list1">
-                    <option value="案例分析">案例分析</option>
-                    <option value="专家咨询">专家咨询</option>
                     <option value="最新咨询">最新咨询</option>
+                    <option value="专家咨询">专家咨询</option>
+                    <option value="案例分析" selected="selected">案例分析</option>
                 </select>
                 &gt;
                 <select name="newest_info_list2" size="1" id="newest_info_list2">
