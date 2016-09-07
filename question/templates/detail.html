@@ -289,7 +289,7 @@
                         {% if answer.isAnonym %}
                         匿名者&nbsp;
                         {% else %}
-                        <a href="users/{{answer.answerer.id}}">{{answer.answerer.username}}</a> &nbsp;
+                        <a href="/users/{{answer.answerer.id}}">{{answer.answerer.username}}</a> &nbsp;
                         {% endif %}
                         {{answer.publishDate|date:"Y-m-d H:i:s"}}
                     <td width="32%" height="26" align="left" valign="middle">

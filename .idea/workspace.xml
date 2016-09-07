@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be6aac9d-6beb-4d61-adac-6dc049ea5bd7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/question/static/jquery.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/templates/case.html" afterPath="$PROJECT_DIR$/question/templates/case.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/templates/detail.html" afterPath="$PROJECT_DIR$/question/templates/detail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/templates/expert.html" afterPath="$PROJECT_DIR$/question/templates/expert.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/templates/newestinfo.html" afterPath="$PROJECT_DIR$/question/templates/newestinfo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/urls.py" afterPath="$PROJECT_DIR$/question/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/templates/updateQuestion.html" afterPath="$PROJECT_DIR$/question/templates/updateQuestion.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/question/views.py" afterPath="$PROJECT_DIR$/question/views.py" />
     </list>
     <ignored path="jingyishe.iws" />
@@ -44,23 +40,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/question/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="489">
-              <caret line="93" column="40" selection-start-line="93" selection-start-column="40" selection-end-line="93" selection-end-column="40" />
-              <folding>
-                <element signature="e#15#54#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/question/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18704">
-              <caret line="668" column="38" selection-start-line="668" selection-start-column="38" selection-end-line="668" selection-end-column="38" />
+            <state relative-caret-position="17836">
+              <caret line="637" column="22" selection-start-line="636" selection-start-column="29" selection-end-line="637" selection-end-column="22" />
               <folding>
                 <element signature="e#15#30#0" expanded="true" />
               </folding>
@@ -68,10 +52,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="updateQuestion.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/question/templates/updateQuestion.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="351">
+              <caret line="223" column="25" selection-start-line="223" selection-start-column="25" selection-end-line="223" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/question/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
+            <state relative-caret-position="532">
               <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding>
                 <element signature="e#21#53#0" expanded="true" />
@@ -80,43 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="case.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/question/templates/case.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="287" column="31" selection-start-line="281" selection-start-column="24" selection-end-line="287" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="detail.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/question/templates/detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="218" column="29" selection-start-line="218" selection-start-column="29" selection-end-line="218" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="newestinfo.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/question/templates/newestinfo.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="49" />
-              <folding>
-                <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="expert.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/question/templates/expert.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="284" column="31" selection-start-line="284" selection-start-column="31" selection-end-line="284" selection-end-column="31" />
+            <state relative-caret-position="28">
+              <caret line="186" column="77" selection-start-line="186" selection-start-column="71" selection-end-line="186" selection-end-column="77" />
               <folding />
             </state>
           </provider>
@@ -125,8 +87,8 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/question/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2184">
-              <caret line="80" column="84" selection-start-line="80" selection-start-column="84" selection-end-line="80" selection-end-column="84" />
+            <state relative-caret-position="295">
+              <caret line="52" column="16" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="16" />
               <folding>
                 <element signature="e#45#69#0" expanded="true" />
               </folding>
@@ -175,7 +137,6 @@
         <option value="$PROJECT_DIR$/question/templates/globalSearch.html" />
         <option value="$PROJECT_DIR$/question/templates/home.html" />
         <option value="$PROJECT_DIR$/question/templates/question.html" />
-        <option value="$PROJECT_DIR$/question/templates/updateQuestion.html" />
         <option value="$PROJECT_DIR$/question/templates/myanswers.html" />
         <option value="$PROJECT_DIR$/question/templates/mycases.html" />
         <option value="$PROJECT_DIR$/question/templates/myquestions.html" />
@@ -192,6 +153,7 @@
         <option value="$PROJECT_DIR$/question/templates/expert.html" />
         <option value="$PROJECT_DIR$/question/urls.py" />
         <option value="$PROJECT_DIR$/question/templates/detail.html" />
+        <option value="$PROJECT_DIR$/question/templates/updateQuestion.html" />
         <option value="$PROJECT_DIR$/question/views.py" />
       </list>
     </option>
@@ -203,9 +165,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
     <option name="width" value="1920" />
-    <option name="height" value="988" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -232,7 +193,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -283,8 +243,23 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jingyishe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jingyishe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mysite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -297,6 +272,7 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/apple/project/jingyishe/question/models.py" />
+    <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -610,17 +586,17 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="988" extended-state="6" />
+    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16506922" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16666667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16436781" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1453252" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -830,13 +806,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mysite/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1064">
-          <caret line="132" column="20" selection-start-line="132" selection-start-column="20" selection-end-line="132" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/question/templates/searchResult.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
@@ -848,13 +817,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="223" column="42" selection-start-line="223" selection-start-column="42" selection-end-line="223" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/question/templates/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="241" column="0" selection-start-line="241" selection-start-column="0" selection-end-line="241" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -914,18 +876,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/question/templates/updateQuestion.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5712">
-          <caret line="240" column="25" selection-start-line="240" selection-start-column="25" selection-end-line="240" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/question/templates/warning.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
           <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -933,19 +887,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10500">
           <caret line="375" column="4" selection-start-line="375" selection-start-column="4" selection-end-line="382" selection-end-column="10" />
-          <folding>
-            <element signature="e#10073#10080#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/question/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2184">
-          <caret line="80" column="84" selection-start-line="80" selection-start-column="84" selection-end-line="80" selection-end-column="84" />
-          <folding>
-            <element signature="e#45#69#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -953,11 +894,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="592">
           <caret line="242" column="20" selection-start-line="242" selection-start-column="20" selection-end-line="242" selection-end-column="20" />
-          <folding>
-            <element signature="n#style#0;n#td#0;n#tr#2;n#table#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#input#0;n#td#0;n#tr#1;n#form#0;n#table#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#input#0;n#table#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -965,7 +901,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -973,19 +908,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
           <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="49" />
-          <folding>
-            <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/question/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="93" column="40" selection-start-line="93" selection-start-column="40" selection-end-line="93" selection-end-column="40" />
-          <folding>
-            <element signature="e#15#54#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -999,6 +921,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/question/templates/case.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="287" column="31" selection-start-line="281" selection-start-column="24" selection-end-line="287" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/question/templates/expert.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="424">
@@ -1007,9 +936,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/question/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="201" column="5" selection-start-line="201" selection-start-column="5" selection-end-line="201" selection-end-column="5" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#p#1;n#form#0;n#td#2;n#tr#0;n#table#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mysite/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2969">
+          <caret line="132" column="20" selection-start-line="132" selection-start-column="20" selection-end-line="132" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/question/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="489">
+          <caret line="93" column="40" selection-start-line="93" selection-start-column="40" selection-end-line="93" selection-end-column="40" />
+          <folding>
+            <element signature="e#15#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/question/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="52" column="16" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="16" />
+          <folding>
+            <element signature="e#45#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/question/templates/detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="186" column="77" selection-start-line="186" selection-start-column="71" selection-end-line="186" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/question/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
+        <state relative-caret-position="532">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
             <element signature="e#21#53#0" expanded="true" />
@@ -1017,26 +992,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/question/templates/case.html">
+    <entry file="file://$PROJECT_DIR$/question/templates/updateQuestion.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="287" column="31" selection-start-line="281" selection-start-column="24" selection-end-line="287" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/question/templates/detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="218" column="29" selection-start-line="218" selection-start-column="29" selection-end-line="218" selection-end-column="29" />
+        <state relative-caret-position="351">
+          <caret line="223" column="25" selection-start-line="223" selection-start-column="25" selection-end-line="223" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/question/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18704">
-          <caret line="668" column="38" selection-start-line="668" selection-start-column="38" selection-end-line="668" selection-end-column="38" />
+        <state relative-caret-position="17836">
+          <caret line="637" column="22" selection-start-line="636" selection-start-column="29" selection-end-line="637" selection-end-column="22" />
           <folding>
             <element signature="e#15#30#0" expanded="true" />
           </folding>

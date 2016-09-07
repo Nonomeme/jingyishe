@@ -222,11 +222,16 @@
                     <td height="42" colspan="2" align="left" valign="middle">
                         <b>关键词：</b>{{form.keyword}}
                     </td>
-                    <td height="42" align="left" valign="middle">上传附件:
+                    <td height="42" align="left" valign="middle">
+                        {% if form.attachedFile.value == None %}上传附件:
                         <!--{% if not question.attachedFile == '' %}-->
                         <!--<a href="attachedFile/"> <img src="/static/images/download.jpg" width="32" height="29"/><b-->
                         <!--class="textsize3">{{question.attachedFile|cut:"./"}}</b></a>-->
                         <!--{% endif %}-->
+                        {% else %}
+                        更改附件:
+                        {{form.attachedFile.value}}
+                        {% endif %}
                         {{form.attachedFile}}
                     </td>
                 </tr>

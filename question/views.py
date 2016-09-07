@@ -604,7 +604,8 @@ def updateQuestion(request, question_id):
             question.isPublic = False
         else:
             question.isPublic = True
-        question.attachedFile = request.FILES.get('attachedFile', None)
+        if question.attachedFile == '':
+            question.attachedFile = request.FILES.get('attachedFile', None)
         question.attachedDescription = request.POST['attachedDescription']
         question.save()
         return HttpResponseRedirect('/users/' + str(user.id) + '/questions/')
@@ -639,18 +640,15 @@ def updateQuestion(request, question_id):
             choice = 2
         data = {'title': question.title, 'description': question.description, 'keyword': question.keyword,
                 'isPublic': choice, 'attachedDescription': question.attachedDescription}
-        file_data = {'attachedFile': SimpleUploadedFile(question.attachedFile.name, question.attachedFile.read())}
-
-        form = QuestionForm2(data, file_data)
-        # if form.is_valid():
-        #     print 'valid'
-        #     print form.cleaned_data['attachedFile']
-        # else:
-        #     print 'wrong'
+        if not question.attachedFile == '':
+            file_data = {'attachedFile': SimpleUploadedFile(question.attachedFile.name, question.attachedFile.read())}
+            form = QuestionForm2(data, file_data)
+            # print form.is_bound()
+        else:
+            form = QuestionForm2(data)
         searchForm = GlobalSearchForm()
         return render(request, 'updateQuestion.html',
                       {'username': username, 'question': question, 'form': form, 'searchForm': searchForm})
-
 
 def search(request):
     username = request.session.get('username', '')
