@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^case/$', views.case, name='case'),
     url(r'^case/(?P<case_id>[0-9]+)/$', views.caseDetail, name='caseDetail'),
     url(r'^case/(?P<case_id>[0-9]+)/follow/$', views.caseFollow, name='caseFollow'),
+    url(r'^addcase/$',views.addCase,name='addCase'),
     url(r'search/$', views.search, name='search'),
     url(r'^answer/(?P<answer_id>[0-9]+)/agree/$', views.grade, name='grade'),
 

@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+import datetime
+
 
 # from django.contrib.auth.models import User
 # from django.contrib.auth.models import AbstractUser
@@ -31,6 +33,8 @@ class User(models.Model):
     followingCase = models.ManyToManyField('question.Case', blank=True, through='CaseFollow')
 
     gradeAnswer = models.ManyToManyField('question.Answer',blank=True)
+
+    date = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return self.username
@@ -116,10 +120,14 @@ class Case(models.Model):
     dataDescription = models.TextField()
     solution = models.TextField()
     keyword = models.CharField(max_length=256)
-    source = models.CharField(max_length=256)
-    reference = models.TextField()
+    source = models.CharField(max_length=256,blank=True)
+    reference = models.TextField(blank=True)
     caseType = models.CharField(max_length=20)
-    domain = models.CharField(max_length=20)
+    # domain = models.CharField(max_length=20)
+    date = models.DateTimeField(auto_now_add=True)
+    attachedDescription = models.FileField(blank=True)
+    attachedSolution = models.FileField(blank=True)
+    uploader = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.title

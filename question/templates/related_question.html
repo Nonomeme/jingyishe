@@ -201,7 +201,7 @@
                         {% if username == '' %}
                         <a href="/login">登录</a> | <a href="/register">注册</a>
                         {% else %}
-                        {{username}} | <a href="/logout">注销</a>
+                        <a href="/users/{{userId}}/">{{username}}</a>  | <a href="/logout">注销</a>
                         {% endif %}
                     </td>
                 </tr>

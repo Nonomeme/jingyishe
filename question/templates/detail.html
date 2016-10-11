@@ -41,7 +41,7 @@
         }
 
         #homedaohang #hometop #toplogo {
-            height: 52px;
+            height: 55px;
             width: 98%;
             margin-top: 0px;
             margin-right: 0%;
@@ -51,16 +51,16 @@
             float: none;
         }
 
-        #homedaohang #登录注册 {
-            height: 30px;
-            width: 220px;
-            margin-top: 20px;
-            margin-right: 10px;
-            margin-bottom: 0px;
-            margin-left: 850px;
-            text-align: right;
-            font-size: x-large;
-        }
+        /*#homedaohang #登录注册 {*/
+            /*height: 30px;*/
+            /*width: 220px;*/
+            /*margin-top: 20px;*/
+            /*margin-right: 10px;*/
+            /*margin-bottom: 0px;*/
+            /*margin-left: 850px;*/
+            /*text-align: right;*/
+            /*font-size: x-large;*/
+        /*}*/
 
         #homedaohang table {
             font-size: medium;
@@ -68,18 +68,18 @@
         }
 
         #homedaohang {
-            height: 700px;
+            height: auto;
             width: 100%;
         }
 
-        #homedaohang #hometop #toplogo #举手 {
-            height: 30px;
-            width: 50px;
-            margin-top: 35px;
-            margin-right: 100px;
-            margin-bottom: 35px;
-            margin-left: 300px;
-        }
+        /*#homedaohang #hometop #toplogo #举手 {*/
+            /*height: 30px;*/
+            /*width: 50px;*/
+            /*margin-top: 35px;*/
+            /*margin-right: 100px;*/
+            /*margin-bottom: 35px;*/
+            /*margin-left: 300px;*/
+        /*}*/
 
         #homedaohang #hometop #toplogo table tr td {
             font-size: medium;
@@ -93,7 +93,7 @@
         }
 
         #homedaohang #tablehome {
-            height: 1320px;
+            height: auto;
             width: 84%;
             margin-top: 0px;
             margin-right: 8%;
@@ -156,6 +156,10 @@
             font-size: x-large;
         }
 
+        .textsize3 {
+            font-size: small;
+        }
+
         .style1 {
             color: #FFF;
         }
@@ -192,7 +196,7 @@
                         {% if username == '' %}
                         <a href="/login">登录</a> | <a href="/register">注册</a>
                         {% else %}
-                        {{username}} | <a href="/logout">注销</a>
+                        <a href="/users/{{userId}}/">{{username}}</a>  | <a href="/logout">注销</a>
                         {% endif %}
                     </td>
                 </tr>
@@ -202,9 +206,11 @@
         <hr/>
     </div>
     <div id="tablehome">
-        <table width="100%" height="409" border="0" align="center" cellpadding="0" cellspacing="0">
+        <br/>
+        <table width="100%" height="446" border="0" align="center" cellpadding="0" cellspacing="15"
+               style="border:1px solid #CCC">
             <tr>
-                <td width="37%" height="68" align="left" style=" border-bottom:#999  dashed 1px">
+                <td width="43%" height="64" align="left" style=" border-bottom:#999  dashed 1px">
                     <b class="textsize2"><img src="/static/images/star1.jpg" width="27" height="26"/>{{question.title}}
                         {% if question.isSolved %}
                         【已解决】
@@ -221,11 +227,11 @@
                     <a href="follow/"><input type="submit" value="关注问题"/></a>
                     {% endif %}
                 </td>
-                <td width="38%" height="68" align="left" style=" border-bottom:#999  dashed 1px">
+                <td width="23%" height="64" align="left" style=" border-bottom:#999  dashed 1px">
                     &nbsp;&nbsp;已发布：{{question.publishDate|date:"Y-m-d H:i:s"}}
                 </td>
                 <form method="" action="{{question.questioner.id}}/follow">
-                    <td width="25%" height="68" align="left" style=" border-bottom:#999  dashed 1px">来自 <a
+                    <td width="34%" height="64" align="left" style=" border-bottom:#999  dashed 1px">来自 <a
                             href="/users/{{question.questioner.id}}">{{question.questioner.username}}</a>
                         {% csrf_token %}
                         {% if isFollowing2 == 2 %}
@@ -239,7 +245,7 @@
                 </form>
             </tr>
             <tr>
-                <td height="40" colspan="3" align="left" valign="top" bgcolor="#FAFAFA"><p><b>问题描述：</b></p>
+                <td height="34" colspan="3" align="left" valign="top" bgcolor="#FAFAFA"><p><b>问题描述：</b></p>
                     {{question.description|linebreaks}}
                 </td>
             </tr>
@@ -266,61 +272,66 @@
 
             </tr>
             <tr>
-                <td height="42" align="left" valign="middle" style=" border-bottom:#999 solid 2px"><b class="textsize1">{{answers.count}}个回答
-                    <input type="button" value="展开↓" onClick="m(this)"></b></td>
-                <td height="42" align="left" valign="middle" style=" border-bottom:#999 solid 2px"><b class="textsize1">{{questionFollowers.count}}人关注</b>
+                <td height="54" align="left" valign="middle"><b class="textsize1">{{answers.count}}个回答</b></td>
+                <td height="54" align="left" valign="middle"><b class="textsize1">{{questionFollowers.count}}人关注</b>
                 </td>
-                <td height="42" align="center" valign="middle" style=" border-bottom:#999 solid 2px"><a
+                <td height="54" align="center" valign="middle"><a
                         href="answer"><img src="/static/images/sign2.jpg" width="51" height="50"/>添加回答</a>
                 </td>
             </tr>
         </table>
         <div id="D"
-             style="display:none;border:1px solid #CCC;margin-top:10px; margin-bottom:5px;width:88;line-height:100%;">
+             style="border:1px solid #CCC;margin-top:10px; margin-bottom:5px;width:88;line-height:100%;">
             <table width="100%" border="0" cellspacing="2" cellpadding="0">
                 {% for answer in answers %}
                 <tr style="font-size:14px;">
-                    <td width="5%" align="left" valign="middle">
+                    <td width="3%" align="left" valign="middle">
                         <a href="/answer/{{answer.id}}/agree/">
-                            <img src="/static/images/thumbup1.jpg" width="27" height="28"/>{{answer.grade}}
+                            <img src="/static/images/thumbup1.jpg" width="27" height="28"/>
                         </a>
                     </td>
-                    <td height="26" colspan="2" align="left" valign="middle">
+                    <td width="3%" align="left" valign="middle">{{answer.grade}}</td>
+                    <td width="76%" height="26" align="left" valign="middle"><b>
                         {% if answer.isAnonym %}
                         匿名者&nbsp;
                         {% else %}
                         <a href="/users/{{answer.answerer.id}}">{{answer.answerer.username}}</a> &nbsp;
                         {% endif %}
                         {{answer.publishDate|date:"Y-m-d H:i:s"}}
+                    </b></td>
                     <td width="32%" height="26" align="left" valign="middle">
                         {% if not answer.attachedFile == '' %}
                         <a href="/question/answer/{{answer.id}}/attachedFile/"><b class="textsize3">{{answer.attachedFile|cut:"./"}}</b></a>
                         {% endif %}
                     </td>
+                    <td width="18%" height="26" align="left" valign="middle">&nbsp;</td>
                 </tr>
                 <tr tyle="font-size:14px;">
-                    <td height="26" colspan="4" style=" border-bottom:1px dashed #000" align="left" valign="middle">
+                    <td height="26" align="left" valign="middle" style=" border-bottom:1px dashed #000">&nbsp;</td>
+                    <td align="left" valign="middle" style=" border-bottom:1px dashed #000">&nbsp;</td>
+                    <td height="26" align="left" valign="middle" style=" border-bottom:1px dashed #000">
                         &nbsp;&nbsp;{{answer.content}}
                     </td>
+                    <td height="26"  align="left" valign="middle"   style=" border-bottom:1px dashed #000"  >&nbsp;</td>
                 </tr>
                 {% endfor %}
             </table>
         </div>
-        <script>var F = false;
-        function m(obj) {
-            if (F) {
-                document.getElementById('D').style.display = "none";
-                obj.value = "展开↓";
-                F = false;
-            } else {
-                document.getElementById('D').style.display = "";
-                obj.value = "收缩↑"
-                F = true;
-            }
-        }
-        </script>
-
-        <table width="100%" border="0" cellspacing="1" cellpadding="1">
+        <!--<script>var F = false;-->
+        <!--function m(obj) {-->
+            <!--if (F) {-->
+                <!--document.getElementById('D').style.display = "none";-->
+                <!--obj.value = "展开↓";-->
+                <!--F = false;-->
+            <!--} else {-->
+                <!--document.getElementById('D').style.display = "";-->
+                <!--obj.value = "收缩↑"-->
+                <!--F = true;-->
+            <!--}-->
+        <!--}-->
+        <!--</script>-->
+        <br />
+        <table width="100%" border="0" cellspacing="10" cellpadding="1" style="border:1px solid #CCC">
             <tr>
                 <td height="50" colspan="2" align="left" style=" border-bottom:#999 solid 2px"><b class="textsize1">关于{{question.title}}的问题&#8230;&#8230;（全部{{relatedQuestions.count}}问题）</b>
                 </td>
@@ -333,7 +344,7 @@
             {% for question in relatedQuestions %}
             <tr>
                 <td height="30" colspan="2" align="left" style=" border-bottom:1px dashed #000">
-                    <a href="/question/{{question.id}}/"> 标题：{{question.title}}</a>
+                    <a href="/question/{{question.id}}/"> {{question.title}}</a>
                 </td>
                 <td width="33%" height="30" align="center" style=" border-bottom:1px dashed #000">
                     {{question.answerNum}}人回答
@@ -384,7 +395,7 @@
         <p>&nbsp;</p>
     </div>
     <div id="bottom"
-         style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#333; color:#FFF"
+         style=" height:60px; line-height:60px; overflow:hidden; text-align:center;background:#333; color:#FFF"
          align="center">
         &nbsp; <a href="/index" class="style1">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
                                                                          class="style1">最新咨询</a>&nbsp; |&nbsp; <a

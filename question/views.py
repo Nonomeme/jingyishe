@@ -12,7 +12,7 @@ from django.http import StreamingHttpResponse
 from django.shortcuts import render, get_object_or_404
 
 from .forms import AnswerForm, UserForm, LoginForm, QuestionForm, MessageForm, SearchForm, GlobalSearchForm, \
-    MessageAnswerForm, QuestionForm2
+    MessageAnswerForm, QuestionForm2, CaseForm
 
 QuestionForm2
 from .models import Question, Answer, User, Expert, Message, QuestionFollow, PersonFollow, Case, CaseFollow, \
@@ -26,19 +26,23 @@ sys.setdefaultencoding('utf-8')
 
 def index(request):
     username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
     latest_questions = Question.objects.order_by("publishDate").reverse()[0:8]
+    latest_cases = Case.objects.order_by("date").reverse()[0:8]
+    latest_users = User.objects.order_by("date").reverse()[0:8]
     form = QuestionForm()
     searchForm = GlobalSearchForm()
     if username == '':
-        return render(request, 'home.html',
-                      {'latest_questions': latest_questions, 'username': username, 'form': form,
-                       'searchForm': searchForm})
+        return render(request, 'home_new.html',
+                      {'latest_questions': latest_questions, 'username': username, 'userId': userId, 'form': form,
+                       'searchForm': searchForm, 'latest_cases': latest_cases, 'latest_users': latest_users})
 
     else:
         user = User.objects.get(username=username)
-        return render(request, 'home.html',
-                      {'latest_questions': latest_questions, 'username': username, 'form': form, 'user': user,
-                       'searchForm': searchForm})
+        return render(request, 'home_new.html',
+                      {'latest_questions': latest_questions, 'username': username, 'userId': userId, 'form': form,
+                       'user': user,
+                       'searchForm': searchForm, 'latest_cases': latest_cases, 'latest_users': latest_users})
 
 
 def login(request):
@@ -50,6 +54,7 @@ def login(request):
             user = User.objects.filter(username__exact=username, password__exact=password)
             if user:
                 request.session['username'] = username
+                request.session['userId'] = User.objects.get(username__exact=username).id
                 redirectUrl = request.session.get('redirect_after_login', '')
                 if redirectUrl == '':
                     return HttpResponseRedirect('/index/')
@@ -68,6 +73,7 @@ def login(request):
 
 def logout(request):
     del request.session['username']
+    del request.session['userId']
     return HttpResponseRedirect('/index/')
 
 
@@ -85,6 +91,7 @@ def register(request):
 
 def detail(request, question_id):
     username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
     question = get_object_or_404(Question, id=question_id)
     if username == '' and not question.isPublic:
         request.session['login_info'] = u'该问题仅限注册用户查看,请先登录'
@@ -121,13 +128,15 @@ def detail(request, question_id):
         q.add(Q(keyword__contains=keyword), Q.OR)
     relatedQuestions = Question.objects.filter(q).exclude(id=question_id)
     return render(request, 'detail.html',
-                  {'username': username, 'question': question, 'answers': answers, 'relatedQuestions': relatedQuestions,
+                  {'username': username, 'userId': userId, 'question': question, 'answers': answers,
+                   'relatedQuestions': relatedQuestions,
                    'questionFollowers': questionFollowers, 'isFollowing': isFollowing, 'isFollowing2': isFollowing2,
                    'form': form, 'searchForm': searchForm})
 
 
 def answer(request, question_id):
     username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
     if request.method == 'POST':
         if username == '':
             request.session['redirect_after_login'] = request.get_full_path()
@@ -156,19 +165,18 @@ def answer(request, question_id):
             return HttpResponse('fail')
     else:
         form = AnswerForm
-        return render(request, 'answer.html', {'username': username, 'form': form})
+        return render(request, 'answer.html', {'username': username, 'userId': userId, 'form': form})
 
 
 def question(request):
     username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
     if request.method == 'POST':
         if username == '':
             request.session['redirect_after_login'] = request.get_full_path()
             request.session['login_info'] = u'请先登陆后提问'
             return HttpResponseRedirect('/login')
         form = QuestionForm(request.POST, request.FILES)
-        if username == '':
-            return HttpResponseRedirect('/login')
         if form.is_valid():
             question = Question()
             question.title = form.cleaned_data['title']
@@ -184,7 +192,7 @@ def question(request):
             return HttpResponseRedirect('/index')
     else:
         form = QuestionForm2()
-        return render(request, 'question.html', {'username': username, 'form': form})
+        return render(request, 'question.html', {'username': username, 'userId': userId, 'form': form})
 
 
 def followQuestion(request, question_id):
@@ -229,6 +237,7 @@ def followPerson(request, question_id, publisher_id):
 
 def latestQuestion(request, type="0"):
     username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
     questions = Question.objects.all().order_by('publishDate').reverse()
     keyword = ''
     # hasPic = False
@@ -256,16 +265,19 @@ def latestQuestion(request, type="0"):
     form = SearchForm({'keyword': keyword, 'isToday': isToday, 'isHot': isHot})
     if not form.is_valid():
         form = SearchForm()
-    return render(request, 'newestinfo.html', {'username': username, 'questions': questions, 'form': form})
+    return render(request, 'newestinfo.html',
+                  {'username': username, 'userId': userId, 'questions': questions, 'form': form})
 
 
 def aboutus(request):
     username = request.session.get('username', '')
-    return render(request, 'aboutus.html', {'username': username,})
+    userId = request.session.get('userId', '')
+    return render(request, 'aboutus.html', {'username': username, 'userId': userId,})
 
 
 def userInfo(request, user_id):
     username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
     # user = User.objects.get(username=username)
     publisher = User.objects.get(id=user_id)
     followers = User.objects.filter(followingPerson=publisher)
@@ -274,9 +286,10 @@ def userInfo(request, user_id):
     answers = Answer.objects.filter(answerer=publisher).order_by('publishDate').reverse()
     answerNum = answers.count()
     answers = answers[:3]
-    followingQuestions = QuestionFollow.objects.filter(questionFollower=user_id).order_by('date').reverse()[:3]
-    followingPersons = PersonFollow.objects.filter(userFollower=user_id).order_by('date').reverse()[:3]
-    followinglist, questionlist, personlist = [], [], []
+    followingQuestions = QuestionFollow.objects.filter(questionFollower=user_id).order_by('date').reverse()[:5]
+    followingPersons = PersonFollow.objects.filter(userFollower=user_id).order_by('date').reverse()[:5]
+    cases = Case.objects.filter(uploader=publisher).order_by('date').reverse()[:5]
+    tmplist, newslist, questionlist, personlist, caselist = [], [], [], [], []
     today = datetime.date.today()
     for question in followingQuestions:
         delta = today - question.date
@@ -291,21 +304,51 @@ def userInfo(request, user_id):
                            'timeDelta': int(delta.total_seconds() / 86400),
                            'type': 2,
                            'url': person.followingPerson.id})
+
+    for case in cases:
+        delta = today - case.date.date()
+        caselist.append({'name': case.title,
+                         'timeDelta': int(delta.total_seconds() / 86400),
+                         'type': 3,
+                         'url': case.id})
+
     i = j = 0
+
     while i < len(questionlist) and j < len(personlist):
         if questionlist[i]['timeDelta'] < personlist[j]['timeDelta']:
-            followinglist.append(questionlist[i])
+            tmplist.append(questionlist[i])
             i += 1
         else:
-            followinglist.append(personlist[j])
+            tmplist.append(personlist[j])
             j += 1
 
     while i < len(questionlist):
-        followinglist.append(questionlist[i])
+        tmplist.append(questionlist[i])
         i += 1
     while j < len(personlist):
-        followinglist.append(personlist[j])
+        tmplist.append(personlist[j])
         j += 1
+
+    i = j = 0
+    while len(tmplist) > 5:
+        tmplist.remove(len(tmplist) - 1)
+    while i < len(tmplist) and j < len(caselist):
+        if tmplist[i]['timeDelta'] < caselist[j]['timeDelta']:
+            newslist.append(tmplist[i])
+            i += 1
+        else:
+            newslist.append(caselist[j])
+            j += 1
+    while i < len(tmplist):
+        newslist.append(tmplist[i])
+        i += 1
+    while j < len(caselist):
+        newslist.append(caselist[j])
+        j += 1
+    while len(newslist) > 5:
+        newslist.remove(len(newslist) - 1)
+
+    print newslist
     # for question in followingQuestions:
     #     for person in followingPersons:
     #         if question.date < person.date:
@@ -333,18 +376,20 @@ def userInfo(request, user_id):
         isFollowing = 0
         messages = Message.objects.filter(receiver=publisher)
         return render(request, 'profile.html',
-                      {'user': publisher, 'username': username, 'followers': count, 'questions': questions,
+                      {'user': publisher, 'username': username, 'userId': userId, 'followers': count,
+                       'questions': questions,
                        'answers': answers, 'isFollowing': isFollowing, 'messages': messages, 'num': num,
-                       'answerNum': answerNum, 'following': followinglist})
+                       'answerNum': answerNum, 'following': newslist})
     else:
         if User.objects.filter(followingPerson=publisher).filter(username=username).exists():
             isFollowing = 2
         form = MessageForm()
 
     return render(request, 'profile.html',
-                  {'user': publisher, 'username': username, 'followers': count, 'questions': questions,
+                  {'user': publisher, 'username': username, 'userId': userId, 'followers': count,
+                   'questions': questions,
                    'answers': answers, 'isFollowing': isFollowing, 'form': form, 'num': num, 'answerNum': answerNum,
-                   'following': followinglist})
+                   'following': newslist})
 
 
 def followUser(request, publisher_id):
@@ -367,6 +412,7 @@ def followUser(request, publisher_id):
 
 def consultion(request):
     username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
     if username == '':
         request.session['redirect_after_login'] = request.get_full_path()
         request.session['login_info'] = u'您还未登陆'
@@ -376,6 +422,7 @@ def consultion(request):
 
 def expert(request):
     username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
     experts = Expert.objects.all()
     keyword = ''
     if 'keyword' in request.GET:  # GET是一个dict，使用文本框的name作为key
@@ -387,7 +434,7 @@ def expert(request):
     form = SearchForm({'keyword': keyword, 'isToday': False, 'isHot': False})
     if not form.is_valid():
         form = SearchForm()
-    return render(request, 'expert.html', {'username': username, 'experts': experts, 'form': form})
+    return render(request, 'expert.html', {'username': username, 'userId': userId, 'experts': experts, 'form': form})
 
 
 def leaveMessage(request, user_id):
@@ -418,6 +465,7 @@ def leaveMessage(request, user_id):
 
 def answerMessage(request, user_id, message_id):
     username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
     message = Message.objects.get(id=message_id)
     if request.method == 'POST':
         form = MessageAnswerForm(request.POST)
@@ -429,28 +477,30 @@ def answerMessage(request, user_id, message_id):
     else:
         user = User.objects.get(id=user_id)
         form = MessageAnswerForm()
-        return render(request, 'mymessage.html', {'username': username, 'user': user, 'message': message, 'form': form})
+        return render(request, 'mymessage.html',
+                      {'username': username, 'userId': userId, 'user': user, 'message': message, 'form': form})
 
 
 def case(request):
     username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
     cases = Case.objects.all()
     keyword = ''
 
     if 'keyword' in request.GET:  # GET是一个dict，使用文本框的name作为key
         keyword = request.GET['keyword']
-        cases = cases.filter(Q(title__contains=keyword) | Q(keyword__contains=keyword) | Q(caseType=keyword) | Q(
-            domain__contains=keyword))
-    cases = cases[:10]
+        cases = cases.filter(Q(title__contains=keyword) | Q(keyword__contains=keyword) | Q(caseType=keyword))
+    cases = cases.order_by('date').reverse()[:10]
 
     form = SearchForm({'keyword': keyword, 'isToday': False, 'isHot': False})
     if not form.is_valid():
         form = SearchForm()
-    return render(request, 'case.html', {'username': username, 'cases': cases, 'form': form})
+    return render(request, 'case.html', {'username': username, 'userId': userId, 'cases': cases, 'form': form})
 
 
 def caseDetail(request, case_id):
     username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
     case = Case.objects.get(id=case_id)
     isFollowing = False
 
@@ -459,7 +509,8 @@ def caseDetail(request, case_id):
         if user.followingCase.filter(id=case_id).exists():
             isFollowing = True
 
-    return render(request, 'caseDetail.html', {'username': username, 'case': case, 'isFollowing': isFollowing})
+    return render(request, 'caseDetail.html',
+                  {'username': username, 'userId': userId, 'case': case, 'isFollowing': isFollowing})
 
 
 def caseFollow(request, case_id):
@@ -536,6 +587,7 @@ def downloadAnswer(request, answer_id):
 
 def relatedQuestions(request, question_id):
     username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
     question = get_object_or_404(Question, id=question_id)
     if username == '' and not question.isPublic:
         request.session['login_info'] = u'该问题仅限注册用户查看,请先登录'
@@ -567,34 +619,39 @@ def relatedQuestions(request, question_id):
     relatedQuestions = Question.objects.filter(q).exclude(id=question_id)
 
     return render(request, 'related_question.html',
-                  {'username': username, 'question': question, 'relatedQuestions': relatedQuestions,
+                  {'username': username, 'userId': userId, 'question': question, 'relatedQuestions': relatedQuestions,
                    'isFollowing': isFollowing, 'isFollowing2': isFollowing2,})
 
 
 def myquestions(request, user_id):
     username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
     user = User.objects.get(id=user_id)
     questions = Question.objects.filter(questioner=user).order_by('publishDate').reverse()
-    return render(request, 'myquestions.html', {'username': username, 'user': user, 'questions': questions})
+    return render(request, 'myquestions.html',
+                  {'username': username, 'userId': userId, 'user': user, 'questions': questions})
 
 
 def myanswers(request, user_id):
     username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
     user = User.objects.get(id=user_id)
     answers = Answer.objects.filter(answerer=user).order_by('publishDate').reverse()
-    return render(request, 'myanswers.html', {'username': username, 'user': user, 'answers': answers})
+    return render(request, 'myanswers.html', {'username': username, 'userId': userId, 'user': user, 'answers': answers})
 
 
 def mycases(request, user_id):
     username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
     user = User.objects.get(id=user_id)
     # cases = user.followingCase.all().order_by('publishDate').reverse()
     cases = CaseFollow.objects.filter(caseFollower=user)
-    return render(request, 'mycases.html', {'username': username, 'user': user, 'cases': cases})
+    return render(request, 'mycases.html', {'username': username, 'userId': userId, 'user': user, 'cases': cases})
 
 
 def updateQuestion(request, question_id):
     username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
     user = User.objects.get(username=username)
     if request.method == 'POST':
         question = Question.objects.get(id=question_id)
@@ -648,10 +705,13 @@ def updateQuestion(request, question_id):
             form = QuestionForm2(data)
         searchForm = GlobalSearchForm()
         return render(request, 'updateQuestion.html',
-                      {'username': username, 'question': question, 'form': form, 'searchForm': searchForm})
+                      {'username': username, 'userId': userId, 'question': question, 'form': form,
+                       'searchForm': searchForm})
+
 
 def search(request):
     username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
     keyword = ''
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
@@ -661,11 +721,12 @@ def search(request):
         experts = Expert.objects.filter(tag__contains=keyword)[:5]
         searchForm = GlobalSearchForm({'keyword': keyword})
         return render(request, 'globalSearch.html',
-                      {'username': username, 'questions': questions, 'experts': experts, 'cases': cases,
+                      {'username': username, 'userId': userId, 'questions': questions, 'experts': experts,
+                       'cases': cases,
                        'searchForm': searchForm})
     else:
         searchForm = GlobalSearchForm()
-        return render(request, 'globalSearch.html', {'username': username, 'searchForm': searchForm})
+        return render(request, 'globalSearch.html', {'username': username, 'userId': userId, 'searchForm': searchForm})
 
 
 def closeQuestion(request, question_id):
@@ -694,3 +755,40 @@ def grade(request, answer_id):
         answer.save()
 
     return HttpResponseRedirect('/question/' + str(answer.question_id) + '/')
+
+
+def addCase(request):
+    username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
+    if request.method == 'POST':
+        # print request.POST
+        if username == "":
+            request.session['redirect_after_login'] = request.get_full_path()
+            request.session['login_info'] = u'您还未登陆'
+            return HttpResponseRedirect('/login')
+        user = User.objects.get(username=username)
+        form = CaseForm(request.POST, request.FILES)
+        if form.is_valid():
+            case = Case()
+            case.title = form.cleaned_data['title']
+            case.questionDescription = form.cleaned_data['questionDescription']
+            case.dataDescription = form.cleaned_data['dataDescription']
+            case.solution = form.cleaned_data['solution']
+            case.keyword = form.cleaned_data['keyword']
+            case.uploader = user
+            case.caseType = form.cleaned_data['category'] + '案例:' + request.POST['direction']
+            # print case.caseType
+            if form.cleaned_data['attachedDescription'] != '':
+                case.attachedDescription = form.cleaned_data['attachedDescription']
+            if form.cleaned_data['attachedSolution'] != '':
+                case.attachedSolution = form.cleaned_data['attachedSolution']
+            case.date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
+            case.save()
+            return HttpResponseRedirect('/case/')
+        else:
+            print form.errors
+
+    else:
+        form = CaseForm()
+        # print form
+    return render(request, 'caseShare.html', {'username': username, 'userId': userId, 'form': form})

@@ -52,34 +52,34 @@
             float: none;
         }
 
-        #homedaohang #登录注册 {
-            height: 30px;
-            width: 220px;
-            margin-top: 20px;
-            margin-right: 10px;
-            margin-bottom: 0px;
-            margin-left: 850px;
-            text-align: right;
-            font-size: x-large;
-        }
+        /*#homedaohang #登录注册 {*/
+            /*height: 30px;*/
+            /*width: 220px;*/
+            /*margin-top: 20px;*/
+            /*margin-right: 10px;*/
+            /*margin-bottom: 0px;*/
+            /*margin-left: 850px;*/
+            /*text-align: right;*/
+            /*font-size: x-large;*/
+        /*}*/
 
         #homedaohang table {
             font-size: medium;
         }
 
         #homedaohang {
-            height: 700px;
+            height: auto;
             width: 100%;
         }
 
-        #homedaohang #hometop #toplogo #举手 {
-            height: 30px;
-            width: 50px;
-            margin-top: 35px;
-            margin-right: 100px;
-            margin-bottom: 35px;
-            margin-left: 300px;
-        }
+        /*#homedaohang #hometop #toplogo #举手 {*/
+            /*height: 30px;*/
+            /*width: 50px;*/
+            /*margin-top: 35px;*/
+            /*margin-right: 100px;*/
+            /*margin-bottom: 35px;*/
+            /*margin-left: 300px;*/
+        /*}*/
 
         #homedaohang #hometop #toplogo table tr td {
             font-size: medium;
@@ -93,11 +93,11 @@
         }
 
         #homedaohang #tablehome {
-            height: 1150px;
+            height: auto;
             width: 80%;
             margin-top: 0px;
             margin-right: 10%;
-            margin-bottom: 0px;
+            margin-bottom: 40px;
             margin-left: 10%;
         }
 
@@ -184,7 +184,7 @@
                         {% if username == '' %}
                         <a href="/login">登录</a> | <a href="/register">注册</a>
                         {% else %}
-                        {{username}} | <a href="/logout">注销</a>
+                        <a href="/users/{{userId}}/">{{username}}</a>  | <a href="/logout">注销</a>
                         {% endif %}
                     </td>
                 </tr>
@@ -284,10 +284,14 @@
                     <ul>
                         {% for item in following %}
                         <li>
-                            {% if item.type == 1%}
+                            {% if item.type == 1 %}
                             关注了问题 <a href="/question/{{item.url}}/">{{item.name}}</a>
                             {% else %}
-                            关注了 <a href="/users/{{item.url}}/">{{item.name}}</a>
+                                {% if item.type == 2 %}
+                                关注了 <a href="/users/{{item.url}}/">{{item.name}}</a>
+                                {% else %}
+                                分享了案例 <a href="/case/{{item.url}}/">{{item.name}}</a>
+                                {% endif %}
                             {% endif %}
                         </li>
                         <br/>

@@ -68,7 +68,7 @@
         }
 
         #homedaohang {
-            height: 1000px;
+            height: auto;
             width: 100%;
         }
 
@@ -93,7 +93,7 @@
         }
 
         #homedaohang #tablehome {
-            height: 950px;
+            height: auto;
             width: 88%;
             margin-top: 0px;
             margin-right: 6%;
@@ -187,7 +187,7 @@
                         {% if username == '' %}
                         <a href="/login">登录</a> | <a href="/register">注册</a>
                         {% else %}
-                        {{username}} | <a href="/logout">注销</a>
+                        <a href="/users/{{userId}}/">{{username}}</a>  | <a href="/logout">注销</a>
                         {% endif %}
                     </td>
                 </tr>
@@ -212,7 +212,7 @@
             <tr>
                 <td height="80" align="left" valign="top" style=" border-bottom:#CCC solid 1px"><p
                         style="text-indent:2em;">
-                    {{case.questionDescription|linebreaks}}</td>
+                    {{case.questionDescription}}</td>
             </tr>
             <tr>
                 <td height="12" align="left"><b class="textsize1">数据描述</b></td>
@@ -220,7 +220,7 @@
             <tr>
                 <td height="23" align="left" valign="top" style=" border-bottom:#CCC solid 1px"><p
                         style="text-indent:2em;">
-                    {{case.dataDescription|linebreaks}}</p>
+                    {{case.dataDescription}}</p>
                 </td>
             </tr>
             <tr>

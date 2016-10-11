@@ -220,9 +220,9 @@
                 var checkIndex = $("#newest_info_list1").get(0).selectedIndex;
                 if (checkIndex == 0)
                     location.href = "/question/latest"
-                if(checkIndex == 1)
+                if (checkIndex == 1)
                     location.href = "/expert/"
-                if(checkIndex == 2)
+                if (checkIndex == 2)
                     location.href = "/case/"
             });
         });
@@ -255,7 +255,7 @@
                 {% if username == '' %}
                 <a href="/login">登录</a> | <a href="/register">注册</a>
                 {% else %}
-                {{username}} | <a href="/logout">注销</a>
+                <a href="/users/{{userId}}/">{{username}}</a> | <a href="/logout">注销</a>
                 {% endif %}
             </td>
         </tr>
@@ -284,6 +284,9 @@
                                 {{form.keyword}}
                                 <input type="submit" value="搜索"
                                        style="width:30; height:20; font-size:18px"/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <img src="/static/images/fly.jpg" width="29" height="29"/>
+                                <b style="color: #0033FF"><a href="/addcase/">分享我的案例</a></b>
                             </p>
                         </form>
                     </td>
@@ -298,7 +301,7 @@
                         <img src="/static/images/star1.jpg" alt="star1" width="27" height="26"/>
                     </td>
                     <td width="518" valign="bottom"><span style=" border-bottom:1px dashed #000"><a
-                            href="/case/{{case.id}}/">{{case.caseType}}案例之：{{case.domain}}：{{case.title}}</a></span>
+                            href="/case/{{case.id}}/">{{case.caseType}}：{{case.title}}</a></span>
                     </td>
                 </tr>
                 {% endfor %}
