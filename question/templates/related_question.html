@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>问题如何求解1+2=？【已解决】--精益社</title>
+    <title>更多相关问题--tf-idf作为特征如何进行数据的筛选从而降维？【已解决】--茶水博士</title>
     <style type="text/css">
         #nav {
             width: auto;
@@ -42,7 +42,7 @@
         }
 
         #homedaohang #hometop #toplogo {
-            height: 50px;
+            height: 60px;
             width: 98%;
             margin-top: 0px;
             margin-right: 0%;
@@ -69,7 +69,7 @@
         }
 
         #homedaohang {
-            height: 800px;
+            height: auto;
             width: 100%;
         }
 
@@ -87,10 +87,9 @@
         }
 
         body {
-            margin-left: 0px;
-            margin-top: 0px;
-            margin-right: 0px;
-            margin-bottom: 0px;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, "Times New Roman", "宋体";
         }
 
         #homedaohang #tablehome {
@@ -185,86 +184,105 @@
 
             <table width="100%" border="0" cellspacing="1" cellpadding="1">
                 <tr>
-                    <td width="12%"><img src="/static/images/font1.jpg" width="125" height="50"/></td>
+                    <td width="12%"><a href="/index"><img src="/static/images/logo_small.png" width="183" height="52"/></a>
+                    </td>
                     <td width="59%" align="left">
-                        <form id="form3" name="form3" method="post" action="">
+                        <form id="form3" name="form3" method="get" action="/search">
                             <p>
-                                <label for="search"></label>
-                                <input name="search" type="text" id="search"
-                                       style="width: 50; height: 50; font-size: 20px" size="45" maxlength="80"/>
+                                {{searchForm.keyword}}
                                 <input type="submit" name="searchbt" id="searchbt" value="搜索"
-                                       style="height:40; width:50; font-size:20px"/>
+                                       style="width:30; height:24; font-size:22px;border:0; background:#0099cc; color:#FFFFFF;"/>
                             </p>
                         </form>
                     </td>
-                    <td width="29%" align="right"><a href="/index">精益社首页</a> | <a href="/question">提问</a> |
+                    <td width="29%" align="right">
                         {% if username == '' %}
-                        <a href="/login">登录</a> | <a href="/register">注册</a>
+                        <a herf="/login"><input type="button" name="login" id="login"
+                                                style="width:30; height:24; font-size:20px;border:0; background: #0099cc; color:#FFFFFF;"
+                                                value="登陆"/></a>
+                        <a href="/register"><input type="button" name="register" id="register"
+                                                   style="width:30; height:24; font-size:20px;border:0; background:#0099cc; color:#FFFFFF;"
+                                                   value="注册"/></a>
                         {% else %}
-                        <a href="/users/{{userId}}/">{{username}}</a>  | <a href="/logout">注销</a>
+                        <a href="/users/{{userId}}"><input type="button"
+                                                           style="width:30; height:24; font-size:20px;border:0; background: #0099cc; color:#FFFFFF;"
+                                                           value="{{username}}"/></a>
+                        <a href="/logout"><input type="button"
+                                                 style="width:30; height:24; font-size:20px;border:0; background:#0099cc; color:#FFFFFF;"
+                                                 value="登出"/></a>
                         {% endif %}
                     </td>
                 </tr>
             </table>
             <br/>
         </div>
-        <hr/>
+        <hr color="#0099cc" style=" margin-top: auto; margin-bottom: 2px;" size="3"/>
     </div>
     <div id="tablehome">
         <br/>
-        <table width="100%" height="376" border="0" align="center" cellpadding="0" cellspacing="10"
+        <table width="100%" height="252" border="0" align="center" cellpadding="0" cellspacing="10"
                style="border:1px solid #CCC">
             <tr>
-                <td width="43%" height="64" align="left" style=" border-bottom:#999  dashed 1px">
-                    <form method="" action="follow">
-                        {% csrf_token %}
-                        <b class="textsize2"><img src="/static/images/star1.jpg" width="27" height="26"/>{{question.title}}
-                            {% if question.isSolved %}
-                            【已解决】
-                            {% else %}
-                            {% endif %}
-                        </b>
-                        {% if isFollowing == 2 %}
-                        <input type="submit" onclick="MM_popupMsg('你已取消关注此问题！')"
-                               value="取消关注"/>
-                        {% elif isFollowing == 1 %}
-                        <input type="submit" onclick="MM_popupMsg('你已关注此问题！')"
-                               value="关注问题"/>
-                        {% endif %}
-                    </form>
+                <td height="64" colspan="2" align="left" style=" border-bottom:#99cc33  dashed 2px">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <form method="" action="follow">
+                                {% csrf_token %}
+                                <td width="55%">
+                                    <b class="textsize2">
+                                        <img src="/static/images/star1.jpg" width="27" height="26"/>
+                                        {{question.title}}<font color="#0099cc">
+                                        {% if question.isSolved %}
+                                        【已解决】
+                                        {% else %}
+                                        {% endif %}</font>
+                                    </b>
+                                    {% if isFollowing == 2 %}
+                                    <input type="submit" value="取消关注"
+                                           style="width:30; height:24; font-size:14px;border:0; background:#ff3300; color:#FFFFFF;"/>
+                                    {% elif isFollowing == 1 %}
+                                    <input type="submit" value="关注问题"
+                                           style="width:30; height:24; font-size:14px;border:0; background:#ff3300; color:#FFFFFF;"/>
+                                    {% endif %}
+                                </td>
+                            </form>
+                            <td width="29%">已发布：{{question.publishDate|date:"Y-m-d H:i"}}</td>
+                            <form method="" action="{{question.questioner.id}}/follow">
+                                {% csrf_token %}
+                                <td width="16%">来自
+                                    <a href="/users/{{question.questioner.id}}">
+                                        {{question.questioner.username}}
+                                    </a>
+                                    {% if isFollowing2 == 2 %}
+                                    <input type="submit" value="取消关注"
+                                           style="width:30; height:24; font-size:14px;border:0; background:#ff9900; color:#fff;"/>
+                                    {% elif isFollowing2 == 1 %}
+                                    <input type="submit" value="关注Ta"
+                                           style="width:30; height:24; font-size:14px;border:0; background:#ff9900; color:#fff;"/>
+                                    {% endif %}
+                                </td>
+                            </form>
+                        </tr>
+                    </table>
+
                 </td>
-                <td width="23%" height="64" align="left" style=" border-bottom:#999  dashed 1px">
-                    &nbsp;&nbsp;已发布：{{question.publishDate|date:"Y-m-d H:i:s"}}
-                </td>
-                <form method="" action="{{question.questioner.id}}/follow">
-                    <td width="34%" height="64" align="center" style=" border-bottom:#999  dashed 1px">来自 <a
-                            href="/users/{{question.questioner.id}}">{{question.questioner.username}}</a>
-                        {% csrf_token %}
-                        {% if isFollowing2 == 2 %}
-                        <input type="submit" onclick="MM_popupMsg('你已取消关注Ta！')"
-                               value="取消关注"/>
-                        {% elif isFollowing2 == 1 %}
-                        <input type="submit" onclick="MM_popupMsg('你已关注Ta！')"
-                               value="关注Ta"/>
-                        {% endif %}
-                    </td>
-                </form>
             </tr>
 
             <tr>
-                <td height="215" colspan="3" align="left" valign="top" bgcolor="#FAFAFA"><p><b>问题描述：</b></p>
+                <td height="102" colspan="2" align="left" valign="top" bgcolor="#FAFAFA"><p><b>问题描述：</b></p>
                     {{question.description|linebreaks}}
                 </td>
             </tr>
             <tr>
-                <td height="42" colspan="2" align="left" valign="middle">
-                    <label><b>关键词：</b></label>
+                <td width="43%" height="42" align="left" valign="middle"><label for="kws"><b>关键词：</b></label>
                     {{question.keyword}}
                 </td>
-                <td height="42" align="left" valign="middle">
+                <td width="34%" height="42" align="left" valign="middle">
                     {% if not question.attachedFile == '' %}
-                    <a href="attachedFile/"> <img src="/static/images/download.jpg" width="32" height="29"/><b
-                            class="textsize3">{{question.attachedFile|cut:"./"}}</b></a>
+                    <a href="attachedFile/">
+                        <img src="/static/images/download.jpg" width="32" height="29"/>
+                        <b class="textsize3">{{question.attachedFile|cut:"./"}}</b>
+                    </a>
                     {% endif %}
                 </td>
             </tr>
@@ -275,18 +293,18 @@
 
         <table width="100%" border="0" cellspacing="10" cellpadding="1" style="border:1px solid #CCC">
             <tr>
-                <td height="50" align="left" style=" border-bottom:#999 solid 2px"><b class="textsize1">关于{{question.title}}的问题&#8230;&#8230;（全部{{relatedQuestions.count}}问题）</b>
+                <td height="50" align="left" style=" border-bottom:#999 solid 2px"><b class="textsize1">关于{{question.title}}的问题&#8230;&#8230;（全部{{relatedQuestions.count}}个问题）</b>
                 </td>
                 <td width="33%" height="50" align="center" style=" border-bottom:#999 solid 2px">
-                    <input name="我要提问" type="submit" id="我要提问" style="width:30; height:20; font-size:18px"
-                           onclick="MM_goToURL('parent','/question');return document.MM_returnValue"
-                           value="我来提问"/>
+                    <a href="/question/"><input type="button"
+                                                style="width:30; height:24; font-size:18px;border:0; background: #99cc33; color:#FFFFFF;"
+                                                value="我要提问"/></a>
                 </td>
             </tr>
             {% for question in relatedQuestions %}
             <tr>
                 <td height="30" align="left" style=" border-bottom:1px dashed #000">
-                    <a href="/question/{{question.id}}/"> 标题：{{question.title}}</a>
+                    <a href="/question/{{question.id}}/"> {{question.title}}</a>
                 </td>
                 <td width="33%" height="30" align="center" style=" border-bottom:1px dashed #000">
                     {{question.answerNum}}人回答
@@ -300,14 +318,39 @@
         <p>&nbsp;</p>
     </div>
     <div id="bottom"
-         style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#333; color:#FFF"
+         style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#666666; color:#0099cc"
          align="center">
-        &nbsp; <a href="/index" class="style1">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
-                                                                         class="style1">最新咨询</a>&nbsp; |&nbsp; <a
-            href="/expert" class="style1">专家咨询</a>&nbsp; |&nbsp; <a href="/case" class="style1">案例分析</a>&nbsp;
-        |&nbsp; <a href="/consultion" class="style1">AI咨询</a>&nbsp; |&nbsp; <a href="/aboutus" class="style1">关于我们</a>&nbsp;
+
+        &nbsp; <a href="/index" class="style1" target="_blank">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
+                                                                                         class="style1"
+                                                                                         target="_blank">最新问答</a>&nbsp;
+        |&nbsp; <a href="/expert" class="style1" target="_blank">专家咨询</a>&nbsp; |&nbsp; <a href="/case"
+                                                                                           class="style1"
+                                                                                           target="_blank">案例分享</a>&nbsp;
+        |&nbsp; <a href="courses.html" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
+                                                                                                class="style1"
+                                                                                                target="_blank">关于我们</a>&nbsp;
     </div>
-    <br/>
+
+
+    <div id="beianxinxi">
+        <table width="100%" border="0" cellspacing="1" cellpadding="1" style="font-size:10px; background: #EAEAEA">
+            <tr>
+                <td align="center">&copy;2016 chashuiboshi.com, all rights reserved 自由度（上海）管理咨询有限公司</td>
+            </tr>
+            <tr>
+                <td align="center">沪ICP备 xxxxxxxxxxxxxx 号</td>
+            </tr>
+        </table>
+
+
+    </div>
+</div>
+</body>
+</html>
+
+
+</div>
 </div>
 </body>
 </html>

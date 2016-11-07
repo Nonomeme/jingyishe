@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>首页--精益社--大数据分析咨询平台</title>
+    <title>茶水博士--一个关于数据科学人工智能的分享咨询网站</title>
 
     <style type="text/css">
         #nav {
@@ -65,11 +65,11 @@
         }
 
         #homedaohang table {
-            font-size: large;
+            font-size: medium;
         }
 
         #homedaohang {
-            height: 700px;
+            height: 600px;
             width: 100%;
         }
 
@@ -87,22 +87,30 @@
         }
 
         body {
-            margin-left: 0px;
-            margin-top: 0px;
-            margin-right: 0px;
-            margin-bottom: 0px;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, "Times New Roman", "宋体";
         }
 
         #homedaohang #tablehome {
-            height: 630px;
+            height: 600px;
             width: 88%;
             margin-top: 0px;
             margin-right: 6%;
             margin-bottom: 0px;
             margin-left: 6%;
+            padding-top: 50px;
         }
 
         .textsize {
+            font-size: x-large;
+        }
+
+        .textsize1 {
+            font-size: xx-large;
+        }
+
+        .textsize2 {
             font-size: larger;
         }
 
@@ -127,6 +135,24 @@
             border: 1px solid #F00
         }
 
+        .div1 {
+            width: 100%;
+            height: auto;
+            float: left;
+        }
+
+        .div2 {
+            width: 35%;
+            height: auto;
+            float: left;
+        }
+
+        .div3 {
+            width: 63%;
+            height: auto;
+            float: left;
+        }
+
         a:link {
             text-decoration: none;
         }
@@ -141,6 +167,7 @@
 
         a:active {
             text-decoration: none;
+            font-size: small;
         }
 
         .style1 {
@@ -149,6 +176,27 @@
 
         .style2 {
             color: #FF3;
+        }
+
+        .div-texthidden1 {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 205px;
+        }
+
+        .td1 {
+            border-bottom: 1px dashed #000;
+            height: 30px;
+        }
+
+        .td2 {
+            border-bottom: #99cc33 solid 2px
+        }
+
+        .td3 {
+            border-bottom: 1px dashed #fff;
+            height: 30px;
         }
     </style>
     <script type="text/javascript">
@@ -163,33 +211,48 @@
 <body>
 <div id="homedaohang">
     <div id="hometop">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:2px;">
             <tr>
                 {% if username == '' %}
-                <td width="25%" align="right"><b><a href="/login">登录</a> | <a href="/register">注册</a>&nbsp;</b></td>
+                <td width="25%" align="right">
+                    <a href="/register"><input type="button" name="login" id="login"
+                                               style="width:30; height:24; font-size:20px;border:0; background: #0099cc; color:#FFFFFF;"
+                                               value="注册"/></a>
+                    <a href="/login"><input type="button" name="register" id="register"
+                                            style="width:30; height:24; font-size:20px;border:0; background:#0099cc; color:#FFFFFF;"
+                                            value="登录"/></a>
+                </td>
                 {% else %}
-                <td width="25%" align="right"><b><a href="/users/{{user.id}}">{{username}}</a> | <a
-                        href="/logout">登出</a></b>&nbsp;</td>
+                <td width="25%" align="right">
+                    <a href="/users/{{user.id}}"><input type="button"
+                                                        style="width:30; height:24; font-size:20px;border:0; background: #0099cc; color:#FFFFFF;"
+                                                        value="{{username}}"/></a>
+                    <a href="/logout"><input type="button"
+                                             style="width:30; height:24; font-size:20px;border:0; background:#0099cc; color:#FFFFFF;"
+                                             value="登出"/></a>
+                </td>
                 {% endif %}
             </tr>
         </table>
-        <hr style=" margin-top: auto; margin-bottom:auto"/>
+        <hr color="#0099cc" style=" margin-top: auto; margin-bottom: 2px;" size="3"/>
         <br/>
         <div id="toplogo" align="left">
             <table width="100%" border="0" cellspacing="1" cellpadding="1">
                 <tr>
-                    <td width="25%"><img src="/static/images/font1.jpg" width="251" height="99"/></td>
+                    <td width="25%" align="center"><p><img src="/static/images/logo_middle.png" width="358"
+                                                           height="98"/></p>
+                        <p align="center" style="font-family:'微软雅黑', '幼圆', '宋体'; font-size:14px; ">
+                            一个关于数据科学人工智能的分享咨询网站</p></td>
                     <td width="13%" align="left"><h2>&nbsp;</h2></td>
                     <td width="62%">
-                        <form method="get" action="/search">
-                            <p>
-                                <label for="search"></label><br/>
-                            </p>
+                        <form id="form3" name="form3" method="get" action="/search">
                             <p>
                                 {{searchForm.keyword}}
-                                <input type="submit" style="height:40; width:50; font-size:22px" value="搜索"/>
+                                <input name="searchbt" type="submit" id="searchbt"
+                                       style="height:40; width:50; font-size:24px;border:0;background: #0099cc; color:#FFFFFF;"
+                                       value="搜索"/>
                             </p>
-                            <p>生存分析 用户行为分析 可靠性统计 半参数模型 机器学习 </p>
+                            <p>大数据 用户行为分析 人工智能 试验设计 机器学习 </p>
                         </form>
                     </td>
                 </tr>
@@ -202,84 +265,182 @@
     <div>
     </div>
     <div id="tablehome">
-        <form action="/question/" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <table width="100%" border="0" align="left" cellpadding="0" cellspacing="5" style="border:1px solid #CCC  ">
-                <tr>
-                    <th height="52" colspan="3" align="left" style=" border-bottom:#999 solid 4px" font-size="25"><b
-                            class="textsize">最新咨询</b>
-                    </th>
-                    <td width="2%" rowspan="4" align="left">&nbsp;</td>
-                    <td width="59%" align="left" style=" border-bottom:#999 solid 4px"><b class="textsize">我要提问</b></td>
-                </tr>
-                <tr>
-                    <td width="20%" rowspan="3" align="left" valign="top">
-                        <ul>
-                            {% for question in latest_questions %}
-                            <!--{% if username == '' and not question.isPublic %}-->
-                            <!--{% else %}-->
-                            <li style=" border-bottom:1px dashed #000"><a href="/question/{{question.id}}">{{question.title|truncatechars:8}}
-                                {% if question.isSolved %}
-                                【已解决】
-                                {% endif %}
-                            </a></li>
-                            <br/>
-                            <!--{% endif %}-->
-                            {% endfor %}
-                            <li style=" border-bottom:1px dashed #000"><a href="/question/latest">&#8226; &#8226;
-                                &#8226;</a></li>
-                        </ul>
-                    </td>
 
-                    <td width="17%" rowspan="3" align="right" valign="top">
-                        <ul style=" list-style-type:none;margin:0px; padding:0px; margin-top:18px;">
-                            {% for question in latest_questions %}
-                            <!--{% if username == '' and not question.isPublic %}-->
-                            <!--{% else %}-->
-                            <li style=" border-bottom:1px dashed #000; ">{{question.publishDate|date:"Y-m-d H:i:s"}}
-                            </li>
-                            <br/>
-                            <!--{% endif %}-->
-                            {% endfor %}
-                            <li style=" border-bottom:1px dashed #000; list-style:none;"> &nbsp;</li>
-                        </ul>
-                    </td>
-                    <td width="2%" rowspan="3" align="" valign="top">&nbsp;</td>
-                    <td height="348" valign="top">
-                        <label for="{{form.title.id_for_label}}"><b>标题:&nbsp;&nbsp;&nbsp;</b></label>
-                        {{form.title}}
-                        &lt;50字 <br/>
-                        <p><b>描述：</b>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label for="{{form.attachedile}}">
-                                <img src="/static/images/filePDF.jpg" width="34"
-                                     height="32"/>附加文件</label>
-                            {{form.attachedFile}}
-                            <br/>
-                            {{form.description}}&lt;1000字<br/></p>
-                        <label for="{{form.keyword.id_for_label}}"><p><b>关键词:</b>&nbsp;&nbsp;</label>
-                        {{form.keyword}}
-                        {{form.isPublic}}
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td height="51" align="right">
-                        <input type="submit" value="发布" onclick="check()" style="width:30; height:22; font-size:18px"/>
-                    </td>
-                </tr>
-            </table>
-        </form>
+        <table width="100%" border="0" align="left" cellpadding="0" cellspacing="10"
+               style="border:1px solid #CCC; font-size: 16px;  ">
+            <tr>
+                <th width="26%" height="52" align="left" class="td2" font-size="25">
+                    <div>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="58%"><b class="textsize">最新问答</b></td>
+                                <td width="42%" align="right">
+                                    <a href="/question"><input type="button"
+                                                               style="width:30; height:24; font-size:18px;border:0; background: #99cc33; color: #FFFFFF;"
+                                                               value="我要提问"/></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </th>
+                <td width="26%" align="left" class="td2"><b class="textsize">最新案例</b></td>
+                <td width="25%" align="left" class="td2"><b class="textsize">最新课程</b></td>
+                <td colspan="2" align="left" class="td2"><b class="textsize">最新用户</b></td>
+            </tr>
+            <tr>
+                <td height="52" align="left" valign="top">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="1">
+                        {% for question in latest_questions %}
+                        <tr>
+                            <td width="83%" class=" td1">
+                                <div class="div-texthidden1"><a href="/question/{{question.id}}">{{question.title}}
+                                    {% if question.isSolved %}
+                                    【已解决】
+                                    {% endif %}</a></div>
+                            </td>
+                            <td width="17%" align="right" class=" td1"> {{question.publishDate|date:"m-d"}}</td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="2" class=" td3" valign="bottom">
+                                <div class="div-texthidden1"><a href="/question/latest">&#8226; &#8226; &#8226;</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td align="left" valign="top">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="1">
+                        {% for case in latest_cases %}
+                        <tr>
+                            <td width="83%" class="td1">
+                                <div class="div-texthidden1"><a href="/case/{{case.id}}/">{{case.title}}</a></div>
+                            </td>
+                            <td width="17%" class="td1" align="right">{{case.date|date:"m-d"}}</td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="2" class="td3" valign="bottom">
+                                <div class="div-texthidden1"><a href="/case">&#8226; &#8226; &#8226;</a></div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td align="left" valign="top">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="1">
+                        <tr>
+                            <td width="81%" class="td1">
+                                <div class="div-texthidden1"><a href="https://www.coursera.org/learn/machine-learning"
+                                                                target="_blank">编程入门</a></div>
+                            </td>
+                            <td width="19%" class="td1" align="right">10-15</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                <div class="div-texthidden1"><a href="https://www.coursera.org/learn/machine-learning"
+                                                                target="_blank">Machine Learning: Unsupervised
+                                    Learning</a></div>
+                            </td>
+                            <td class="td1" align="right">10-15</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                <div class="div-texthidden1">Intro to Data Science</div>
+                            </td>
+                            <td class="td1" align="right">10-15</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                <div class="div-texthidden1">Mobile Robot Design</div>
+                            </td>
+                            <td class="td1" align="right">10-15</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                <div class="div-texthidden1">Social and Information Network Analysis</div>
+                            </td>
+                            <td class="td1" align="right">10-15</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                <div class="div-texthidden1">商业数据分析</div>
+                            </td>
+                            <td class="td1" align="right">10-15</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                <div class="div-texthidden1">R Programming</div>
+                            </td>
+                            <td class="td1" align="right">10-15</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">
+                                <div class="div-texthidden1">Structural Equation Model and its Applications |
+                                    结构方程模型及其应用
+                                </div>
+                            </td>
+                            <td class="td1" align="right">10-15</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="td3" valign="bottom">
+                                <div class="div-texthidden1"><a href="courses.html">&#8226; &#8226; &#8226;</a></div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td colspan="2" align="left" valign="top">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="1">
+                        {% for newuser in latest_users %}
+                        <tr>
+                            <td width="65%" class="td1">
+                                <div class="div-texthidden1"><a href="/users/{{newuser.id}}">{{newuser.username}}：{{newuser.tag}}</a>
+                                </div>
+                            </td>
+                            <td width="35%" class="td1" align="right">{{newuser.date|date:"m-d"}}</td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="2" class="td3" valign="bottom">
+                                <div class="div-texthidden1"><a href="">&#8226; &#8226; &#8226;</a></div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
     </div>
 
+
+    <div style="clear:both"></div>
     <div id="bottom"
-         style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#333; color:#FFF"
+         style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#666666; color:#0099cc"
          align="center">
-        &nbsp; <a href="/index" class="style1">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
-                                                                         class="style1">最新咨询</a>&nbsp; |&nbsp; <a
-            href="/expert" class="style1">专家咨询</a>&nbsp; |&nbsp; <a href="/case" class="style1">案例分析</a>&nbsp;
-        |&nbsp; <a href="/consultion" class="style1">AI咨询</a>&nbsp; |&nbsp; <a href="/aboutus" class="style1">关于我们</a>&nbsp;
+
+        &nbsp; <a href="/index" class="style1" target="_blank">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
+                                                                                         class="style1"
+                                                                                         target="_blank">最新问答</a>&nbsp;
+        |&nbsp; <a href="/expert" class="style1" target="_blank">专家咨询</a>&nbsp; |&nbsp; <a href="/case"
+                                                                                           class="style1"
+                                                                                           target="_blank">案例分享</a>&nbsp;
+        |&nbsp; <a href="courses.html" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
+                                                                                                class="style1"
+                                                                                                target="_blank">关于我们</a>&nbsp;
+
     </div>
-    <br/>
+
+
+    <div id="beianxinxi">
+        <table width="100%" border="0" cellspacing="1" cellpadding="1" style="font-size:10px; background: #EAEAEA">
+            <tr>
+                <td align="center">&copy;2016 chashuiboshi.com, all rights reserved 自由度（上海）管理咨询有限公司</td>
+            </tr>
+            <tr>
+                <td align="center">沪ICP备 xxxxxxxxxxxxxx 号</td>
+            </tr>
+        </table>
+
+
+    </div>
 </div>
 </body>
 </html>

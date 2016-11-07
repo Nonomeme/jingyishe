@@ -33,13 +33,13 @@ def index(request):
     form = QuestionForm()
     searchForm = GlobalSearchForm()
     if username == '':
-        return render(request, 'home_new.html',
+        return render(request, 'home.html',
                       {'latest_questions': latest_questions, 'username': username, 'userId': userId, 'form': form,
                        'searchForm': searchForm, 'latest_cases': latest_cases, 'latest_users': latest_users})
 
     else:
         user = User.objects.get(username=username)
-        return render(request, 'home_new.html',
+        return render(request, 'home.html',
                       {'latest_questions': latest_questions, 'username': username, 'userId': userId, 'form': form,
                        'user': user,
                        'searchForm': searchForm, 'latest_cases': latest_cases, 'latest_users': latest_users})
@@ -51,10 +51,13 @@ def login(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = User.objects.filter(username__exact=username, password__exact=password)
+            if username.rfind('@') == -1:
+                user = User.objects.filter(username__exact=username, password__exact=password)
+            else:
+                user = User.objects.filter(mail__exact=username, password__exact=password)
             if user:
-                request.session['username'] = username
-                request.session['userId'] = User.objects.get(username__exact=username).id
+                request.session['username'] = user[0].username
+                request.session['userId'] = user[0].id
                 redirectUrl = request.session.get('redirect_after_login', '')
                 if redirectUrl == '':
                     return HttpResponseRedirect('/index/')
@@ -486,10 +489,17 @@ def case(request):
     userId = request.session.get('userId', '')
     cases = Case.objects.all()
     keyword = ''
-
     if 'keyword' in request.GET:  # GET是一个dict，使用文本框的name作为key
         keyword = request.GET['keyword']
         cases = cases.filter(Q(title__contains=keyword) | Q(keyword__contains=keyword) | Q(caseType=keyword))
+    if 'category' in request.GET:
+        category = request.GET['category']
+        if category != u'0':
+            direction = request.GET['direction']
+            caseType = category + '案例:' + direction
+            print caseType
+            cases = cases.filter(caseType__contains=caseType)
+
     cases = cases.order_by('date').reverse()[:10]
 
     form = SearchForm({'keyword': keyword, 'isToday': False, 'isHot': False})

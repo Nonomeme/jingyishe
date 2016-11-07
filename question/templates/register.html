@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>注册--精益社</title>
+    <title>注册--茶水博士</title>
     <style type="text/css">
         #nav {
             width: auto;
@@ -42,7 +42,7 @@
         }
 
         #homedaohang #hometop #toplogo {
-            height: 50px;
+            height: 60px;
             width: 98%;
             margin-top: 0px;
             margin-right: 0%;
@@ -86,14 +86,13 @@
         }
 
         body {
-            margin-left: 0px;
-            margin-top: 0px;
-            margin-right: 0px;
-            margin-bottom: 0px;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, "Times New Roman", "宋体";
         }
 
         #homedaohang #tablehome {
-            height: 600px;
+            height: 500px;
             width: 80%;
             margin-top: 0px;
             margin-right: 10%;
@@ -151,6 +150,10 @@
         }
 
         .textsize2 {
+            font-size: x-large;
+        }
+
+        .textsize3 {
             font-size: xx-large;
         }
 
@@ -158,10 +161,15 @@
             color: #FFF;
         }
 
-        .myfieldclass {
-            width: 60;
-            height: 40;
-            font-size: 16px
+        .font1 {
+            font-size: 18px;
+            font-family: "幼圆", "微软雅黑", "宋体"
+        }
+
+        .font2 {
+            font-size: 12px;
+            font-family: "宋体", "微软雅黑", "幼圆";
+            color: #99cc33;
         }
     </style>
     <script type="text/javascript">
@@ -169,15 +177,6 @@
             var i, args = MM_goToURL.arguments;
             document.MM_returnValue = false;
             for (i = 0; i < (args.length - 1); i += 2) eval(args[i] + ".location='" + args[i + 1] + "'");
-        }
-
-        function check() {
-            if (document.getElementById("id_password").value != document.getElementById("pwd").value) {
-                alert("两次密码不一致")
-                document.getElementById("id_password").value = "";
-                document.getElementById("pwd").value = "";
-            }
-            else document.forms[0].submit()
         }
     </script>
 </head>
@@ -188,76 +187,96 @@
         <div id="toplogo" align="left">
             <table width="100%" border="0" cellspacing="1" cellpadding="1">
                 <tr>
-                    <td width="13%"><img src="/static/images/font1.jpg" width="125" height="50"/></td>
-                    <td width="58%" align="left" c valign="middle"><b class="textsize2">用户注册</b></td>
-                    <td width="29%" align="right"><a href="/index">精益社首页</a> | <a href="/question">提问</a> | <a
-                            href="/login">登录</a> | <a href="/register">注册</a></td>
+                    <td width="13%"><a href="/index"><img src="/static/images/logo_small.png" width="183" height="52"/></a>
+                    </td>
+                    <td width="58%" align="left" c valign="middle"><b class="textsize3">用户注册</b></td>
+                    <td width="29%" align="right">
+                        <a href="/question">
+                            <input type="button"
+                                   style="width:30; height:24; font-size:20px;border:0; background: #99cc33; color:#FFFFFF;"
+                                   value="我要提问"/>
+                        </a>
+                        <a href="/login">
+                            <input type="button"
+                                   style="width:30; height:24; font-size:20px;border:0; background:#0099cc; color:#FFFFFF;"
+                                   value="登录"/>
+                        </a>
+                    </td>
                 </tr>
             </table>
             <br/>
         </div>
-        <hr/>
+        <hr color="#0099cc" style=" margin-top: auto; margin-bottom: 2px;" size="3"/>
     </div>
     <div id="tablehome" style="text-align:center" align="center">
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <p>&nbsp;</p>
-            <table width="449" height="346" border="0" align="center" cellpadding="0" cellspacing="10"
-                   style="border:1px solid #CCC">
+        <p>&nbsp;</p>
+        <table width="449" height="346" border="0" align="center" cellpadding="0" cellspacing="10"
+               style="background-color: #F6F6F6">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
                 <tr>
-                    <td height="53" colspan="2" align="center" valign="middle" class="border" bgcolor="#F6F6F6"><b
-                            class="textsize1">用户注册</b></td>
+                    <td height="53" colspan="2" align="center" valign="middle"><font
+                            style="font-family:'微软雅黑', '幼圆', '宋体'; font-size: 24px">欢迎加入茶水博士</font></td>
                 </tr>
                 <tr>
-                    <td width="123" height="40" align="left">
-                        <label for="{{form.username.id_for_label}}">用户名</label>
-                    </td>
+                    <td width="123" height="40" align="left"><font class="font1">用户名</font></td>
                     <td width="296" height="30" align="center">
                         {{form.username}}
                     </td>
                 </tr>
                 <tr>
-                    <td height="40" align="left">
-                        <label for="{{form.mail.id_for_label}}">邮箱</label>
-                    </td>
-                    <td width="296" height="30" align="center">
-                        {{form.mail}}
-                    </td>
+                    <td height="40" align="left"><font class="font1">邮箱</font></td>
+                    <td height="30" align="center">{{form.mail}}</td>
                 </tr>
                 <tr>
-                    <td height="40" align="left">
-                        <label for="{{form.password.id_for_label}}">输入密码</label>
-                    </td>
-                    <td width="296" height="30" align="center">
-                        {{form.password}}
-                    </td>
+                    <td height="40" align="left"><font class="font1">输入密码</font></td>
+                    <td height="30" align="center"> {{form.password}}</td>
                 </tr>
                 <tr>
-                    <td align="left"><span class="style"><label for="pwd">确认密码</label></td>
-                    <td width="296" height="30" align="center">
-                        <input type="password" id="pwd" size="32" maxlength="100"
-                               class=myfieldclass>
-                    </td>
+                    <td align="left"><font class="font1">确认密码</font></td>
+                    <td width="296" height="30" align="center"><label for="textfield4"></label>
+                        <input name="textfield4" type="password" id="textfield4" size="32" maxlength="100"
+                               style="width: 60; height: 40; font-size: 16px"/></td>
                 </tr>
                 <tr>
                     <td height="40" colspan="2" align="center" valign="middle" bgcolor="#F6F6F6">
-                        <input type="submit" name="button3" id="button3" onclick="check()"
-                               style="width:30; height:20; font-size:20px;border:0; background:#F6F6F6" value="注  册"/>
+                        <input type="submit"
+                               style="width:30; height:24; font-size:20px;border:0; background:#0099cc; color:#FFFFFF;"
+                               value="注  册"/>
                     </td>
                 </tr>
-            </table>
-            <p>&nbsp;</p>
-        </form>
+        </table>
+        <p>&nbsp;</p>
     </div>
     <div id="bottom"
-         style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#333; color:#FFF"
+         style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#666666; color:#0099cc"
          align="center">
-        &nbsp; <a href="/index" class="style1">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
-                                                                         class="style1">最新咨询</a>&nbsp; |&nbsp; <a
-            href="/expert" class="style1">专家咨询</a>&nbsp; |&nbsp; <a href="/case" class="style1">案例分析</a>&nbsp;
-        |&nbsp; <a href="/consultion" class="style1">AI咨询</a>&nbsp; |&nbsp; <a href="/aboutus" class="style1">关于我们</a>&nbsp;
+
+        &nbsp;&nbsp; <a href="/index" class="style1" target="_blank">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
+                                                                                         class="style1"
+                                                                                         target="_blank">最新问答</a>&nbsp;
+        |&nbsp; <a href="/expert" class="style1" target="_blank">专家咨询</a>&nbsp; |&nbsp; <a href="/case"
+                                                                                           class="style1"
+                                                                                           target="_blank">案例分享</a>&nbsp;
+        |&nbsp; <a href="courses.html" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
+                                                                                                class="style1"
+                                                                                                target="_blank">关于我们</a>&nbsp;
+
     </div>
-    <br/>
+
+
+    <div id="beianxinxi">
+        <table width="100%" border="0" cellspacing="1" cellpadding="1" style="font-size:10px; background: #EAEAEA">
+            <tr>
+                <td align="center">&copy;2016 chashuiboshi.com, all rights reserved 自由度（上海）管理咨询有限公司</td>
+            </tr>
+            <tr>
+                <td align="center">沪ICP备 xxxxxxxxxxxxxx 号</td>
+            </tr>
+        </table>
+
+
+    </div>
 </div>
 </body>
 </html>
