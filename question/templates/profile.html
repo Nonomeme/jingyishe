@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>我的账户--精益社</title>
+    <title>zhangsan@jys.com的主页--茶水博士</title>
     <style type="text/css">
         #nav {
             width: auto;
@@ -42,7 +42,7 @@
         }
 
         #homedaohang #hometop #toplogo {
-            height: 50px;
+            height: 60px;
             width: 98%;
             margin-top: 0px;
             margin-right: 0%;
@@ -52,16 +52,16 @@
             float: none;
         }
 
-        /*#homedaohang #登录注册 {*/
-            /*height: 30px;*/
-            /*width: 220px;*/
-            /*margin-top: 20px;*/
-            /*margin-right: 10px;*/
-            /*margin-bottom: 0px;*/
-            /*margin-left: 850px;*/
-            /*text-align: right;*/
-            /*font-size: x-large;*/
-        /*}*/
+        #homedaohang #登录注册 {
+            height: 30px;
+            width: 220px;
+            margin-top: 20px;
+            margin-right: 10px;
+            margin-bottom: 0px;
+            margin-left: 850px;
+            text-align: right;
+            font-size: x-large;
+        }
 
         #homedaohang table {
             font-size: medium;
@@ -72,24 +72,23 @@
             width: 100%;
         }
 
-        /*#homedaohang #hometop #toplogo #举手 {*/
-            /*height: 30px;*/
-            /*width: 50px;*/
-            /*margin-top: 35px;*/
-            /*margin-right: 100px;*/
-            /*margin-bottom: 35px;*/
-            /*margin-left: 300px;*/
-        /*}*/
+        #homedaohang #hometop #toplogo #举手 {
+            height: 30px;
+            width: 50px;
+            margin-top: 35px;
+            margin-right: 100px;
+            margin-bottom: 35px;
+            margin-left: 300px;
+        }
 
         #homedaohang #hometop #toplogo table tr td {
             font-size: medium;
         }
 
         body {
-            margin-left: 0px;
-            margin-top: 0px;
-            margin-right: 0px;
-            margin-bottom: 0px;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, "Times New Roman", "宋体";
         }
 
         #homedaohang #tablehome {
@@ -97,7 +96,7 @@
             width: 80%;
             margin-top: 0px;
             margin-right: 10%;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             margin-left: 10%;
         }
 
@@ -167,6 +166,21 @@
         .style1 {
             color: #FFF;
         }
+
+        .td1 {
+            border-bottom: 1px dashed #000;
+            height: 30px;
+        }
+
+        .td2 {
+            border-bottom: #99cc33 solid 2px
+        }
+
+        .td3 {
+            border-bottom: 1px dashed #fff;
+            height: 30px;
+        }
+
     </style>
 
 </head>
@@ -178,46 +192,65 @@
         <div id="toplogo" align="left">
             <table width="100%" border="0" cellspacing="1" cellpadding="1">
                 <tr>
-                    <td width="12%"><img src="/static/images/font1.jpg" width="125" height="50"/></td>
-                    <td width="59%" align="left"><b class="textsize3"><u>{{user.mail}}</u>的主页</b></td>
-                    <td width="29%" align="right"><a href="/index">精益社首页</a> | <a href="/question">提问</a> |
-                        {% if username == '' %}
-                        <a href="/login">登录</a> | <a href="/register">注册</a>
+                    <td width="12%"><a href="/index"><img src="/static/images/logo_small.png" width="183" height="52"/></a>
+                    </td>
+                    <td width="59%" align="left">
+                        <b class="textsize3">{{user.mail}}的主页</b>
+                        {% if isFollowing == 1%}
+                        <a href="follow/"><input type="button"
+                                                 style="width:30; height:24; font-size:20px;border:0; background: #0099cc; color:#FFFFFF;"
+                                                 value="关注Ta"/></a>
+                        {% elif isFollowing == 2%}
+                        <a href="follow/"><input type="button"
+                                                 style="width:30; height:24; font-size:20px;border:0; background: #0099cc; color:#FFFFFF;"
+                                                 value="取消关注"/></a>
                         {% else %}
-                        <a href="/users/{{userId}}/">{{username}}</a>  | <a href="/logout">注销</a>
+                        {% endif %}
+                    </td>
+                    <td width="29%" align="right">
+                        <a href="/question/"><input type="button" name="question" id="question"
+                                                    style="width:30; height:24; font-size:20px;border:0; background: #99cc33; color:#FFFFFF;"
+                                                    value="我要提问"/></a>
+                        {% if username == '' %}
+                        <a herf="/login"><input type="button" name="login" id="login"
+                                                style="width:30; height:24; font-size:20px;border:0; background: #0099cc; color:#FFFFFF;"
+                                                value="登陆"/></a>
+                        <a href="/register"><input type="button" name="register" id="register"
+                                                   style="width:30; height:24; font-size:20px;border:0; background:#0099cc; color:#FFFFFF;"
+                                                   value="注册"/></a>
+                        {% else %}
+                        <a href="/users/{{userId}}"><input type="button"
+                                                           style="width:30; height:24; font-size:20px;border:0; background: #0099cc; color:#FFFFFF;"
+                                                           value="{{username}}"/></a>
+                        <a href="/logout"><input type="button"
+                                                 style="width:30; height:24; font-size:20px;border:0; background:#0099cc; color:#FFFFFF;"
+                                                 value="登出"/></a>
                         {% endif %}
                     </td>
                 </tr>
             </table>
             <br/>
         </div>
-        <hr/>
+        <hr color="#0099cc" style=" margin-top: auto; margin-bottom: 2px;" size="3"/>
     </div>
     <div id="tablehome"><br/><br/>
-        <table width="100%" height="213" border="0" align="center" cellpadding="0" cellspacing="10"
+        <table width="100%" height="246" border="0" align="center" cellpadding="0" cellspacing="15"
                style="border:1px solid #CCC">
             <tr>
-                <td width="15%" height="132" align="center">
-                    <p><img src="/static/images/伟人.jpg" width="84" height="94"/></p>
+                <td width="15%" height="132" rowspan="2" align="center"><p><img src="/static/images/伟人3.jpg" width="84"
+                                                                                height="94"/></p>
                     <p>{{user.username}}&nbsp;</p>
                 </td>
-                <td colspan="2">
-                    <span class="textstyle">标签:</span>
+                <td height="109" colspan="2"><font color="#0099cc"><b class="textsize1">标签: </b> </font>
                     {{user.tag}}<br/>
-
                 </td>
-                <td><p>&nbsp;| 关注了 {{user.followingPerson.count}} 人</p>
+                <td rowspan="2"><p> &nbsp;| 关注了 {{user.followingPerson.count}} 人</p>
                     <p>&nbsp;| 关注者 {{followers}} 人</p>
-                    <p>&nbsp;| 关注了 {{user.followingQuestion.count}} 个问题</p></td>
+                    <p> &nbsp;| 关注了 {{user.followingQuestion.count}} 个问题</p></td>
             </tr>
             <tr>
-                <td align="center">
-                    {% if isFollowing == 1%}
-                    <a href="follow/"><input type="button" value="关注Ta"/></a>
-                    {% elif isFollowing == 2%}
-                    <a href="follow/"><input type="button" value="取消关注"/></a>
-                    {% else %}
-                    {% endif %}
+                <td colspan="2" align="right"><img src="/static/images/write.jpg" width="34" height="32"/><font
+                        style="font-size: 14px">编辑</font> &nbsp; &nbsp;
                 </td>
             </tr>
             <tr>
@@ -226,103 +259,87 @@
                 </td>
             </tr>
             <tr>
-                <td height="29" class="textstyle"><img src="/static/images/home1.jpg" width="34" height="29"/></td>
-                <td width="37%" align="center"><b class="textsize1"><a href="questions/" style="color:#000">提问
-                    {{questions.count}}</a></b></td>
-                <td width="23%" align="center"><b class="textsize1"><a href="answers/" style="color:#000">回答
-                    {{answerNum}}</a></b></td>
-                <td width="25%" align="center"><b class="textsize1"><a href="cases/" style="color:#000">收藏
-                    {{num}}</a></b></td>
+                <td height="29" class="textstyle"><b class="textsize1"><a href="sharings/" style="color:#000"
+                                                                          target="_blank">分享</a></b></td>
+                <td width="37%" align="center"><b class="textsize1"><a href="questions/" style="color:#000"
+                                                                       target="_blank">提问</a> {{questions.count}}</b>
+                </td>
+                <td width="23%" align="center"><b class="textsize1"><a href="answers/" style="color:#000"
+                                                                       target="_blank">回答</a> {{answerNum}}</b></td>
+                <td width="25%" align="center"><b class="textsize1"><a href="cases/" style="color:#000"
+                                                                       target="_blank">收藏</a> {{num}}</b></td>
             </tr>
 
         </table>
         <br/>
 
-        <table width="100%" border="0" cellspacing="10" cellpadding="0" style="border:1px solid #CCC">
+        <table width="100%" height="100" border="0" cellpadding="0" cellspacing="10" style="border:1px solid #CCC">
             <tr>
-                <td height="23" colspan="4"><b class="textsize1">回答 </b></td>
-            </tr>
-            <tr>
-                <td height="5" colspan="4">
-                    <hr noshade="noshade"/>
-                </td>
+                <td height="30" colspan="3" class="td2"><b class="textsize1">回答 </b></td>
             </tr>
             {% for answer in answers %}
             <tr>
-                <td width="7%" align="center">
-                    <img src="/static/images/thumbup1.jpg" width="27" height="28"/>{{answer.grade}}
-                </td>
-                <td colspan="2">
-                    <a href="/question/{{answer.question.id}}/">
-                        {{answer.question.title}}
+                <td width="7%" align="center"><img src="/static/images/thumbup1.jpg" width="27" height="28"/>24</td>
+                <td>
+                    <a href="/question/{{answer.question.id}}/">{{answer.question.title}}
                         {% if answer.qustion.isSolved %}
                         【已解决】
                         {% endif %}
                     </a>
                 </td>
-                <td width="30%">{{answer.publishDate|date:"Y-m-d H:i:s"}}</td>
+                <td width="30%"> {{answer.publishDate|date:"Y-m-d H:i"}}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td>
+                    Ta还很懒.没有任何回答.
+                </td>
             </tr>
             {% endfor %}
+            {% if answerNum > 3 %}
             <tr>
-                <td align="center"><a href="answers/">&#8230;</a></td>
-                <td colspan="2"><a href="answers/">&#8230;</a></td>
-                <td width="30%"><a href="answers/">&#8230;</a></td>
+                <td align="center">&nbsp; </td>
+                <td colspan="2"><a href="answers/">&#8226;&#8226;&#8226;</a></td>
             </tr>
+            {% endif %}
         </table>
         <br/>
         <table width="100%" border="0" cellspacing="10" cellpadding="0" style="border:1px solid #CCC">
             <tr>
-                <td colspan="4"><b class="textsize1">最新动态</b></td>
+                <td height="30" colspan="2" class="td2"><b class="textsize1">最新动态</b></td>
             </tr>
+            {% for item in following %}
             <tr>
-                <td height="5" colspan="4">
-                    <hr noshade="noshade"/>
+                <td valign="top">
+                    {% if item.type == 1 %}
+                    关注了问题 <a href="/question/{{item.url}}/">{{item.name}}</a>
+                    {% else %}
+                    {% if item.type == 2 %}
+                    关注了 <a href="/users/{{item.url}}/">{{item.name}}</a>
+                    {% else %}
+                    分享了案例 <a href="/case/{{item.url}}/">{{item.name}}</a>
+                    {% endif %}
+                    {% endif %}
+                </td>
+                <td width="30%" colspan="-1" valign="top">
+                    {{item.timeDelta}}天前
                 </td>
             </tr>
-
+            {% empty %}
             <tr>
-                <td colspan="3" valign="top">
-                    <ul>
-                        {% for item in following %}
-                        <li>
-                            {% if item.type == 1 %}
-                            关注了问题 <a href="/question/{{item.url}}/">{{item.name}}</a>
-                            {% else %}
-                                {% if item.type == 2 %}
-                                关注了 <a href="/users/{{item.url}}/">{{item.name}}</a>
-                                {% else %}
-                                分享了案例 <a href="/case/{{item.url}}/">{{item.name}}</a>
-                                {% endif %}
-                            {% endif %}
-                        </li>
-                        <br/>
-                        {% endfor %}
-                        <li>&#8230; </li>
-                    </ul>
-                </td>
-                <td width="54%">
-                    <ul style=" list-style-type:none;margin:0px; padding:0px; margin-top:18px;">
-                        {% for item in following %}
-                        <li> {{item.timeDelta}}天前</li>
-                        <br/>
-                        {% endfor %}
-                        <li>&nbsp;</li>
-                    </ul>
+                <td>
+                    Ta还很懒.没有任何更新.
                 </td>
             </tr>
+            {% endfor %}
         </table>
         <br/>
 
         {% if isFollowing == 0%}
         <table width="100%" border="0" cellspacing="10" cellpadding="0" style="border:1px solid #CCC">
             <tr>
-                <td height="21" colspan="7">
+                <td height="30" colspan="7" class="td2">
                     <b class="textsize1"> 给我的留言</b></td>
-            </tr>
-            <tr>
-                <td height="5" colspan="7">
-                    <hr noshade="noshade"/>
-                </td>
             </tr>
             {% if messages.count == 0 %}
             <tr>
@@ -333,8 +350,8 @@
             {% else %}
             {% for message in messages %}
             <tr>
-                <td height="18" colspan="4" valign="top">
-                    <a href="/users/{{message.commenter}}">{{message.commenter.username}}</a>
+                <td height="-18" colspan="4" valign="top">
+                    <a href="/users/{{message.commenter.id}}">{{message.commenter.username}}</a>
                     留言：{{message.message}}&#8230;</td>
                 <td width="10%" valign="top">
                     {% if message.isPublic %}
@@ -345,7 +362,7 @@
                 </td>
 
                 <td width="16%" height="5" valign="top">
-                    {{message.publishDate|date:"Y-m-d H:i:s"}}
+                    {{message.publishDate|date:"Y-m-d H:i"}}
                 </td>
                 <td width="15%" align="center" valign="top">
                     <a href="message/{{message.id}}/">查看留言</a></td>
@@ -360,7 +377,8 @@
                 <tr>
                     <td height="39" colspan="5" align="">
                         <b class="textsize1">给Ta留言</b>
-                        {{form.isPublic}}
+                        <input name="isPublic" type="radio" value="True" checked="checked"/>公开 &nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="isPublic" value="False"/>仅Ta可见
                     </td>
                 </tr>
                 <tr>
@@ -371,7 +389,9 @@
                 <tr>
                     <td height="21" colspan="5" align="right">
                         <input type="submit" name="send" id="send" value="发送"
-                               style="width:30; height:22; font-size:18px"/>
+                               style="width:30; height:24; font-size:18px;border:0; background: #0099cc; color:#FFFFFF;"/>
+                        <input type="button" name="cancel" id="cancel" value="取消"
+                               style="width:30; height:24; font-size:18px;border:0; background: #0099cc; color:#FFFFFF;"/>
                     </td>
                 </tr>
             </table>
@@ -379,14 +399,34 @@
         {% endif %}
     </div>
     <div id="bottom"
-         style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#333; color:#FFF"
+         style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#666666; color:#0099cc"
          align="center">
-        &nbsp; <a href="/index" class="style1">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
-                                                                         class="style1">最新咨询</a>&nbsp; |&nbsp; <a
-            href="/expert" class="style1">专家咨询</a>&nbsp; |&nbsp; <a href="/case" class="style1">案例分析</a>&nbsp;
-        |&nbsp; <a href="/consultion" class="style1">AI咨询</a>&nbsp; |&nbsp; <a href="/aboutus" class="style1">关于我们</a>&nbsp;
+
+        &nbsp; <a href="/index" class="style1" target="_blank">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
+                                                                                         class="style1"
+                                                                                         target="_blank">最新问答</a>&nbsp;
+        |&nbsp; <a href="/expert" class="style1" target="_blank">专家咨询</a>&nbsp; |&nbsp; <a href="/case"
+                                                                                           class="style1"
+                                                                                           target="_blank">案例分享</a>&nbsp;
+        |&nbsp; <a href="/courses" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
+                                                                                                class="style1"
+                                                                                                target="_blank">关于我们</a>&nbsp;
+
     </div>
-    <br/>
+
+
+    <div id="beianxinxi">
+        <table width="100%" border="0" cellspacing="1" cellpadding="1" style="font-size:10px; background: #EAEAEA">
+            <tr>
+                <td align="center">&copy;2016 chashuiboshi.com, all rights reserved 自由度（上海）管理咨询有限公司</td>
+            </tr>
+            <tr>
+                <td align="center">沪ICP备 xxxxxxxxxxxxxx 号</td>
+            </tr>
+        </table>
+
+
+    </div>
 </div>
 </body>
 </html>

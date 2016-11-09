@@ -3,8 +3,6 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-import datetime
-
 
 # from django.contrib.auth.models import User
 # from django.contrib.auth.models import AbstractUser
@@ -32,7 +30,7 @@ class User(models.Model):
                                              through_fields=('userFollower', 'followingPerson'))
     followingCase = models.ManyToManyField('question.Case', blank=True, through='CaseFollow')
 
-    gradeAnswer = models.ManyToManyField('question.Answer',blank=True)
+    gradeAnswer = models.ManyToManyField('question.Answer', blank=True)
 
     date = models.DateTimeField(auto_now_add=True)
 
@@ -83,8 +81,9 @@ class Message(models.Model):
     def __unicode__(self):
         return self.message
 
+
 class MessageAnswer(models.Model):
-    id = models.AutoField(primary_key=True,editable=False)
+    id = models.AutoField(primary_key=True, editable=False)
     answer = models.TextField()
     message = models.ForeignKey(Message)
     publishDate = models.DateTimeField(auto_now_add=True)
@@ -120,7 +119,7 @@ class Case(models.Model):
     dataDescription = models.TextField()
     solution = models.TextField()
     keyword = models.CharField(max_length=256)
-    source = models.CharField(max_length=256,blank=True)
+    source = models.CharField(max_length=256, blank=True)
     reference = models.TextField(blank=True)
     caseType = models.CharField(max_length=20)
     # domain = models.CharField(max_length=20)
@@ -138,3 +137,15 @@ class CaseFollow(models.Model):
     followingCase = models.ForeignKey(Case, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
 
+
+class Course(models.Model):
+    id = models.AutoField(primary_key=True, editable=False)
+    title = models.CharField(max_length=100)
+    university = models.CharField(max_length=50)
+    description = models.TextField()
+    publishDate = models.DateTimeField(auto_now_add=True)
+    language = models.IntegerField(default=1)   #1代表中文 2代表英文
+    courseDate = models.DateTimeField()
+    count = models.IntegerField(default=0)
+    link = models.CharField(max_length=100)
+    picture = models.ImageField(blank=True)

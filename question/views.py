@@ -6,17 +6,16 @@ import sys
 
 import pytz
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponse
 from django.http import StreamingHttpResponse
 from django.shortcuts import render, get_object_or_404
 
 from .forms import AnswerForm, UserForm, LoginForm, QuestionForm, MessageForm, SearchForm, GlobalSearchForm, \
-    MessageAnswerForm, QuestionForm2, CaseForm
-
-QuestionForm2
+    MessageAnswerForm, QuestionForm2, CaseForm, CourseSearchForm
 from .models import Question, Answer, User, Expert, Message, QuestionFollow, PersonFollow, Case, CaseFollow, \
-    MessageAnswer
+    MessageAnswer, Course
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -30,19 +29,22 @@ def index(request):
     latest_questions = Question.objects.order_by("publishDate").reverse()[0:8]
     latest_cases = Case.objects.order_by("date").reverse()[0:8]
     latest_users = User.objects.order_by("date").reverse()[0:8]
+    latest_courses = Course.objects.order_by("publishDate").reverse()[0:8]
     form = QuestionForm()
     searchForm = GlobalSearchForm()
     if username == '':
         return render(request, 'home.html',
                       {'latest_questions': latest_questions, 'username': username, 'userId': userId, 'form': form,
-                       'searchForm': searchForm, 'latest_cases': latest_cases, 'latest_users': latest_users})
+                       'searchForm': searchForm, 'latest_cases': latest_cases, 'latest_users': latest_users,
+                       'courses': latest_courses})
 
     else:
         user = User.objects.get(username=username)
         return render(request, 'home.html',
                       {'latest_questions': latest_questions, 'username': username, 'userId': userId, 'form': form,
                        'user': user,
-                       'searchForm': searchForm, 'latest_cases': latest_cases, 'latest_users': latest_users})
+                       'searchForm': searchForm, 'latest_cases': latest_cases, 'latest_users': latest_users,
+                       'courses': latest_courses})
 
 
 def login(request):
@@ -128,7 +130,7 @@ def detail(request, question_id):
     keywords = question.keyword.split(';')
     q = Q()
     for keyword in keywords:
-        q.add(Q(keyword__contains=keyword), Q.OR)
+        q.add(Q(keyword__icontains=keyword), Q.OR)
     relatedQuestions = Question.objects.filter(q).exclude(id=question_id)
     return render(request, 'detail.html',
                   {'username': username, 'userId': userId, 'question': question, 'answers': answers,
@@ -250,7 +252,7 @@ def latestQuestion(request, type="0"):
     if 'keyword' in request.GET:  # GET是一个dict，使用文本框的name作为key
         keyword = request.GET['keyword']
         questions = questions.filter(
-            Q(title__contains=keyword) | Q(keyword__contains=keyword))
+            Q(title__icontains=keyword) | Q(keyword__icontains=keyword))
         # if 'hasPic' in request.GET:
         #     hasPic = True
         #     questions = questions.exclude(attachedFile='')
@@ -263,7 +265,27 @@ def latestQuestion(request, type="0"):
     if 'isHot' in request.GET:
         isHot = True
 
-    questions = questions[:10]
+    page_size = 10  # 每页显示的条数
+    after_range_num = 5
+    before_range_num = 6
+    try:
+        page = int(request.GET.get("page", 1))
+        if page < 1:
+            page = 1
+    except ValueError:
+        page = 1
+    paginator = Paginator(questions, page_size)  # 分页器
+    try:
+        questions = paginator.page(page)
+    except(EmptyPage, InvalidPage, PageNotAnInteger):
+        questions = paginator.page(1)
+    # if page >= after_range_num:
+    #     page_range = paginator.page_range[page-after_range_num:page+before_range_num] #页码的列表
+    # else:
+    #     page_range = paginator.page_range[0:int(page)+before_range_num]
+
+
+    # questions = questions[:10]
 
     form = SearchForm({'keyword': keyword, 'isToday': isToday, 'isHot': isHot})
     if not form.is_valid():
@@ -351,7 +373,7 @@ def userInfo(request, user_id):
     while len(newslist) > 5:
         newslist.remove(len(newslist) - 1)
 
-    print newslist
+    # print newslist
     # for question in followingQuestions:
     #     for person in followingPersons:
     #         if question.date < person.date:
@@ -430,7 +452,8 @@ def expert(request):
     keyword = ''
     if 'keyword' in request.GET:  # GET是一个dict，使用文本框的name作为key
         keyword = request.GET['keyword']
-        experts = experts.filter(Q(name__contains=keyword) | Q(university__contains=keyword) | Q(tag__contains=keyword))
+        experts = experts.filter(
+            Q(name__icontains=keyword) | Q(university__icontains=keyword) | Q(tag__icontains=keyword))
 
     experts = experts[:10]
 
@@ -453,9 +476,9 @@ def leaveMessage(request, user_id):
             message.message = form.cleaned_data['message']
             message.commenter = User.objects.get(username=username)
             message.receiver = User.objects.get(id=user_id)
-            message.publishDate = datetime.datetime.now(datetime.datetime.now)
+            message.publishDate = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
             message.isPublic = True
-            if form.cleaned_data['isPublic'] == '2':
+            if request.POST['isPublic'] == 'False':
                 message.isPublic = False
             message.save()
 
@@ -491,14 +514,14 @@ def case(request):
     keyword = ''
     if 'keyword' in request.GET:  # GET是一个dict，使用文本框的name作为key
         keyword = request.GET['keyword']
-        cases = cases.filter(Q(title__contains=keyword) | Q(keyword__contains=keyword) | Q(caseType=keyword))
+        cases = cases.filter(Q(title__icontains=keyword) | Q(keyword__icontains=keyword) | Q(caseType=keyword))
     if 'category' in request.GET:
         category = request.GET['category']
         if category != u'0':
             direction = request.GET['direction']
             caseType = category + '案例:' + direction
             print caseType
-            cases = cases.filter(caseType__contains=caseType)
+            cases = cases.filter(caseType__icontains=caseType)
 
     cases = cases.order_by('date').reverse()[:10]
 
@@ -625,7 +648,7 @@ def relatedQuestions(request, question_id):
     keywords = re.split(r'[,;]', question.keyword)
     q = Q()
     for keyword in keywords:
-        q.add(Q(keyword__contains=keyword), Q.OR)
+        q.add(Q(keyword__icontains=keyword), Q.OR)
     relatedQuestions = Question.objects.filter(q).exclude(id=question_id)
 
     return render(request, 'related_question.html',
@@ -671,9 +694,17 @@ def updateQuestion(request, question_id):
             question.isPublic = False
         else:
             question.isPublic = True
-        if question.attachedFile == '':
-            question.attachedFile = request.FILES.get('attachedFile', None)
+
+        attachedFile = request.FILES.get('attachedFile', None)
+        if attachedFile:
+            question.attachedFile = attachedFile
+
         question.attachedDescription = request.POST['attachedDescription']
+
+        if request.POST['isSolved'] == 'True':
+            question.isSolved = True
+        else:
+            question.isSolved = False
         question.save()
         return HttpResponseRedirect('/users/' + str(user.id) + '/questions/')
 
@@ -716,7 +747,7 @@ def updateQuestion(request, question_id):
         searchForm = GlobalSearchForm()
         return render(request, 'updateQuestion.html',
                       {'username': username, 'userId': userId, 'question': question, 'form': form,
-                       'searchForm': searchForm})
+                       'searchForm': searchForm, 'isSolved': question.isSolved})
 
 
 def search(request):
@@ -725,10 +756,10 @@ def search(request):
     keyword = ''
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
-        cases = Case.objects.filter(Q(title__contains=keyword) | Q(keyword__contains=keyword))[:5]
-        questions = Question.objects.filter(Q(title__contains=keyword) | Q(keyword__contains=keyword)).order_by(
+        cases = Case.objects.filter(Q(title__icontains=keyword) | Q(keyword__icontains=keyword))[:5]
+        questions = Question.objects.filter(Q(title__icontains=keyword) | Q(keyword__icontains=keyword)).order_by(
             'publishDate').reverse()[:5]
-        experts = Expert.objects.filter(tag__contains=keyword)[:5]
+        experts = Expert.objects.filter(tag__icontains=keyword)[:5]
         searchForm = GlobalSearchForm({'keyword': keyword})
         return render(request, 'globalSearch.html',
                       {'username': username, 'userId': userId, 'questions': questions, 'experts': experts,
@@ -802,3 +833,59 @@ def addCase(request):
         form = CaseForm()
         # print form
     return render(request, 'caseShare.html', {'username': username, 'userId': userId, 'form': form})
+
+
+def courses(request):
+    username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
+    courses = Course.objects.all()
+    keyword = ''
+    data = {}
+
+    if 'keyword' in request.GET:  # GET是一个dict，使用文本框的name作为key
+        keyword = request.GET['keyword']
+        courses = courses.filter(
+            Q(title__icontains=keyword) | Q(description__icontains=keyword) | Q(university__icontains=keyword))
+        data.update({'keyword': keyword})
+
+    if 'language' in request.GET:
+        if request.GET['language'] == '1':
+            courses = courses.filter(language=1)
+            language = '1'
+        elif request.GET['language'] == '2':
+            courses = courses.filter(language=2)
+            language = '2'
+        data.update({'language': language})
+
+    if 'time' in request.GET:
+        today = datetime.date.today()
+        print today
+        if request.GET['time'] == '1':
+            courses = courses.filter(
+                Q(publishDate__year=today.year) & Q(publishDate__month=today.month) & Q(publishDate__day=today.day))
+            time = '1'
+        elif request.GET['time'] == '2':
+            courses = courses.filter(Q(courseDate__gt=(today - datetime.timedelta(7))) & Q(courseDate__lte=today))
+            time = '2'
+        elif request.GET['time'] == '3':
+            courses = courses.filter(Q(courseDate__lt=(today + datetime.timedelta(7))) & Q(courseDate__gt=today))
+            time = '3'
+        data.update({'time': time})
+
+    if 'order' in request.GET:
+        if request.GET['order'] == '1':
+            courses = courses.order_by('publishDate').reverse()
+            order = '1'
+        if request.GET['order'] == '2':
+            courses = courses.order_by('courseDate').reverse()
+            order = '2'
+        if request.GET['order'] == '3':
+            courses = courses.order_by('count').reverse()
+            order = '3'
+        data.update({'order': order})
+
+    form = CourseSearchForm(data)
+    if not form.is_valid():
+        form = CourseSearchForm()
+
+    return render(request, 'courses.html', {'username': username, 'userId': userId, 'form': form, 'courses': courses})

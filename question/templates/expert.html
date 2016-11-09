@@ -194,31 +194,31 @@
             for (i = 0; i < (args.length - 1); i += 2) eval(args[i] + ".location='" + args[i + 1] + "'");
         }
     </script>
-    <script language="javascript">
-        function CaseCategory() {
-            with (document.myForm) {
-                var categorys = new Array();
-                categorys["0"] = ["--请选择所在研究方向--"];
-                categorys["统计学"] = ["抽样调查", "回归分析", "概率论与数理统计", "统计学", "最优化理论/运筹学", "数据分析", "R软件", "统计推断", "时间序列分析", "应用多元分析", "随机过程", "试验设计", "假设检验", "统计模型", "统计学习理论", "机器学习", "数据采集方法", "其他"];
-                categorys["计算机科学"] = ["数据结构", "算法设计与分析", "面向对象设计", "C/C++", "Python", "Delphi", "PHP", "Java", "编程基础", "计算机系统", "操作系统", "数据库", "软件工程", "数据科学", "机器学习", "计算结构", "自然语言处理", "人工智能", "数据挖掘", "计算机图形学", "图像识别", "虚拟现实", "计算机视觉", "数据可视化", "其他"];
-                categorys["人工智能"] = ["Knowledge-Based Artificial Intelligence", "Artificial Intelligence", "Computational Creativity", "Cognitive Science", "Cognitive Systems", "Cognitive Model Science & Technology", "Robot Intelligence", "其他"];
-                categorys["数据科学"] = ["数值线性分析", "数值优化", "随机方法", "统计建模", "现代应用统计", "统计学习", "数据挖掘", "海量数据分析", "大数据应用", "大型软件开发", "并行计算", "社交网络分析", "并行和分布式数据挖掘", "其他"];
-                categorys["机器人技术"] = ["Vision Sensors", "Sensing and Sensors", "Geometry-based Methods in Vision", "Computer Graphics", "Feedback Control Systems", "Mechanics of Manipulation", "Manipulation Algorithms", "Mobile Robot Design", "Robot Ethics", "Robotic Motion Planning", "Human-Robot Interaction", "Kinematics, Dynamic Systems and Control", "Adaptive Control and Reinforcement Learning", "其他"];
+    <!--<script language="javascript">-->
+    <!--function CaseCategory() {-->
+    <!--with (document.myForm) {-->
+    <!--var categorys = new Array();-->
+    <!--categorys["0"] = ["&#45;&#45;请选择所在研究方向&#45;&#45;"];-->
+    <!--categorys["统计学"] = ["抽样调查", "回归分析", "概率论与数理统计", "统计学", "最优化理论/运筹学", "数据分析", "R软件", "统计推断", "时间序列分析", "应用多元分析", "随机过程", "试验设计", "假设检验", "统计模型", "统计学习理论", "机器学习", "数据采集方法", "其他"];-->
+    <!--categorys["计算机科学"] = ["数据结构", "算法设计与分析", "面向对象设计", "C/C++", "Python", "Delphi", "PHP", "Java", "编程基础", "计算机系统", "操作系统", "数据库", "软件工程", "数据科学", "机器学习", "计算结构", "自然语言处理", "人工智能", "数据挖掘", "计算机图形学", "图像识别", "虚拟现实", "计算机视觉", "数据可视化", "其他"];-->
+    <!--categorys["人工智能"] = ["Knowledge-Based Artificial Intelligence", "Artificial Intelligence", "Computational Creativity", "Cognitive Science", "Cognitive Systems", "Cognitive Model Science & Technology", "Robot Intelligence", "其他"];-->
+    <!--categorys["数据科学"] = ["数值线性分析", "数值优化", "随机方法", "统计建模", "现代应用统计", "统计学习", "数据挖掘", "海量数据分析", "大数据应用", "大型软件开发", "并行计算", "社交网络分析", "并行和分布式数据挖掘", "其他"];-->
+    <!--categorys["机器人技术"] = ["Vision Sensors", "Sensing and Sensors", "Geometry-based Methods in Vision", "Computer Graphics", "Feedback Control Systems", "Mechanics of Manipulation", "Manipulation Algorithms", "Mobile Robot Design", "Robot Ethics", "Robotic Motion Planning", "Human-Robot Interaction", "Kinematics, Dynamic Systems and Control", "Adaptive Control and Reinforcement Learning", "其他"];-->
 
-                var value = category.value;
-                direction.options.length = 0;
-                var option;
-                for (i = 0; i < categorys[value].length; i++) {
-                    option = new Option(categorys[value][i], categorys[value][i]);
-                    direction.options.add(option);
-                }
-                if (category.value == "0")
-                    direction.disabled = true;
-                else
-                    direction.disabled = false;
-            }
-        }
-    </script>
+    <!--var value = category.value;-->
+    <!--direction.options.length = 0;-->
+    <!--var option;-->
+    <!--for (i = 0; i < categorys[value].length; i++) {-->
+    <!--option = new Option(categorys[value][i], categorys[value][i]);-->
+    <!--direction.options.add(option);-->
+    <!--}-->
+    <!--if (category.value == "0")-->
+    <!--direction.disabled = true;-->
+    <!--else-->
+    <!--direction.disabled = false;-->
+    <!--}-->
+    <!--}-->
+    <!--</script>-->
 </head>
 
 <body>
@@ -256,33 +256,33 @@
         </div>
         <hr color="#0099cc" style=" margin-top: auto; margin-bottom: 2px;" size="3"/>
     </div>
-    <div>
-        <table width="100%" border="0" cellspacing="3" cellpadding="1">
-            <tr>
-                <td height="40px" bgcolor="#F4F4F4">
-                    <form method="post" action="" name="myForm">
-                        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;专家选择：
-                            <select name="category" onChange="CaseCategory()">
-                                <option value="0">--请选择所属领域--</option>
-                                <option value="统计学">统计学</option>
-                                <option value="计算机科学">计算机科学</option>
-                                <option value="人工智能">人工智能</option>
-                                <option value="数据科学">数据科学</option>
-                                <option value="机器人技术">机器人技术</option>
+    <!--<div>-->
+    <!--<table width="100%" border="0" cellspacing="3" cellpadding="1">-->
+    <!--<tr>-->
+    <!--<td height="40px" bgcolor="#F4F4F4">-->
+    <!--<form method="post" action="" name="myForm">-->
+    <!--<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;专家选择：-->
+    <!--<select name="category" onChange="CaseCategory()">-->
+    <!--<option value="0">&#45;&#45;请选择所属领域&#45;&#45;</option>-->
+    <!--<option value="统计学">统计学</option>-->
+    <!--<option value="计算机科学">计算机科学</option>-->
+    <!--<option value="人工智能">人工智能</option>-->
+    <!--<option value="数据科学">数据科学</option>-->
+    <!--<option value="机器人技术">机器人技术</option>-->
 
 
-                            </select>
-                            &gt;
-                            <select name="direction">
-                                <option>--请选择所在研究方向--</option>
-                            </select>
+    <!--</select>-->
+    <!--&gt;-->
+    <!--<select name="direction">-->
+    <!--<option>&#45;&#45;请选择所在研究方向&#45;&#45;</option>-->
+    <!--</select>-->
 
-                        </div>
-                    </form>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <!--</div>-->
+    <!--</form>-->
+    <!--</td>-->
+    <!--</tr>-->
+    <!--</table>-->
+    <!--</div>-->
     <div id="tablehome">
         <div id="tableinfo" class="div1">
             <table width="90%" border="0" cellspacing="1" cellpadding="1" style="border-right:#CCC solid 8px">
@@ -384,11 +384,13 @@
                 <tr>
                     <td width="30" align="center" valign="bottom">
                         <img src="/static/images/star1.jpg" alt="star1" width="27"
-                                                                       height="26"/>
+                             height="26"/>
                     </td>
                     <td width="153" valign="bottom" style=" border-bottom:1px dashed #000"><a
                             href="{{expert.link}}" title="汤银才" target="_blank">{{expert.name}}</a></td>
-                    <td width="226" valign="bottom" height="30" style=" border-bottom:1px dashed #000">{{expert.university}}</td>
+                    <td width="226" valign="bottom" height="30" style=" border-bottom:1px dashed #000">
+                        {{expert.university}}
+                    </td>
                     <td width="518" valign="bottom" style=" border-bottom:1px dashed #000" align="left">
                         <div class="test">{{expert.tag}}</div>
                     </td>
@@ -463,15 +465,15 @@
          style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#666666; color:#0099cc"
          align="center">
 
-        &nbsp;<a href="/index" class="style1" target="_blank">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
+        &nbsp; <a href="/index" class="style1" target="_blank">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
                                                                                          class="style1"
                                                                                          target="_blank">最新问答</a>&nbsp;
         |&nbsp; <a href="/expert" class="style1" target="_blank">专家咨询</a>&nbsp; |&nbsp; <a href="/case"
                                                                                            class="style1"
                                                                                            target="_blank">案例分享</a>&nbsp;
-        |&nbsp; <a href="courses.html" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
-                                                                                                class="style1"
-                                                                                                target="_blank">关于我们</a>
+        |&nbsp; <a href="/courses" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
+                                                                                            class="style1"
+                                                                                            target="_blank">关于我们</a>&nbsp;
     </div>
 
 

@@ -183,9 +183,9 @@
                     </td>
                     <td width="59%" align="left"><b class="textsize2">案例分析</b></td>
                     <td width="29%" align="right">
-                        <a href="/question/"><input type="button" name="question" id="question"
-                                                    style="width:30; height:24; font-size:20px;border:0; background: #99cc33; color:#FFFFFF;"
-                                                    value="我要提问"/></a>
+                        <a href="/addcase/"><input type="button"
+                                                   style="width:30; height:24; font-size:20px;border:0; background: #99cc33; color:#FFFFFF;"
+                                                   value="分享案例"/></a>
                         {% if username == '' %}
                         <a herf="/login"><input type="button" name="login" id="login"
                                                 style="width:30; height:24; font-size:20px;border:0; background: #0099cc; color:#FFFFFF;"
@@ -218,53 +218,71 @@
         <table width="100%" height="766" border="0" align="center" cellpadding="0" cellspacing="10"
                style="border:1px solid #CCC  ">
             <tr>
-                <th width="100%" height="72" align="center" class="textsize2" style=" border-bottom:#99cc33 solid 2px">
+                <th width="100%" height="72" align="center" colspan="2" class="textsize2"
+                    style=" border-bottom:#99cc33 solid 2px">
                     {{case.title}}
                 </th>
             </tr>
             <tr>
                 <td height="12" align="left"><b class="textsize1">问题描述</b></td>
+                <td align="center">
+                    {% if not case.attachedDescription == '' %}
+                    <a href="attachedFile/">
+                        <img src="/static/images/download.jpg" width="32" height="29"/>
+                        <b class="textsize3">{{case.attachedDescription|cut:"./"}}</b>
+                    </a>
+                    {% endif %}
+                </td>
             </tr>
             <tr>
-                <td height="80" align="left" valign="top" style=" border-bottom:#CCC solid 1px"><p
+                <td height="80" align="left" valign="top" colspan="2" style=" border-bottom:#CCC solid 1px"><p
                         style="text-indent:2em;">
                     {{case.questionDescription}}</td>
             </tr>
             <tr>
-                <td height="12" align="left"><b class="textsize1">数据描述</b></td>
+                <td height="12" align="left" colspan="2"><b class="textsize1">数据描述</b></td>
             </tr>
             <tr>
-                <td height="23" align="left" valign="top" style=" border-bottom:#CCC solid 1px"><p
+                <td height="23" align="left" valign="top" colspan="2" style=" border-bottom:#CCC solid 1px"><p
                         style="text-indent:2em;">
                     {{case.dataDescription}}
                 </td>
             </tr>
             <tr>
                 <td height="12" align="left"><b class="textsize1">分析与解决</b></td>
-            </tr>
-            <tr>
-                <td height="100" align="left" valign="top" style=" border-bottom:#CCC solid 1px">
-                     {{case.solution|linebreaks}}
+                <td align="center">
+                    {% if not case.attachedSolution == '' %}
+                    <a href="attachedFile/">
+                        <img src="/static/images/download.jpg" width="32" height="29"/>
+                        <b class="textsize3">{{case.attachedSolution|cut:"./"}}</b>
+                    </a>
+                    {% endif %}
                 </td>
             </tr>
             <tr>
-                <td height="30" align="left" valign="top" style=" border-bottom:#CCC solid 1px"><b class="textsize1">关键词：</b>
+                <td height="100" align="left" valign="top" colspan="2" style=" border-bottom:#CCC solid 1px">
+                    {{case.solution|linebreaks}}
+                </td>
+            </tr>
+            <tr>
+                <td height="30" align="left" valign="top" colspan="2" style=" border-bottom:#CCC solid 1px"><b
+                        class="textsize1">关键词：</b>
                     {{case.keyword|linebreaks}}
                 </td>
             </tr>
             <tr>
-                <td height="12" align="left"><b class="textsize1">案例来源</b></td>
+                <td height="12" align="left" colspan="2"><b class="textsize1">案例来源</b></td>
             </tr>
             <tr>
-                <td height="13" align="left" valign="top" style=" border-bottom:#CCC solid 1px"><p
+                <td height="13" align="left" valign="top" colspan="2" style=" border-bottom:#CCC solid 1px"><p
                         style="text-indent:2em;">{{case.source|linebreaks}}</p></td>
             </tr>
             <tr>
-                <td height="12" align="left" valign="top"><b class="textsize1">相关参考</b></td>
+                <td height="12" align="left" valign="top" colspan="2"><b class="textsize1">相关参考</b></td>
             </tr>
             <tr>
-                <td height="44" align="left" valign="top">
-                     {{case.reference|linebreaks}}
+                <td height="44" align="left" valign="top" colspan="2">
+                    {{case.reference|linebreaks}}
                 </td>
             </tr>
         </table>
@@ -281,7 +299,7 @@
         |&nbsp; <a href="/expert" class="style1" target="_blank">专家咨询</a>&nbsp; |&nbsp; <a href="/case"
                                                                                            class="style1"
                                                                                            target="_blank">案例分享</a>&nbsp;
-        |&nbsp; <a href="courses.html" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
+        |&nbsp; <a href="/courses" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
                                                                                                 class="style1"
                                                                                                 target="_blank">关于我们</a>&nbsp;
 

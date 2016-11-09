@@ -6,6 +6,9 @@ from models import User
 
 CHOICES_FOR_ANSWER = (('1', u'公开'), ('2', u'仅提问者可见'))
 CHOICES_FOR_QUESTION = (('1', u'公开'), ('2', u'仅注册用户可见'))
+CHOICES_FOR_LANGUAGE = (('1', u'中文'), ('2', u'英文'))
+CHOICES_FOR_TIME = (('1', u'今天'), ('2', u'过去7天'), ('3', u'未来7天'))
+CHOICES_FOR_ORDER = (('1', u'最新发布'), ('2', u'开课时间'), ('3', u'热度'))
 CHOICES_FOR_MESSAGE = (('1', u'公开'), ('2', u'仅Ta可见'))
 CHOICES_FOR_UPDATE = (('1', u'待解决'), ('2', u'已解决'))
 CHOICES_FOR_CASE = (
@@ -73,13 +76,23 @@ class SearchForm(forms.Form):
 
 class MessageForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea(attrs={'cols': '148', 'rows': '8'}))
-    isPublic = forms.ChoiceField(choices=CHOICES_FOR_MESSAGE, widget=forms.RadioSelect, initial='1')
+    # isPublic = forms.ChoiceField(choices=CHOICES_FOR_MESSAGE, widget=forms.RadioSelect, initial='1')
 
 
 class GlobalSearchForm(forms.Form):
     keyword = forms.CharField(required=False,
                               widget=forms.TextInput(
                                   attrs={'style': 'width:50;height:50;font-size:22px', 'size': '35'}))
+
+
+class CourseSearchForm(forms.Form):
+    keyword = forms.CharField(required=False,
+                              widget=forms.TextInput(
+                                  attrs={'style': 'width: 60; height: 40; font-size: 18px', 'size': '60',
+                                         'placeholder': '请输入关键词'}))
+    language = forms.ChoiceField(choices=CHOICES_FOR_LANGUAGE, widget=forms.RadioSelect,required=False)
+    time = forms.ChoiceField(choices=CHOICES_FOR_TIME, widget=forms.RadioSelect,required=False)
+    order = forms.ChoiceField(choices=CHOICES_FOR_ORDER, widget=forms.RadioSelect,required=False)
 
 
 class MessageAnswerForm(forms.Form):

@@ -328,62 +328,18 @@
                 </td>
                 <td align="left" valign="top">
                     <table width="100%" border="0" cellspacing="0" cellpadding="1">
+                        {% for course in courses %}
                         <tr>
                             <td width="81%" class="td1">
-                                <div class="div-texthidden1"><a href="https://www.coursera.org/learn/machine-learning"
-                                                                target="_blank">编程入门</a></div>
+                                <div class="div-texthidden1"><a href="{{course.link}}"
+                                                                target="_blank">{{course.title}}</a></div>
                             </td>
-                            <td width="19%" class="td1" align="right">10-15</td>
+                            <td width="19%" class="td1" align="right">{{course.publishDate|date:"m-d"}}</td>
                         </tr>
-                        <tr>
-                            <td class="td1">
-                                <div class="div-texthidden1"><a href="https://www.coursera.org/learn/machine-learning"
-                                                                target="_blank">Machine Learning: Unsupervised
-                                    Learning</a></div>
-                            </td>
-                            <td class="td1" align="right">10-15</td>
-                        </tr>
-                        <tr>
-                            <td class="td1">
-                                <div class="div-texthidden1">Intro to Data Science</div>
-                            </td>
-                            <td class="td1" align="right">10-15</td>
-                        </tr>
-                        <tr>
-                            <td class="td1">
-                                <div class="div-texthidden1">Mobile Robot Design</div>
-                            </td>
-                            <td class="td1" align="right">10-15</td>
-                        </tr>
-                        <tr>
-                            <td class="td1">
-                                <div class="div-texthidden1">Social and Information Network Analysis</div>
-                            </td>
-                            <td class="td1" align="right">10-15</td>
-                        </tr>
-                        <tr>
-                            <td class="td1">
-                                <div class="div-texthidden1">商业数据分析</div>
-                            </td>
-                            <td class="td1" align="right">10-15</td>
-                        </tr>
-                        <tr>
-                            <td class="td1">
-                                <div class="div-texthidden1">R Programming</div>
-                            </td>
-                            <td class="td1" align="right">10-15</td>
-                        </tr>
-                        <tr>
-                            <td class="td1">
-                                <div class="div-texthidden1">Structural Equation Model and its Applications |
-                                    结构方程模型及其应用
-                                </div>
-                            </td>
-                            <td class="td1" align="right">10-15</td>
-                        </tr>
+                        {% endfor %}
                         <tr>
                             <td colspan="2" class="td3" valign="bottom">
-                                <div class="div-texthidden1"><a href="courses.html">&#8226; &#8226; &#8226;</a></div>
+                                <div class="div-texthidden1"><a href="/courses">&#8226; &#8226; &#8226;</a></div>
                             </td>
                         </tr>
                     </table>
@@ -422,9 +378,9 @@
         |&nbsp; <a href="/expert" class="style1" target="_blank">专家咨询</a>&nbsp; |&nbsp; <a href="/case"
                                                                                            class="style1"
                                                                                            target="_blank">案例分享</a>&nbsp;
-        |&nbsp; <a href="courses.html" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
-                                                                                                class="style1"
-                                                                                                target="_blank">关于我们</a>&nbsp;
+        |&nbsp; <a href="/courses" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
+                                                                                            class="style1"
+                                                                                            target="_blank">关于我们</a>&nbsp;
 
     </div>
 

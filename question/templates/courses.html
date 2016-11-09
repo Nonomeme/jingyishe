@@ -1,8 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>最新问答--茶水博士</title>
+    <title>最新课程--茶水博士</title>
     <style type="text/css">
         #nav {
             width: auto;
@@ -67,7 +68,7 @@
         }
 
         #homedaohang {
-            height: 700px;
+            height: auto;
             width: 100%;
         }
 
@@ -91,12 +92,12 @@
         }
 
         #homedaohang #tablehome {
-            height: 800px;
-            width: 90%;
+            height: 850px;
+            width: 92%;
             margin-top: 0px;
             margin-right: 5%;
             margin-bottom: 0px;
-            margin-left: 5%;
+            margin-left: 3%;
         }
 
         .textsize {
@@ -163,19 +164,19 @@
         }
 
         .div1 {
-            width: 15%;
+            width: 18%;
             height: auto;
             float: left;
         }
 
         .div2 {
-            width: 85%;
+            width: 82%;
             height: auto;
             float: left;
         }
 
         #homedaohang #tablehome #tableinfo_r {
-            width: 85%;
+            width: 82%;
             margin: 0px;
         }
 
@@ -185,6 +186,16 @@
 
         .test:hover span {
             display: block;
+        }
+
+        .css2 {
+            overflow: hidden; /*自动隐藏文字*/
+            text-overflow: ellipsis; /*文字隐藏后添加省略号*/
+            white-space: nowrap; /*强制不换行*/
+            width: 42em; /*不允许出现半汉字截断*/
+            height: 30px;
+            color: #6699ff;
+            border: 0px #ff8000 dashed;
         }
     </style>
     <script type="text/javascript">
@@ -228,11 +239,13 @@
         <div id="toplogo" align="left">
             <table width="100%" border="0" cellspacing="1" cellpadding="1">
                 <tr>
-                    <td width="12%"><a href="/index"><img src="/static/images/logo_small.png" width="183"
-                                                          height="52"/></a>
+                    <td width="12%"><a href="/index"><img src="/static/images/logo_small.png" width="183" height="52"/></a>
                     </td>
-                    <td width="59%" align="left"><b class="textsize2">最新问答</b></td>
+                    <td width="59%" align="left"><b class="textsize2">最新课程</b></td>
                     <td width="29%" align="right">
+                        <a href="/question/"><input type="button" name="question" id="question"
+                                                    style="width:30; height:24; font-size:20px;border:0; background: #99cc33; color:#FFFFFF;"
+                                                    value="我要提问"/></a>
                         {% if username == '' %}
                         <a herf="/login"><input type="button" name="login" id="login"
                                                 style="width:30; height:24; font-size:20px;border:0; background: #0099cc; color:#FFFFFF;"
@@ -255,14 +268,13 @@
             <br/>
         </div>
         <hr color="#0099cc" style=" margin-top: auto; margin-bottom: 2px;" size="3"/>
-        <br/>
     </div>
     <!--<div>-->
     <!--<table width="100%" border="0" cellspacing="3" cellpadding="1">-->
     <!--<tr>-->
     <!--<td height="40px" bgcolor="#F4F4F4">-->
     <!--<form method="post" action="" name="myForm">-->
-    <!--<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;问答选择：-->
+    <!--<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;课程选择：-->
     <!--<select name="category" onChange="CaseCategory()">-->
     <!--<option value="0">&#45;&#45;请选择所属领域&#45;&#45;</option>-->
     <!--<option value="统计学">统计学</option>-->
@@ -285,25 +297,41 @@
     <!--</table>-->
     <!--</div>-->
     <div id="tablehome">
-        <div id="tableinfo" class="div1">
-            <form action="" method="get">
+        <form action="" method="get">
+            <div id="tableinfo" class="div1">
                 <table width="90%" border="0" cellspacing="1" cellpadding="1" style="border-right:#CCC solid 8px">
                     <tr>
-                        <th width="125" height="37" align="left"><b class="textsize1">问答看点</b></th>
+                        <th width="125" height="37" align="left"><b class="textsize1">课程要素</b></th>
                     </tr>
 
                     <tr>
                         <td height="30">
-                            {{form.isToday}}
-                            <label for="{{form.isToday.id_for_label}}"></label>
-                            今天发布
+                            <b>语言</b>
                         </td>
-                        <!--<td width="793" valign="top" style=" border-bottom:1px dashed #000">7月11日，12:31，R语言蒙特卡洛模拟？【已解决】</td> -->
                     </tr>
                     <tr>
                         <td height="30">
-                            {{form.isHot}}
-                            <label for="{{form.isHot.id_for_label}}">热点问题</label>
+                            {{form.language}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30" align="left">
+                            <b>时间</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30" align="left">
+                            {{form.time}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30" align="left">
+                            <b>排序</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30" align="left">
+                            {{form.order}}
                         </td>
                     </tr>
                     <tr>
@@ -312,13 +340,22 @@
                                    style="width:30; height:24; font-size:16px;border:0; background: #0099cc; color:#FFFFFF;"
                                    value="Reset"/>
                             &nbsp;
-                            <input type="submit" name="search2" id="search2"
+                            <input type="submit"
                                    style="width:30; height:24; font-size:16px;border:0; background: #0099cc; color:#FFFFFF;"
                                    value="Search"/>
                         </td>
                     </tr>
                     <tr>
+                        <td height="30" align="left"></td>
+                    </tr>
+                    <tr>
                         <td height="30" align="left">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30" align="left">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30" align="left"></td>
                     </tr>
                     <tr>
                         <td height="30" align="left">&nbsp;</td>
@@ -341,151 +378,57 @@
                     <tr>
                         <td height="30" align="left">&nbsp;</td>
                     </tr>
+
+                </table>
+            </div>
+            <div id="tableinfo_r" class="div1">
+                <table width="100%" border="0" cellspacing="1" cellpadding="1">
                     <tr>
-                        <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td height="30" align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td height="30" align="left">&nbsp;</td>
+                        <td>
+                            <p> &lt;&lt;
+                                {{form.keyword}}
+                                <input name="search2" type="submit" id="search2" value="搜索"
+                                       style="width:30; height:20; font-size:21px;border:0; background: #0099cc; color:#FFFFFF;"/>
+                            </p>
+                        </td>
                     </tr>
                 </table>
-        </div>
-        <div id="tableinfo_r" class="div1">
-            <table width="90%" border="0" cellspacing="1" cellpadding="1">
-                <tr>
-                    <td>
-                        <p> &lt;&lt;
-                            {{form.keyword}}
-                            <input name="search2" type="submit" id="search2" value="搜索"
-                                   style="width:30; height:20; font-size:21px;border:0; background: #0099cc; color:#FFFFFF;"/>
-                            &nbsp;&nbsp;&nbsp;
-                            <a href="/question/"> <input type="button" name="question" id="question"
-                                                         style="width:30; height:24; font-size:20px;border:0; background: #99cc33; color:#FFFFFF;"
-                                                         value="我要提问"/></a>
-                        </p>
-
-                    </td>
-                </tr>
-            </table>
-        </div>
+            </div>
+        </form>
         <div class="div2">
-            <table width="90%" border="0" cellspacing="1" cellpadding="1">
-                {% for question in questions %}
+            <table width="100%" border="0" cellspacing="1" cellpadding="1">
+                {% for course in courses %}
                 <tr>
-                    <td width="43" align="center" valign="bottom"><img src="/static/images/star1.jpg" alt="star1"
-                                                                       width="27"
-                                                                       height="26"/></td>
-                    <td width="570" valign="bottom" height="30" style=" border-bottom:1px dashed #000"><a
-                            href="/question/{{question.id}}">{{question.title}} {% if question.isSolved %}
-                        【已解决】
-                        {% else %}
-                        {% endif %} </a></td>
-                    <td width="128" valign="bottom" style=" border-bottom:1px dashed #000" align="right">
-                        {{question.publishDate|date:"Y-m-d"}}
+                    <td width="216" rowspan="2" align="center" valign="bottom">
+                        <a href="{{course.link}}" target="_blank">
+                            <img src="/static/images/courses/{{course.picture}}" width="214" height="131"/></a></td>
+                    <td width="269" height="65" align="left">
+                        <a href="{{course.link}}" target="_blank">{{course.title}}</a>
+                    </td>
+                    <td width="326" align="left">{{course.university}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" valign="top" style=" border-bottom:1px solid #99cc33"><b>课程介绍：</b>{{course.description}}
                     </td>
                 </tr>
                 {% endfor %}
-                <tr>
-                    <td align="left">&nbsp;</td>
-                    <td align="left">&nbsp;</td>
-                    <td height="30" align="left">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td align="left">&nbsp;</td>
-                    <td align="left">&nbsp;</td>
-                    <td height="30" align="left">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td align="left">&nbsp;</td>
-                    <td align="left">&nbsp;</td>
-                    <td height="30" align="left">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td align="left">&nbsp;</td>
-                    <td align="left">&nbsp;</td>
-                    <td height="30" align="left">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td align="left">&nbsp;</td>
-                    <td align="left">&nbsp;</td>
-                    <td height="30" align="left">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td align="left">&nbsp;</td>
-                    <td align="left">&nbsp;</td>
-                    <td height="30" align="left">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td align="left">&nbsp;</td>
-                    <td align="left">&nbsp;</td>
-                    <td height="30" align="left">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td align="left">&nbsp;</td>
-                    <td align="left">&nbsp;</td>
-                    <td height="30" align="left">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td align="left">&nbsp;</td>
-                    <td align="left">&nbsp;</td>
-                    <td height="30" align="left">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td colspan="3" align="center">
-                        <p>
-                            {% if questions.has_previous %}
-                            <a href="?page={{ questions.previous_page_number }}">Previous</a>
-                            {% endif %}
-                            <!--{# questions.paginator.number_pages 返回总页数 #}-->
-                            Page {{ questions.number }} of {{ questions.paginator.num_pages }}.
-                            {% if questions.has_next %}
-                            <a href="?page={{ questions.next_page_number }}">Next</a>
-                            {% endif %}
-                        </p>
-                    </td>
-                </tr>
             </table>
         </div>
         <p>&nbsp;</p>
-        </form>
     </div>
     <div id="bottom"
          style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#666666; color:#0099cc"
          align="center">
 
-        &nbsp;&nbsp; <a href="/index" class="style1" target="_blank">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
+        &nbsp; <a href="/index" class="style1" target="_blank">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
                                                                                          class="style1"
                                                                                          target="_blank">最新问答</a>&nbsp;
         |&nbsp; <a href="/expert" class="style1" target="_blank">专家咨询</a>&nbsp; |&nbsp; <a href="/case"
                                                                                            class="style1"
                                                                                            target="_blank">案例分享</a>&nbsp;
         |&nbsp; <a href="/courses" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
-                                                                                                class="style1"
-                                                                                                target="_blank">关于我们</a>&nbsp;
-
+                                                                                            class="style1"
+                                                                                            target="_blank">关于我们</a>&nbsp;
     </div>
 
 

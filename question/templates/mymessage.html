@@ -190,7 +190,7 @@
                         {% if username == '' %}
                         <a href="/login">登录</a> | <a href="/register">注册</a>
                         {% else %}
-                        <a href="/users/{{userId}}/">{{username}}</a>  | <a href="/logout">注销</a>
+                        <a href="/users/{{userId}}/">{{username}}</a> | <a href="/logout">注销</a>
                         {% endif %}
                     </td>
                 </tr>
@@ -227,10 +227,11 @@
                     <td height="30" align="right">
                         <input type="submit" style="width:30; height:22; font-size:18px"
                                value="回复"/>
-                        </form>| <input type="submit" style="width:30; height:22; font-size:18px"
-                                                     value="删除"/>
-                    </td>
-                </tr>
+            </form>
+            | <input type="submit" style="width:30; height:22; font-size:18px"
+                     value="删除"/>
+            </td>
+            </tr>
         </table>
         <br/>
         <br/>
@@ -239,10 +240,15 @@
     <div id="bottom"
          style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#333; color:#FFF"
          align="center">
-        &nbsp; <a href="/index" class="style1">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
-                                                                         class="style1">最新咨询</a>&nbsp; |&nbsp; <a
-            href="/expert" class="style1">专家咨询</a>&nbsp; |&nbsp; <a href="/case" class="style1">案例分析</a>&nbsp;
-        |&nbsp; <a href="/consultion" class="style1">AI咨询</a>&nbsp; |&nbsp; <a href="/aboutus" class="style1">关于我们</a>&nbsp;
+        &nbsp; <a href="/index" class="style1" target="_blank">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
+                                                                                         class="style1"
+                                                                                         target="_blank">最新问答</a>&nbsp;
+        |&nbsp; <a href="/expert" class="style1" target="_blank">专家咨询</a>&nbsp; |&nbsp; <a href="/case"
+                                                                                           class="style1"
+                                                                                           target="_blank">案例分享</a>&nbsp;
+        |&nbsp; <a href="/courses" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
+                                                                                            class="style1"
+                                                                                            target="_blank">关于我们</a>&nbsp;
     </div>
     <br/>
 </div>
