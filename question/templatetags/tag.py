@@ -38,3 +38,9 @@ def num_range(parser, token):
         raise TemplateSyntaxError, "%s takes the syntax %s number_to_iterate\
             as context_variable" % (fnctn, fnctn)
     return RangeNode(num, context_name)
+
+@register.simple_tag()
+def error_msg(error_list):
+    if error_list:
+        return error_list[0]
+    return ""

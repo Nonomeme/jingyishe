@@ -279,7 +279,7 @@
             </tr>
             {% for answer in answers %}
             <tr>
-                <td width="7%" align="center"><img src="/static/images/thumbup1.jpg" width="27" height="28"/>24</td>
+                <td width="7%" align="center"><img src="/static/images/thumbup1.jpg" width="27" height="28"/>{{answer.grade}}</td>
                 <td>
                     <a href="/question/{{answer.question.id}}/">{{answer.question.title}}
                         {% if answer.qustion.isSolved %}

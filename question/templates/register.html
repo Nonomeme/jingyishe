@@ -209,6 +209,7 @@
         <hr color="#0099cc" style=" margin-top: auto; margin-bottom: 2px;" size="3"/>
     </div>
     <div id="tablehome" style="text-align:center" align="center">
+        {% load tag %}
         <p>&nbsp;</p>
         <table width="449" height="346" border="0" align="center" cellpadding="0" cellspacing="10"
                style="background-color: #F6F6F6">
@@ -221,22 +222,36 @@
                 <tr>
                     <td width="123" height="40" align="left"><font class="font1">用户名</font></td>
                     <td width="296" height="30" align="center">
-                        {{form.username}}
+                        {{form.username}}{% error_msg errors.username %}
                     </td>
                 </tr>
                 <tr>
                     <td height="40" align="left"><font class="font1">邮箱</font></td>
-                    <td height="30" align="center">{{form.mail}}</td>
+                    <td height="30" align="center">{{form.mail}}{% error_msg errors.mail %}</td>
                 </tr>
                 <tr>
                     <td height="40" align="left"><font class="font1">输入密码</font></td>
-                    <td height="30" align="center"> {{form.password}}</td>
+                    <td height="30" align="center"> {{form.password}}{% error_msg errors.password %}</td>
                 </tr>
                 <tr>
                     <td align="left"><font class="font1">确认密码</font></td>
-                    <td width="296" height="30" align="center"><label for="textfield4"></label>
-                        <input name="textfield4" type="password" id="textfield4" size="32" maxlength="100"
-                               style="width: 60; height: 40; font-size: 16px"/></td>
+                    <td width="296" height="30" align="center">{{form.password2}}{% error_msg errors.password2 %}</td>
+                </tr>
+                <tr>
+                    <td align="left"><font class="font1">验证码</font></td>
+                    <td width="296" height="30" align="center">
+                        {{form.captcha}}<br>{% error_msg errors.captcha %}
+                        <!--<script type="text/javascript">-->
+                            <!--$('.captcha').click(function () { //点击图片刷新-->
+                                <!--var tmp = Math.random().toString();-->
+                                <!--$.get("?newsn=1&tmp=" + tmp, function (result) {-->
+                                    <!--$('.captcha').attr("src", result);-->
+                                    <!--$('#id_captcha_0').attr("value", result.split('/')[3]);-->
+                                <!--});-->
+                                <!--return false;-->
+                            <!--});-->
+                        <!--</script>-->
+                    </td>
                 </tr>
                 <tr>
                     <td height="40" colspan="2" align="center" valign="middle" bgcolor="#F6F6F6">
@@ -259,8 +274,8 @@
                                                                                            class="style1"
                                                                                            target="_blank">案例分享</a>&nbsp;
         |&nbsp; <a href="/courses" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
-                                                                                                class="style1"
-                                                                                                target="_blank">关于我们</a>&nbsp;
+                                                                                            class="style1"
+                                                                                            target="_blank">关于我们</a>&nbsp;
 
     </div>
 

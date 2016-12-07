@@ -186,7 +186,6 @@
 <body>
 <div id="homedaohang">
     <div id="hometop">
-
         <div id="toplogo" align="left">
             <table width="100%" border="0" cellspacing="1" cellpadding="1">
                 <tr>
@@ -218,7 +217,8 @@
         <div id="tablehome" style="text-align:center" align="center">
             <p>&nbsp;</p>
             <p>&nbsp;</p>
-            <table width="435" height="280" border="0" align="center" cellpadding="0" cellspacing="10"
+            {% load tag %}
+            <table width="470" height="280" border="0" align="center" cellpadding="0" cellspacing="10"
                    style="background-color: #F6F6F6">
                 <tr>
                     <td height="51" colspan="2" align="center" valign="middle" class="border">
@@ -226,17 +226,17 @@
                     </td>
                 </tr>
                 <tr>
-                    <td width="120" height="50" align="left">
+                    <td width="150" height="50" align="left">
                         <font class="font1">用户名/邮箱</font>
                     </td>
                     <td width="283" height="50">
-                        {{form.username}}
+                        {{form.username}}{% error_msg errors.username %}
                     </td>
                 </tr>
                 <tr>
                     <td align="left"><font class="font1">密码</font></td>
                     <td width="283" height="50">
-                        {{form.password}}
+                        {{form.password}}{% error_msg errors.password %}
                     </td>
                 </tr>
                 <tr>
@@ -255,14 +255,14 @@
      align="center">
 
     &nbsp; <a href="/index" class="style1" target="_blank">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
-                                                                                         class="style1"
-                                                                                         target="_blank">最新问答</a>&nbsp;
-        |&nbsp; <a href="/expert" class="style1" target="_blank">专家咨询</a>&nbsp; |&nbsp; <a href="/case"
-                                                                                           class="style1"
-                                                                                           target="_blank">案例分享</a>&nbsp;
-        |&nbsp; <a href="/courses" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
-                                                                                                class="style1"
-                                                                                                target="_blank">关于我们</a>&nbsp;
+                                                                                     class="style1"
+                                                                                     target="_blank">最新问答</a>&nbsp;
+    |&nbsp; <a href="/expert" class="style1" target="_blank">专家咨询</a>&nbsp; |&nbsp; <a href="/case"
+                                                                                       class="style1"
+                                                                                       target="_blank">案例分享</a>&nbsp;
+    |&nbsp; <a href="/courses" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
+                                                                                        class="style1"
+                                                                                        target="_blank">关于我们</a>&nbsp;
 
 </div>
 

@@ -11,11 +11,18 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponse
 from django.http import StreamingHttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.conf import settings
 
 from .forms import AnswerForm, UserForm, LoginForm, QuestionForm, MessageForm, SearchForm, GlobalSearchForm, \
     MessageAnswerForm, QuestionForm2, CaseForm, CourseSearchForm
 from .models import Question, Answer, User, Expert, Message, QuestionFollow, PersonFollow, Case, CaseFollow, \
     MessageAnswer, Course
+
+from utils.token import Token
+from django.core.mail import send_mail
+
+token_confirm = Token(settings.SECRET_KEY)
+DOMAIN = 'http://127.0.0.1:8000'
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -67,7 +74,12 @@ def login(request):
                     del request.session['redirect_after_login']
                     return HttpResponseRedirect(redirectUrl)
             else:
-                return HttpResponseRedirect('/login')
+                if not User.objects.filter(Q(username__exact=username) | Q(mail__exact=username)).exists():
+                    form._errors['username'] = form.error_class([u"用户名不存在"])
+                else:
+                    form._errors['password'] = form.error_class([u"密码输入错误"])
+                errors = form.errors
+                return render(request, 'login.html', {'form': form, 'errors': errors})
     else:
         form = LoginForm()
         info = request.session.get('login_info', '')
@@ -86,12 +98,54 @@ def register(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/login')
+            human = True
+            user = User()
+            user.username = form.cleaned_data['username']
+            user.mail = form.cleaned_data['mail']
+            user.password = form.cleaned_data['password']
+            user.save()
+            # token = token_confirm.generate_validate_token(username)
+            # # active_key = base64.encodestring(username)
+            # # send email to the register email
+            # # message = "\n".join([
+            # #     u'{0},欢迎加入茶水博士'.format(username),
+            # #     u'请访问该链接，完成用户验证:',
+            # #     '/'.join([DOMAIN, 'users/activate/', token])
+            # # ])
+            # message = 'hello, this is a validatio message'
+            # send_mail('validation', 'hello', 'service_csbs@163.com', [mail])
+            # # user = auth.authenticate(username=username,password=password)
+            # # auth.login(request,user)
+            # return HttpResponse(u"请登录到注册邮箱中验证用户，有效期为1个小时。")
+            return HttpResponseRedirect('/login/')
+        else:
+            errors = form.errors
+            return render(request, 'register.html', {'form': form, 'errors': errors})
     else:
         form = UserForm()
+        return render(request, 'register.html', {'form': form})
 
-    return render(request, 'register.html', {'form': form})
+
+def activateUser(request, token):
+    """
+    the view function is used to accomplish the user register confirm,only after input the link
+    that sent to the register email,user can login the site normally.
+    :param request:
+    :param activate_key:the paragram is gotten by encrypting username when user register
+    :return:
+    """
+    try:
+        username = token_confirm.confirm_validate_token(token)
+    except:
+        return HttpResponse(u'对不起，验证链接已经过期')
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return HttpResponse(u'对不起，您所验证的用户不存在，请重新注册')
+    user.is_active = True
+    user.save()
+    confirm = u'验证成功，请进行登录操作。'
+    return HttpResponseRedirect('/login/')
 
 
 def detail(request, question_id):
@@ -100,7 +154,7 @@ def detail(request, question_id):
     question = get_object_or_404(Question, id=question_id)
     if username == '' and not question.isPublic:
         request.session['login_info'] = u'该问题仅限注册用户查看,请先登录'
-        return HttpResponseRedirect('/login')
+        return HttpResponseRedirect('/login/')
 
     questionFollowers = User.objects.filter(followingQuestion=question_id)
 
@@ -234,7 +288,8 @@ def followPerson(request, question_id, publisher_id):
         relation = PersonFollow.objects.get(userFollower=user, followingPerson=publisher)
         relation.delete()
     else:
-        relation = PersonFollow.objects.create(userFollower=user, followingPerson=publisher, date=datetime.date.today())
+        relation = PersonFollow.objects.create(userFollower=user, followingPerson=publisher,
+                                               date=datetime.date.today())
         relation.save()
 
     return HttpResponseRedirect('/question/' + question_id)
@@ -460,7 +515,8 @@ def expert(request):
     form = SearchForm({'keyword': keyword, 'isToday': False, 'isHot': False})
     if not form.is_valid():
         form = SearchForm()
-    return render(request, 'expert.html', {'username': username, 'userId': userId, 'experts': experts, 'form': form})
+    return render(request, 'expert.html',
+                  {'username': username, 'userId': userId, 'experts': experts, 'form': form})
 
 
 def leaveMessage(request, user_id):
@@ -622,6 +678,7 @@ def relatedQuestions(request, question_id):
     username = request.session.get('username', '')
     userId = request.session.get('userId', '')
     question = get_object_or_404(Question, id=question_id)
+    searchForm = GlobalSearchForm()
     if username == '' and not question.isPublic:
         request.session['login_info'] = u'该问题仅限注册用户查看,请先登录'
         return HttpResponseRedirect('/login')
@@ -652,8 +709,9 @@ def relatedQuestions(request, question_id):
     relatedQuestions = Question.objects.filter(q).exclude(id=question_id)
 
     return render(request, 'related_question.html',
-                  {'username': username, 'userId': userId, 'question': question, 'relatedQuestions': relatedQuestions,
-                   'isFollowing': isFollowing, 'isFollowing2': isFollowing2,})
+                  {'username': username, 'userId': userId, 'question': question,
+                   'relatedQuestions': relatedQuestions,
+                   'isFollowing': isFollowing, 'isFollowing2': isFollowing2, 'searchForm': searchForm})
 
 
 def myquestions(request, user_id):
@@ -670,7 +728,8 @@ def myanswers(request, user_id):
     userId = request.session.get('userId', '')
     user = User.objects.get(id=user_id)
     answers = Answer.objects.filter(answerer=user).order_by('publishDate').reverse()
-    return render(request, 'myanswers.html', {'username': username, 'userId': userId, 'user': user, 'answers': answers})
+    return render(request, 'myanswers.html',
+                  {'username': username, 'userId': userId, 'user': user, 'answers': answers})
 
 
 def mycases(request, user_id):
@@ -680,6 +739,15 @@ def mycases(request, user_id):
     # cases = user.followingCase.all().order_by('publishDate').reverse()
     cases = CaseFollow.objects.filter(caseFollower=user)
     return render(request, 'mycases.html', {'username': username, 'userId': userId, 'user': user, 'cases': cases})
+
+
+def mysharings(request, user_id):
+    username = request.session.get('username', '')
+    userId = request.session.get('userId', '')
+    user = User.objects.get(id=user_id)
+    # cases = user.followingCase.all().order_by('publishDate').reverse()
+    cases = Case.objects.filter(uploader=user)
+    return render(request, 'mysharings.html', {'username': username, 'userId': userId, 'user': user, 'cases': cases})
 
 
 def updateQuestion(request, question_id):
@@ -739,7 +807,8 @@ def updateQuestion(request, question_id):
         data = {'title': question.title, 'description': question.description, 'keyword': question.keyword,
                 'isPublic': choice, 'attachedDescription': question.attachedDescription}
         if not question.attachedFile == '':
-            file_data = {'attachedFile': SimpleUploadedFile(question.attachedFile.name, question.attachedFile.read())}
+            file_data = {
+                'attachedFile': SimpleUploadedFile(question.attachedFile.name, question.attachedFile.read())}
             form = QuestionForm2(data, file_data)
             # print form.is_bound()
         else:
@@ -767,7 +836,8 @@ def search(request):
                        'searchForm': searchForm})
     else:
         searchForm = GlobalSearchForm()
-        return render(request, 'globalSearch.html', {'username': username, 'userId': userId, 'searchForm': searchForm})
+        return render(request, 'globalSearch.html',
+                      {'username': username, 'userId': userId, 'searchForm': searchForm})
 
 
 def closeQuestion(request, question_id):
@@ -888,4 +958,5 @@ def courses(request):
     if not form.is_valid():
         form = CourseSearchForm()
 
-    return render(request, 'courses.html', {'username': username, 'userId': userId, 'form': form, 'courses': courses})
+    return render(request, 'courses.html',
+                  {'username': username, 'userId': userId, 'form': form, 'courses': courses})

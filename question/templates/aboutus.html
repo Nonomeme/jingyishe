@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>关于我们--精益社</title>
+    <title>关于我们--茶水博士</title>
     <style type="text/css">
         #nav {
             width: auto;
@@ -42,7 +42,7 @@
         }
 
         #homedaohang #hometop #toplogo {
-            height: 50px;
+            height: 60px;
             width: 98%;
             margin-top: 0px;
             margin-right: 0%;
@@ -68,7 +68,7 @@
         }
 
         #homedaohang {
-            height: 700px;
+            height: auto;
             width: 100%;
         }
 
@@ -86,14 +86,13 @@
         }
 
         body {
-            margin-left: 0px;
-            margin-top: 0px;
-            margin-right: 0px;
-            margin-bottom: 0px;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, "Times New Roman", "宋体";
         }
 
         #homedaohang #tablehome {
-            height: 650px;
+            height: auto;
             width: 88%;
             margin-top: 0px;
             margin-right: 6;
@@ -153,6 +152,10 @@
         }
 
         .textsize2 {
+            font-size: x-large;
+        }
+
+        .textsize3 {
             font-size: xx-large;
         }
 
@@ -176,40 +179,50 @@
         <div id="toplogo" align="left">
             <table width="100%" border="0" cellspacing="1" cellpadding="1">
                 <tr>
-                    <td width="12%"><a href="home.html"><img src="/static/images/font1.jpg" width="125"
-                                                             height="50"/></a></td>
-                    <td width="59%" align="left"><b class="textsize2">关于我们</b></td>
-                    <td width="29%" align="right"><a href="/index">精益社首页</a> | <a href="/question">提问</a> |
+                    <td width="12%"><a href="/index"><img src="/static/images/logo_small.png" width="183" height="52"/></a>
+                    </td>
+                    <td width="59%" align="left"><b class="textsize3">关于我们</b></td>
+                    <td width="29%" align="right">
+                        <a href="/question/"><input type="button" name="question" id="question"
+                                                    style="width:30; height:24; font-size:20px;border:0; background: #99cc33; color:#FFFFFF;"
+                                                    value="我要提问"/></a>
                         {% if username == '' %}
-                        <a href="/login">登录</a> | <a href="/register">注册</a>
+                        <a herf="/login"><input type="button" name="login" id="login"
+                                                style="width:30; height:24; font-size:20px;border:0; background: #0099cc; color:#FFFFFF;"
+                                                value="登陆"/></a>
+                        <a href="/register"><input type="button" name="register" id="register"
+                                                   style="width:30; height:24; font-size:20px;border:0; background:#0099cc; color:#FFFFFF;"
+                                                   value="注册"/></a>
                         {% else %}
-                        <a href="/users/{{userId}}/">{{username}}</a> | <a href="/logout">注销</a>
+                        <a href="/users/{{userId}}"><input type="button"
+                                                           style="width:30; height:24; font-size:20px;border:0; background: #0099cc; color:#FFFFFF;"
+                                                           value="{{username}}"/></a>
+                        <a href="/logout"><input type="button"
+                                                 style="width:30; height:24; font-size:20px;border:0; background:#0099cc; color:#FFFFFF;"
+                                                 value="登出"/></a>
                         {% endif %}
                     </td>
                 </tr>
             </table>
             <br/>
         </div>
-        <hr/>
+        <hr color="#0099cc" style=" margin-top: auto; margin-bottom: 2px;" size="3"/>
     </div>
-    <form id="form6" name="form6" method="post" action="">
-        <p>&nbsp;&nbsp;</p>
-    </form>
     <div id="tablehome">
         <table width="100%" height="489" border="0" align="center" cellpadding="0" cellspacing="10"
                style="border:1px solid #CCC  ">
             <tr>
-                <th width="86" height="40" align="center" valign="middle" style=" border-bottom:#999 solid 4px"><b
-                        class="textsize1"> 介绍</b></th>
-                <th width="842" align="left" valign="middle">&nbsp;</th>
+                <th width="127" height="40" align="center" valign="middle" style=" border-bottom:#99cc33 solid 2px"><b
+                        class="textsize2"> 介绍</b></th>
+                <th width="800" align="left" valign="middle">&nbsp;</th>
             </tr>
             <tr>
                 <td height="120" colspan="2" align="left" valign="top" bgcolor="#FAFAFA"><p>&nbsp;</p>
                     <p>&nbsp;</p></td>
             </tr>
             <tr>
-                <td height="40" align="center" style=" border-bottom:#999 solid 4px">
-                    <b class="textsize1">合作伙伴</b></td>
+                <td height="40" align="center" style=" border-bottom:#99cc33 solid 2px">
+                    <b class="textsize2">合作伙伴</b></td>
                 <td height="40" align="left">&nbsp;</td>
             </tr>
             <tr>
@@ -217,8 +230,8 @@
                 </td>
             </tr>
             <tr>
-                <td height="40" align="center" valign="middle" style=" border-bottom:#999 solid 4px"><b
-                        class="textsize1">联系我们</b></td>
+                <td height="40" align="center" valign="middle" style=" border-bottom:#99cc33 solid 2px"><b
+                        class="textsize2">联系我们</b></td>
                 <td height="40" align="left" valign="middle">&nbsp;</td>
             </tr>
             <tr>
@@ -228,8 +241,9 @@
         <p>&nbsp;</p>
     </div>
     <div id="bottom"
-         style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#333; color:#FFF"
+         style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#666666; color:#0099cc"
          align="center">
+
         &nbsp; <a href="/index" class="style1" target="_blank">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
                                                                                          class="style1"
                                                                                          target="_blank">最新问答</a>&nbsp;
@@ -237,11 +251,24 @@
                                                                                            class="style1"
                                                                                            target="_blank">案例分享</a>&nbsp;
         |&nbsp; <a href="/courses" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
-                                                                                            class="style1"
-                                                                                            target="_blank">关于我们</a>&nbsp;
-        &nbsp;
+                                                                                                class="style1"
+                                                                                                target="_blank">关于我们</a>&nbsp;
+
     </div>
-    <br/>
+
+
+    <div id="beianxinxi">
+        <table width="100%" border="0" cellspacing="1" cellpadding="1" style="font-size:10px; background: #EAEAEA">
+            <tr>
+                <td align="center">&copy;2016 chashuiboshi.com, all rights reserved 自由度（上海）管理咨询有限公司</td>
+            </tr>
+            <tr>
+                <td align="center">沪ICP备 xxxxxxxxxxxxxx 号</td>
+            </tr>
+        </table>
+
+
+    </div>
 </div>
 </body>
 </html>

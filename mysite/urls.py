@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^users/(?P<user_id>[0-9]+)/questions/$', views.myquestions, name='myquestions'),
     url(r'^users/(?P<user_id>[0-9]+)/answers/$', views.myanswers, name='myanswers'),
     url(r'^users/(?P<user_id>[0-9]+)/cases/$', views.mycases, name='mycases'),
+    url(r'^users/(?P<user_id>[0-9]+)/sharings/$', views.mysharings, name='mysharings'),
     url(r'^consultion/$', views.consultion, name='consultion'),
     url(r'^expert/$', views.expert, name='expert'),
     url(r'^case/$', views.case, name='case'),
@@ -43,5 +44,7 @@ urlpatterns = [
     url(r'search/$', views.search, name='search'),
     url(r'^answer/(?P<answer_id>[0-9]+)/agree/$', views.grade, name='grade'),
     url(r'^courses/$', views.courses, name='courses'),
+    url(r'^users/activate/(?P<token>\w+.[-_\w]*\w+.[-_\w]*\w+)/$', views.activateUser, name='activateUser'),
+    url(r'^captcha/', include('captcha.urls')),
 
 ]

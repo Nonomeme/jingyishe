@@ -24,6 +24,7 @@ class User(models.Model):
     password = models.CharField(max_length=50)
     mail = models.EmailField()
     tag = models.CharField(max_length=256, blank=True)
+    isActive = models.BooleanField(default=False)
     followingQuestion = models.ManyToManyField('question.Question', blank=True, through='QuestionFollow',
                                                through_fields=('questionFollower', 'followingQuestion'))
     followingPerson = models.ManyToManyField("self", blank=True, symmetrical=False, through='PersonFollow',
