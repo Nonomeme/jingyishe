@@ -14,15 +14,18 @@ from django.shortcuts import render, get_object_or_404
 from django.conf import settings
 
 from .forms import AnswerForm, UserForm, LoginForm, QuestionForm, MessageForm, SearchForm, GlobalSearchForm, \
-    MessageAnswerForm, QuestionForm2, CaseForm, CourseSearchForm
+    MessageAnswerForm, QuestionForm2, CaseForm, CourseSearchForm, UpdatePwdForm
 from .models import Question, Answer, User, Expert, Message, QuestionFollow, PersonFollow, Case, CaseFollow, \
     MessageAnswer, Course
 
 from utils.token import Token
 from django.core.mail import send_mail
+from email.mime.text import MIMEText
+from email.header import Header
+import smtplib
 
 token_confirm = Token(settings.SECRET_KEY)
-DOMAIN = 'http://127.0.0.1:8000'
+DOMAIN = 'http://127.0.0.1:8000/'
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -94,6 +97,63 @@ def logout(request):
     return HttpResponseRedirect('/index/')
 
 
+def forgetPwd(request):
+    message = ''
+    if request.method == "POST":
+        mail = request.POST['mail']
+        if User.objects.filter(mail__exact=mail).exists():
+            user = User.objects.get(mail__exact=mail)
+            from_addr = 'service_csbs@163.com'
+            password = 'chashuiboshi123'
+            smtp_server = 'smtp.163.com'
+            to_addr = mail
+            subject = u'找回密码'
+            token = token_confirm.generate_validate_token(user.username)
+            message = u'Hi,' + user.username + '请点击连接完成用户验证:' + DOMAIN + 'updatePassword' + token
+            msg = MIMEText(message, 'plain', 'utf-8')
+            msg['Subject'] = Header(subject, 'utf-8')
+            msg['From'] = 'service_csbs@163.com'
+            msg['To'] = mail
+            server = smtplib.SMTP(smtp_server, 25)
+            server.set_debuglevel(1)
+            server.login(from_addr, password)
+            server.sendmail(from_addr, [to_addr], msg.as_string())
+            server.quit()
+            message = '请在一小时内确认邮件修改!'
+        else:
+            errorMsg = u'该邮箱还未注册!'
+            return render(request, 'forgetPwd.html', {'message': message})
+
+    return render(request, 'forgetPwd.html', {'message': message})
+
+
+def updatePwd(request, token):
+    try:
+        username = token_confirm.confirm_validate_token(token)
+    except:
+        # username = token_confirm.remove_validate_token(token)
+        return render(request, 'forgetPwd.html', {
+            'message': u'对不起，验证链接已经过期，请重新发送'})
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return render(request, 'forgetPwd.html', {'message': u"对不起，您所验证的用户不存在，请重新注册"})
+
+    if request.method == 'GET':
+        form = UpdatePwdForm()
+        return render(request, 'updatePwd.html', {'form': form})
+    if request.method == 'POST':
+        form = UpdatePwdForm(request.POST)
+        print username
+        if form.is_valid():
+            user.password = form.cleaned_data['password']
+            user.save()
+            return HttpResponseRedirect('/login/')
+        else:
+            errors = form.errors
+            return render(request, 'updatePwd.html', {'form': form, 'errors': errors})
+
+
 def register(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
@@ -104,19 +164,22 @@ def register(request):
             user.mail = form.cleaned_data['mail']
             user.password = form.cleaned_data['password']
             user.save()
-            # token = token_confirm.generate_validate_token(username)
-            # # active_key = base64.encodestring(username)
-            # # send email to the register email
-            # # message = "\n".join([
-            # #     u'{0},欢迎加入茶水博士'.format(username),
-            # #     u'请访问该链接，完成用户验证:',
-            # #     '/'.join([DOMAIN, 'users/activate/', token])
-            # # ])
-            # message = 'hello, this is a validatio message'
-            # send_mail('validation', 'hello', 'service_csbs@163.com', [mail])
-            # # user = auth.authenticate(username=username,password=password)
-            # # auth.login(request,user)
-            # return HttpResponse(u"请登录到注册邮箱中验证用户，有效期为1个小时。")
+            from_addr = 'service_csbs@163.com'
+            password = 'chashuiboshi123'
+            smtp_server = 'smtp.163.com'
+            to_addr = user.mail
+            subject = u'验证用户'
+            token = token_confirm.generate_validate_token(user.username)
+            message = u'Hi,' + user.username + '请点击连接完成用户验证:' + DOMAIN + 'users/activate/' + token
+            msg = MIMEText(message, 'plain', 'utf-8')
+            msg['Subject'] = Header(subject, 'utf-8')
+            msg['From'] = 'service_csbs@163.com'
+            msg['To'] = user.mail
+            server = smtplib.SMTP(smtp_server, 25)
+            server.set_debuglevel(1)
+            server.login(from_addr, password)
+            server.sendmail(from_addr, [to_addr], msg.as_string())
+            server.quit()
             return HttpResponseRedirect('/login/')
         else:
             errors = form.errors
@@ -142,9 +205,8 @@ def activateUser(request, token):
         user = User.objects.get(username=username)
     except User.DoesNotExist:
         return HttpResponse(u'对不起，您所验证的用户不存在，请重新注册')
-    user.is_active = True
+    user.isActive = True
     user.save()
-    confirm = u'验证成功，请进行登录操作。'
     return HttpResponseRedirect('/login/')
 
 

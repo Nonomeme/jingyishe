@@ -60,7 +60,7 @@ class UserForm(forms.Form):
         cleaned_data = super(UserForm, self).clean()
         password = cleaned_data.get('password', '')
         password2 = cleaned_data.get('password2', '')
-        username = cleaned_data.get('username','')
+        username = cleaned_data.get('username', '')
         if len(password) <= 7:
             self._errors['password'] = self.error_class([u"密码必须大于7位"])
         if password != password2:
@@ -75,6 +75,23 @@ class LoginForm(forms.Form):
         widget=forms.TextInput(attrs={'style': 'width: 60; height: 40; font-size: 16px', 'size': '32'}))
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'style': 'width: 60; height: 40; font-size: 16px', 'size': '32'}))
+
+
+class UpdatePwdForm(forms.Form):
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'style': 'width: 60; height: 40; font-size: 16px', 'size': '32'}))
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'style': 'width: 60; height: 40; font-size: 16px', 'size': '32'}))
+
+    def clean(self):
+        cleaned_data = super(UpdatePwdForm, self).clean()
+        password = cleaned_data.get('password', '')
+        password2 = cleaned_data.get('password2', '')
+        if len(password) <= 7:
+            self._errors['password'] = self.error_class([u"密码必须大于7位"])
+        if password != password2:
+            self._errors['password2'] = self.error_class([u"两次密码输入不一致"])
+        return cleaned_data
 
 
 class QuestionForm(forms.Form):

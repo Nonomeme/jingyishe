@@ -25,6 +25,8 @@ urlpatterns = [
     url(r'^login/$', views.login, name='login'),
     url(r'^register/$', views.register, name='register'),
     url(r'^logout/$', views.logout, name='logout'),
+    url(r'^forgetPassword/$', views.forgetPwd, name='forgetPwd'),
+    url(r'^updatePassword/(?P<token>\w+.[-_\w]*\w+.[-_\w]*\w+)/$', views.updatePwd, name='updatePwd'),
     url(r'^question/', include(question_urls)),
     url(r'^aboutus/$', views.aboutus, name='aboutus'),
     url(r'^users/(?P<user_id>[0-9]+)/$', views.userInfo, name='userInfo'),
