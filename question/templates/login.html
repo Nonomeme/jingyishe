@@ -211,7 +211,6 @@
         </div>
         <hr color="#0099cc" style=" margin-top: auto; margin-bottom: 2px;" size="3"/>
     </div>
-
     <form method='post' enctype="multipart/form-data">
         {% csrf_token %}
         <div id="tablehome" style="text-align:center" align="center">
@@ -244,41 +243,12 @@
                                                                                       id="button3"
                                                                                       style="width:30; height:24; font-size:20px;border:0; background:#0099cc; color:#FFFFFF;"
                                                                                       value="登 录"/> <font class="font2">
-                        &nbsp;忘记密码</font></td>
+                        &nbsp;<a href="/forgetPassword/"> 忘记密码</a></font></td>
                 </tr>
             </table>
     </form>
     <p>&nbsp;</p>
-</div>
-<div id="bottom"
-     style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#666666; color:#0099cc"
-     align="center">
-
-    &nbsp; <a href="/index" class="style1" target="_blank">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
-                                                                                     class="style1"
-                                                                                     target="_blank">最新问答</a>&nbsp;
-    |&nbsp; <a href="/expert" class="style1" target="_blank">专家咨询</a>&nbsp; |&nbsp; <a href="/case"
-                                                                                       class="style1"
-                                                                                       target="_blank">案例分享</a>&nbsp;
-    |&nbsp; <a href="/courses" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
-                                                                                        class="style1"
-                                                                                        target="_blank">关于我们</a>&nbsp;
-
-</div>
-
-
-<div id="beianxinxi">
-    <table width="100%" border="0" cellspacing="1" cellpadding="1" style="font-size:10px; background: #EAEAEA">
-        <tr>
-            <td align="center">&copy;2016 chashuiboshi.com, all rights reserved 自由度（上海）管理咨询有限公司</td>
-        </tr>
-        <tr>
-            <td align="center">沪ICP备 xxxxxxxxxxxxxx 号</td>
-        </tr>
-    </table>
-
-
-</div>
-</div>
+    </div>
+    {% include 'bottom.html' %}
 </body>
 </html>

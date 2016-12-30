@@ -20,6 +20,7 @@ from question import urls as question_urls
 from question import views
 
 urlpatterns = [
+    url(r'^$', views.index, name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^index/$', views.index, name='index'),
     url(r'^login/$', views.login, name='login'),
@@ -47,6 +48,5 @@ urlpatterns = [
     url(r'^answer/(?P<answer_id>[0-9]+)/agree/$', views.grade, name='grade'),
     url(r'^courses/$', views.courses, name='courses'),
     url(r'^users/activate/(?P<token>\w+.[-_\w]*\w+.[-_\w]*\w+)/$', views.activateUser, name='activateUser'),
-    url(r'^captcha/', include('captcha.urls')),
-
+    # url(r'^captcha/', include('captcha.urls')),
 ]

@@ -37,7 +37,7 @@ class UserForm(forms.Form):
     mail = forms.CharField(widget=forms.TextInput(
         attrs={'style': 'width: 60; height: 40; font-size: 16px', 'size': '32'}), validators=[EmailValidator],
         error_messages={"required": u'邮箱不能为空', "invalid": u'请输入正确的邮箱地址'})
-    captcha = CaptchaField()
+    # captcha = CaptchaField()
 
     # def clean_password(self):
     #     password = self.cleaned_data['password']

@@ -94,7 +94,7 @@
         #homedaohang #tablehome {
             height: auto;
             width: 88%;
-            margin-top: 0px;
+            margin-top: 20px;
             margin-right: 6;
             margin-bottom: 0px;
             margin-left: 6%;
@@ -162,6 +162,10 @@
         .style1 {
             color: #FFF;
         }
+        .aboutus{
+            font-size:large;
+
+        }
     </style>
     <script type="text/javascript">
         function MM_goToURL() { //v3.0
@@ -189,7 +193,7 @@
                         {% if username == '' %}
                         <a herf="/login"><input type="button" name="login" id="login"
                                                 style="width:30; height:24; font-size:20px;border:0; background: #0099cc; color:#FFFFFF;"
-                                                value="登陆"/></a>
+                                                value="登录"/></a>
                         <a href="/register"><input type="button" name="register" id="register"
                                                    style="width:30; height:24; font-size:20px;border:0; background:#0099cc; color:#FFFFFF;"
                                                    value="注册"/></a>
@@ -210,7 +214,7 @@
     </div>
     <div id="tablehome">
         <table width="100%" height="489" border="0" align="center" cellpadding="0" cellspacing="10"
-               style="border:1px solid #CCC  ">
+               style="border:1px solid #CCC">
             <tr>
                 <th width="127" height="40" align="center" valign="middle" style=" border-bottom:#99cc33 solid 2px"><b
                         class="textsize2"> 介绍</b></th>
@@ -218,15 +222,9 @@
             </tr>
             <tr>
                 <td height="120" colspan="2" align="left" valign="top" bgcolor="#FAFAFA"><p>&nbsp;</p>
-                    <p>&nbsp;</p></td>
-            </tr>
-            <tr>
-                <td height="40" align="center" style=" border-bottom:#99cc33 solid 2px">
-                    <b class="textsize2">合作伙伴</b></td>
-                <td height="40" align="left">&nbsp;</td>
-            </tr>
-            <tr>
-                <td height="120" colspan="2" align="left" valign="top" bgcolor="#FAFAFA">
+                    <p class="aboutus">
+                        茶水博士（chashuiboshi.com）是一个专注于数据科学人工智能的分享咨询网站。用户可以在这里学习交流数据分析、机器学习、人工智能等专业知识技术，发现热门技术，专家资讯，优质课程，还可以分享推荐实践方法和案例。
+                    </p>
                 </td>
             </tr>
             <tr>
@@ -235,40 +233,16 @@
                 <td height="40" align="left" valign="middle">&nbsp;</td>
             </tr>
             <tr>
-                <td height="120" colspan="2" align="left" valign="middle" bgcolor="#FAFAFA">&nbsp;</td>
+                <td height="120" colspan="2" align="left" valign="middle" bgcolor="#FAFAFA">
+                    <p class="aboutus">
+                        关于网站问题意见，合作需求，请通过邮件联系我们：ChaShuiBoShiChina@126.com。
+                    </p>
+                </td>
             </tr>
         </table>
         <p>&nbsp;</p>
     </div>
-    <div id="bottom"
-         style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#666666; color:#0099cc"
-         align="center">
-
-        &nbsp; <a href="/index" class="style1" target="_blank">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
-                                                                                         class="style1"
-                                                                                         target="_blank">最新问答</a>&nbsp;
-        |&nbsp; <a href="/expert" class="style1" target="_blank">专家咨询</a>&nbsp; |&nbsp; <a href="/case"
-                                                                                           class="style1"
-                                                                                           target="_blank">案例分享</a>&nbsp;
-        |&nbsp; <a href="/courses" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
-                                                                                                class="style1"
-                                                                                                target="_blank">关于我们</a>&nbsp;
-
-    </div>
-
-
-    <div id="beianxinxi">
-        <table width="100%" border="0" cellspacing="1" cellpadding="1" style="font-size:10px; background: #EAEAEA">
-            <tr>
-                <td align="center">&copy;2016 chashuiboshi.com, all rights reserved 自由度（上海）管理咨询有限公司</td>
-            </tr>
-            <tr>
-                <td align="center">沪ICP备 xxxxxxxxxxxxxx 号</td>
-            </tr>
-        </table>
-
-
-    </div>
+    {% include 'bottom.html' %}
 </div>
 </body>
 </html>

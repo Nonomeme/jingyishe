@@ -153,11 +153,11 @@
         }
 
         .textsize2 {
-            font-size: xx-large;
+            font-size: x-large;
         }
 
         .textsize3 {
-            font-size: x-large;
+            font-size: xx-large;
         }
 
         .textstyle {
@@ -185,7 +185,9 @@
             <table width="100%" border="0" cellspacing="1" cellpadding="1">
                 <tr>
                     <td width="12%"><img src="/static/images/font1.jpg" width="125" height="50"/></td>
-                    <td width="59%" align="left"><b class="textsize3"><u>{{user.mail}}</u>的主页</b></td>
+                    <td width="59%" align="left">
+                        <b class="textsize2"><u>{{user.mail}}</u>的主页</b>
+                    </td>
                     <td width="29%" align="right"><a href="/index">精益社首页</a> | <a href="/question">提问</a> |
                         {% if username == '' %}
                         <a href="/login">登录</a> | <a href="/register">注册</a>
@@ -237,19 +239,7 @@
         <br/>
         <br/>
     </div>
-    <div id="bottom"
-         style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#333; color:#FFF"
-         align="center">
-        &nbsp; <a href="/index" class="style1" target="_blank">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
-                                                                                         class="style1"
-                                                                                         target="_blank">最新问答</a>&nbsp;
-        |&nbsp; <a href="/expert" class="style1" target="_blank">专家咨询</a>&nbsp; |&nbsp; <a href="/case"
-                                                                                           class="style1"
-                                                                                           target="_blank">案例分享</a>&nbsp;
-        |&nbsp; <a href="/courses" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
-                                                                                            class="style1"
-                                                                                            target="_blank">关于我们</a>&nbsp;
-    </div>
+    {% include 'bottom.html' %}
     <br/>
 </div>
 </body>

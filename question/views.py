@@ -158,7 +158,7 @@ def register(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
-            human = True
+            # human = True
             user = User()
             user.username = form.cleaned_data['username']
             user.mail = form.cleaned_data['mail']
@@ -488,7 +488,7 @@ def userInfo(request, user_id):
         newslist.append(caselist[j])
         j += 1
     while len(newslist) > 5:
-        newslist.remove(len(newslist) - 1)
+        newslist.remove(newslist[len(newslist)-1])
 
     # print newslist
     # for question in followingQuestions:

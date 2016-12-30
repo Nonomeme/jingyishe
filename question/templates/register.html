@@ -237,22 +237,22 @@
                     <td align="left"><font class="font1">确认密码</font></td>
                     <td width="296" height="30" align="center">{{form.password2}}{% error_msg errors.password2 %}</td>
                 </tr>
-                <tr>
-                    <td align="left"><font class="font1">验证码</font></td>
-                    <td width="296" height="30" align="center">
-                        {{form.captcha}}<br>{% error_msg errors.captcha %}
-                        <!--<script type="text/javascript">-->
-                            <!--$('.captcha').click(function () { //点击图片刷新-->
-                                <!--var tmp = Math.random().toString();-->
-                                <!--$.get("?newsn=1&tmp=" + tmp, function (result) {-->
-                                    <!--$('.captcha').attr("src", result);-->
-                                    <!--$('#id_captcha_0').attr("value", result.split('/')[3]);-->
-                                <!--});-->
-                                <!--return false;-->
-                            <!--});-->
-                        <!--</script>-->
-                    </td>
-                </tr>
+                <!--<tr>-->
+                    <!--<td align="left"><font class="font1">验证码</font></td>-->
+                    <!--<td width="296" height="30" align="center">-->
+                        <!--{{form.captcha}}<br>{% error_msg errors.captcha %}-->
+                        <!--&lt;!&ndash;<script type="text/javascript">&ndash;&gt;-->
+                            <!--&lt;!&ndash;$('.captcha').click(function () { //点击图片刷新&ndash;&gt;-->
+                                <!--&lt;!&ndash;var tmp = Math.random().toString();&ndash;&gt;-->
+                                <!--&lt;!&ndash;$.get("?newsn=1&tmp=" + tmp, function (result) {&ndash;&gt;-->
+                                    <!--&lt;!&ndash;$('.captcha').attr("src", result);&ndash;&gt;-->
+                                    <!--&lt;!&ndash;$('#id_captcha_0').attr("value", result.split('/')[3]);&ndash;&gt;-->
+                                <!--&lt;!&ndash;});&ndash;&gt;-->
+                                <!--&lt;!&ndash;return false;&ndash;&gt;-->
+                            <!--&lt;!&ndash;});&ndash;&gt;-->
+                        <!--&lt;!&ndash;</script>&ndash;&gt;-->
+                    <!--</td>-->
+                <!--</tr>-->
                 <tr>
                     <td height="40" colspan="2" align="center" valign="middle" bgcolor="#F6F6F6">
                         <input type="submit"
@@ -263,35 +263,7 @@
         </table>
         <p>&nbsp;</p>
     </div>
-    <div id="bottom"
-         style=" height:60px; line-height:60px; overflow:hidden;; text-align:center;background:#666666; color:#0099cc"
-         align="center">
-
-        &nbsp; <a href="/index" class="style1" target="_blank">网站首页</a>&nbsp; |&nbsp; <a href="/question/latest"
-                                                                                         class="style1"
-                                                                                         target="_blank">最新问答</a>&nbsp;
-        |&nbsp; <a href="/expert" class="style1" target="_blank">专家咨询</a>&nbsp; |&nbsp; <a href="/case"
-                                                                                           class="style1"
-                                                                                           target="_blank">案例分享</a>&nbsp;
-        |&nbsp; <a href="/courses" class="style1" target="_blank">课程培训</a>&nbsp; |&nbsp; <a href="/aboutus"
-                                                                                            class="style1"
-                                                                                            target="_blank">关于我们</a>&nbsp;
-
-    </div>
-
-
-    <div id="beianxinxi">
-        <table width="100%" border="0" cellspacing="1" cellpadding="1" style="font-size:10px; background: #EAEAEA">
-            <tr>
-                <td align="center">&copy;2016 chashuiboshi.com, all rights reserved 自由度（上海）管理咨询有限公司</td>
-            </tr>
-            <tr>
-                <td align="center">沪ICP备 xxxxxxxxxxxxxx 号</td>
-            </tr>
-        </table>
-
-
-    </div>
+    {% include 'bottom.html' %}
 </div>
 </body>
 </html>
