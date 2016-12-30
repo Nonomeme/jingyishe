@@ -229,7 +229,7 @@
                     {% if not case.attachedDescription == '' %}
                     <a href="attachedFile/">
                         <img src="/static/images/download.jpg" width="32" height="29"/>
-                        <b class="textsize3">{{case.attachedDescription|cut:"./"}}</b>
+                        <b class="textsize3">{{case.attachedDescription|cut:"case/"}}</b>
                     </a>
                     {% endif %}
                 </td>
@@ -252,9 +252,9 @@
                 <td height="12" align="left"><b class="textsize1">分析与解决</b></td>
                 <td align="center">
                     {% if not case.attachedSolution == '' %}
-                    <a href="attachedFile/">
+                    <a href="attachedSolution/">
                         <img src="/static/images/download.jpg" width="32" height="29"/>
-                        <b class="textsize3">{{case.attachedSolution|cut:"./"}}</b>
+                        <b class="textsize3">{{case.attachedSolution|cut:"caseSolution/"}}</b>
                     </a>
                     {% endif %}
                 </td>

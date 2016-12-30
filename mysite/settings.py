@@ -147,11 +147,11 @@ LOGGING = {
     # },
 }
 
-SECRET_KEY = 'JINGYISHE'
-
-EMAIL_HOST = 'smtp.163.com'             #SMTP地址
-EMAIL_PORT = 25                         #SMTP端口
-EMAIL_HOST_USER = 'service_csbs@163.com'  #邮箱地址
-EMAIL_HOST_PASSWORD = 'chashuiboshi123'        #邮箱密码
-EMAIL_SUBJECT_PREFIX = u'[茶水博士]'            #为邮件Subject-line前缀,默认是'[django]'
+# SECRET_KEY = 'JINGYISHE'
+#
+# EMAIL_HOST = 'smtp.163.com'             #SMTP地址
+# EMAIL_PORT = 25                         #SMTP端口
+# EMAIL_HOST_USER = 'service_csbs@163.com'  #邮箱地址
+# EMAIL_HOST_PASSWORD = 'chashuiboshi123'        #邮箱密码
+# EMAIL_SUBJECT_PREFIX = u'[茶水博士]'            #为邮件Subject-line前缀,默认是'[django]'
 # EMAIL_USE_SSL = True                             #与SMTP服务器通信时，是否启动TLS链接(安全链接)。默认是false

@@ -488,7 +488,7 @@ def userInfo(request, user_id):
         newslist.append(caselist[j])
         j += 1
     while len(newslist) > 5:
-        newslist.remove(newslist[len(newslist)-1])
+        newslist.remove(newslist[len(newslist) - 1])
 
     # print newslist
     # for question in followingQuestions:
@@ -701,7 +701,7 @@ def download(request, question_id):
                     break
 
     question = Question.objects.get(id=question_id)
-    prefix = os.getcwd() + '/media/'
+    prefix = os.getcwd() + '/media/question/'
     fileName = os.path.split(question.attachedFile.name)[1]
     response = StreamingHttpResponse(file_iterator(prefix + fileName))
     response['Content-Type'] = 'application/octet-stream'
@@ -727,8 +727,60 @@ def downloadAnswer(request, answer_id):
                     break
 
     answer = Answer.objects.get(id=answer_id)
-    prefix = os.getcwd() + '/media/'
+    prefix = os.getcwd() + '/media/answer/'
     fileName = os.path.split(answer.attachedFile.name)[1]
+    response = StreamingHttpResponse(file_iterator(prefix + fileName))
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(fileName)
+
+    return response
+
+
+def downloadCase(request, case_id):
+    username = request.session.get('username', '')
+    if username == '':
+        request.session['redirect_after_login'] = request.get_full_path()
+        request.session['login_info'] = u'请先登录后下载'
+        return HttpResponseRedirect('/login')
+
+    def file_iterator(file_name, chunk_size=512):
+        with open(file_name) as f:
+            while True:
+                c = f.read(chunk_size)
+                if c:
+                    yield c
+                else:
+                    break
+
+    case = Case.objects.get(id=case_id)
+    prefix = os.getcwd() + '/media/case/'
+    fileName = os.path.split(case.attachedDescription.name)[1]
+    response = StreamingHttpResponse(file_iterator(prefix + fileName))
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(fileName)
+
+    return response
+
+
+def downloadSolution(request, case_id):
+    username = request.session.get('username', '')
+    if username == '':
+        request.session['redirect_after_login'] = request.get_full_path()
+        request.session['login_info'] = u'请先登录后下载'
+        return HttpResponseRedirect('/login')
+
+    def file_iterator(file_name, chunk_size=512):
+        with open(file_name) as f:
+            while True:
+                c = f.read(chunk_size)
+                if c:
+                    yield c
+                else:
+                    break
+
+    case = Case.objects.get(id=case_id)
+    prefix = os.getcwd() + '/media/caseSolution/'
+    fileName = os.path.split(case.attachedSolution.name)[1]
     response = StreamingHttpResponse(file_iterator(prefix + fileName))
     response['Content-Type'] = 'application/octet-stream'
     response['Content-Disposition'] = 'attachment;filename="{0}"'.format(fileName)

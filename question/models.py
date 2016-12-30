@@ -46,7 +46,7 @@ class Question(models.Model):
     keyword = models.CharField(max_length=256)
     isPublic = models.BooleanField(default=True)
     publishDate = models.DateTimeField(auto_now_add=True)
-    attachedFile = models.FileField(blank=True)
+    attachedFile = models.FileField(blank=True,upload_to='question')
     isSolved = models.BooleanField(default=False)
     questioner = models.ForeignKey(User)
     answerNum = models.IntegerField(default=0)
@@ -62,7 +62,7 @@ class Answer(models.Model):
     question = models.ForeignKey(Question)
     answerer = models.ForeignKey(User)
     publishDate = models.DateTimeField(auto_now_add=True)
-    attachedFile = models.FileField(blank=True)
+    attachedFile = models.FileField(blank=True,upload_to='answer')
     # attachedFile = models.FileField(blank=True, upload_to='./upload/')
     isPublic = models.BooleanField()
     grade = models.IntegerField(default=0)
@@ -125,8 +125,8 @@ class Case(models.Model):
     caseType = models.CharField(max_length=20)
     # domain = models.CharField(max_length=20)
     date = models.DateTimeField(auto_now_add=True)
-    attachedDescription = models.FileField(blank=True)
-    attachedSolution = models.FileField(blank=True)
+    attachedDescription = models.FileField(blank=True,upload_to='case')
+    attachedSolution = models.FileField(blank=True,upload_to='caseSolution')
     uploader = models.ForeignKey(User)
 
     def __unicode__(self):

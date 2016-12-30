@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>tf-idf作为特征如何进行数据的筛选从而降维？【已解决】--茶水博士</title>
+    <title>{{question.title}}{% if question.isSolved %}【已解决】{% endif %}--茶水博士</title>
     <style type="text/css">
         #nav {
             width: auto;
@@ -278,7 +278,7 @@
                     {% if not question.attachedFile == '' %}
                     <a href="attachedFile/">
                         <img src="/static/images/download.jpg" width="32" height="29"/>
-                        <b class="textsize3">{{question.attachedFile|cut:"./"}}</b>
+                        <b class="textsize3">{{question.attachedFile|cut:"question/"}}</b>
                     </a>
                     {% endif %}
                 </td>
@@ -319,7 +319,7 @@
                     <td width="18%" height="26" align="left" valign="middle">
                         {% if not answer.attachedFile == '' %}
                         <a href="/question/answer/{{answer.id}}/attachedFile/">
-                            <b class="textsize3">{{answer.attachedFile|cut:"./"}}</b>
+                            <b class="textsize3">{{answer.attachedFile|cut:"/answer"}}</b>
                         </a>
                         {% else %}
                         &nbsp;
