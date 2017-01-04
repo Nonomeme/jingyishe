@@ -183,6 +183,15 @@
 
     </style>
 
+    <script type="text/javascript">
+        function changeTag() {
+            document.getElementById("tag").style.display = 'none';
+            document.getElementById("tag_edit").style.display = 'block';
+            document.getElementById("tagbutton").style.display = 'none';
+            document.getElementById("editbutton").style.display = 'block';
+        }
+    </script>
+
 </head>
 
 <body>
@@ -212,7 +221,7 @@
                                                     style="width:30; height:24; font-size:20px;border:0; background: #99cc33; color:#FFFFFF;"
                                                     value="我要提问"/></a>
                         {% if username == '' %}
-                        <a herf="/login"><input type="button" name="login" id="login"
+                        <a href="/login"><input type="button" name="login" id="login"
                                                 style="width:30; height:24; font-size:20px;border:0; background: #0099cc; color:#FFFFFF;"
                                                 value="登录"/></a>
                         <a href="/register"><input type="button" name="register" id="register"
@@ -242,15 +251,41 @@
                     <p>{{user.username}}&nbsp;</p>
                 </td>
                 <td height="109" colspan="2"><font color="#0099cc"><b class="textsize1">标签: </b> </font>
-                    {{user.tag}}<br/>
+                    <div id="tag">
+                        {{user.tag}}<br/>
+                    </div>
+                    <div id="tag_edit" style="display:none">
+                        <form id="form1" name="form1" method="post" action="tag/">
+                            {% csrf_token %}
+                            <p>
+                                <textarea name="tag" id="setlabel" cols="80"
+                                          rows="5" >{{user.tag}}</textarea>
+                            </p>
+
+                    </div>
                 </td>
                 <td rowspan="2"><p> &nbsp;| 关注了 {{user.followingPerson.count}} 人</p>
                     <p>&nbsp;| 关注者 {{followers}} 人</p>
                     <p> &nbsp;| 关注了 {{user.followingQuestion.count}} 个问题</p></td>
             </tr>
             <tr>
-                <td colspan="2" align="right"><img src="/static/images/write.jpg" width="34" height="32"/><font
-                        style="font-size: 14px">编辑</font> &nbsp; &nbsp;
+                <td colspan="2" align="right">
+                    {% if isFollowing == 0 %}
+                    <div id="tagbutton">
+                        <span onclick="changeTag()">
+                            <img src="/static/images/write.jpg" width="34" height="32"/><font
+                                style="font-size: 14px">编辑</font>&nbsp; &nbsp;
+                         </span>
+                    </div>
+                    <div id="editbutton" style="display:none">
+                            <input type="submit"
+                                   style="width:30; height:24; font-size:14px;border:0; background: #FF9933; color:#FFFFFF;"
+                                   value="修改"/>
+                        </form>
+                    </div>
+                    {% else %}
+                    <p></p>
+                    {% endif %}
                 </td>
             </tr>
             <tr>
@@ -279,7 +314,8 @@
             </tr>
             {% for answer in answers %}
             <tr>
-                <td width="7%" align="center"><img src="/static/images/thumbup1.jpg" width="27" height="28"/>{{answer.grade}}</td>
+                <td width="7%" align="center"><img src="/static/images/thumbup1.jpg" width="27" height="28"/>{{answer.grade}}
+                </td>
                 <td>
                     <a href="/question/{{answer.question.id}}/">{{answer.question.title}}
                         {% if answer.qustion.isSolved %}

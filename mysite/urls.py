@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^question/', include(question_urls)),
     url(r'^aboutus/$', views.aboutus, name='aboutus'),
     url(r'^users/(?P<user_id>[0-9]+)/$', views.userInfo, name='userInfo'),
+    url(r'^users/(?P<user_id>[0-9]+)/tag/$', views.userTag, name='userTag'),
     url(r'^users/(?P<publisher_id>[0-9]+)/follow/$', views.followUser, name='followUser'),
     url(r'^users/(?P<user_id>[0-9]+)/message/$', views.leaveMessage, name='leaveMessage'),
     url(r'^users/(?P<user_id>[0-9]+)/message/(?P<message_id>[0-9]+)/$', views.answerMessage, name='answerMessage'),

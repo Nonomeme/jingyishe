@@ -1064,7 +1064,7 @@ def courses(request):
             courses = courses.order_by('courseDate').reverse()
             order = '2'
         if request.GET['order'] == '3':
-            courses = courses.order_by('count').reverse()
+            courses = courses.order_by('rank').reverse()
             order = '3'
         data.update({'order': order})
 
@@ -1074,3 +1074,11 @@ def courses(request):
 
     return render(request, 'courses.html',
                   {'username': username, 'userId': userId, 'form': form, 'courses': courses})
+
+
+def userTag(request, user_id):
+    user = User.objects.get(id=user_id)
+    if user:
+        user.tag = request.POST['tag']
+        user.save()
+    return HttpResponseRedirect('/users/' + user_id + '/')

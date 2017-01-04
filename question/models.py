@@ -35,6 +35,7 @@ class User(models.Model):
 
     date = models.DateTimeField(auto_now_add=True)
 
+
     def __unicode__(self):
         return self.username
 
@@ -94,8 +95,11 @@ class Expert(models.Model):
     id = models.AutoField(primary_key=True, editable=False)
     name = models.CharField(max_length=20)
     university = models.CharField(max_length=50)
-    tag = models.CharField(max_length=200)
-    link = models.CharField(max_length=200)
+    department = models.CharField(max_length=50)
+    tag = models.CharField(max_length=256)
+    link = models.CharField(max_length=256)
+    h_index = models.IntegerField(default=0)
+    course = models.CharField(max_length=256,blank=True)
 
     def __unicode__(self):
         return self.name
@@ -141,12 +145,13 @@ class CaseFollow(models.Model):
 
 class Course(models.Model):
     id = models.AutoField(primary_key=True, editable=False)
-    title = models.CharField(max_length=100)
-    university = models.CharField(max_length=50)
+    title = models.CharField(max_length=256)
+    university = models.CharField(max_length=256)
     description = models.TextField()
     publishDate = models.DateTimeField(auto_now_add=True)
     language = models.IntegerField(default=1)   #1代表中文 2代表英文
-    courseDate = models.DateTimeField()
-    count = models.IntegerField(default=0)
-    link = models.CharField(max_length=100)
+    courseDate = models.DateTimeField(null=True)
+    rank = models.FloatField(default=0)
+    popularity = models.FloatField(default=0)
+    link = models.CharField(max_length=256)
     picture = models.ImageField(blank=True)

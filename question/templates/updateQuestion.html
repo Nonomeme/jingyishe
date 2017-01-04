@@ -215,7 +215,7 @@
                                                     style="width:30; height:24; font-size:20px;border:0; background: #99cc33; color:#FFFFFF;"
                                                     value="我要提问"/></a>
                         {% if username == '' %}
-                        <a herf="/login"><input type="button" name="login" id="login"
+                        <a href="/login"><input type="button" name="login" id="login"
                                                 style="width:30; height:24; font-size:20px;border:0; background: #0099cc; color:#FFFFFF;"
                                                 value="登录"/></a>
                         <a href="/register"><input type="button" name="register" id="register"
@@ -252,14 +252,15 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td width="41%" height="58" align="left" style=" border-bottom:#999  dashed 1px">
+                                    <td width="41%" height="58" align="left" colspan="2" style=" border-bottom:#999  dashed 1px">
                                         <b class="textsize1"><img src="/static/images/star1.jpg" width="27"
                                                                   height="26"/>{{question.title}}</b>
                                     </td>
-                                    <td width="17%" align="left"
-                                        style=" border-bottom:#999  dashed 1px; font-size:12px;">
-                                        <img src="/static/images/write.jpg" width="34" height="32"/>编辑
-                                    </td>
+                                    <!--<td width="17%" align="left"-->
+                                        <!--style=" border-bottom:#999  dashed 1px; font-size:12px;">-->
+                                        <!--<a href="close/"><input type="button" value="删除问题"-->
+                                                         <!--style="width:30; height:24; font-size:14px;border:0; background:#ff3300; color:#FFFFFF;"/></a>-->
+                                    <!--</td>-->
                                     <td width="42%" height="58" align="left" style=" border-bottom:#999  dashed 1px">
                                         &nbsp;已发布：{{question.publishDate|date:"Y-m-d H:i"}}&nbsp;</td>
                                 </tr>
