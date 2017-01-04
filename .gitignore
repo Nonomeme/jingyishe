@@ -6,4 +6,5 @@ __pycache__
 *.xlsx
 excel2db.py
 settings.py
-media
+media/
+data/
