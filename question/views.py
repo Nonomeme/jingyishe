@@ -23,6 +23,7 @@ from django.core.mail import send_mail
 from email.mime.text import MIMEText
 from email.header import Header
 import smtplib
+from mysite.settings import page_size
 
 token_confirm = Token(settings.SECRET_KEY)
 DOMAIN = 'http://127.0.0.1:8000/'
@@ -357,7 +358,7 @@ def followPerson(request, question_id, publisher_id):
     return HttpResponseRedirect('/question/' + question_id)
 
 
-def latestQuestion(request, type="0"):
+def latestQuestion(request):
     username = request.session.get('username', '')
     userId = request.session.get('userId', '')
     questions = Question.objects.all().order_by('publishDate').reverse()
@@ -382,9 +383,9 @@ def latestQuestion(request, type="0"):
     if 'isHot' in request.GET:
         isHot = True
 
-    page_size = 10  # 每页显示的条数
-    after_range_num = 5
-    before_range_num = 6
+    # page_size = 10  # 每页显示的条数
+    # # after_range_num = 5
+    # # before_range_num = 6
     try:
         page = int(request.GET.get("page", 1))
         if page < 1:
@@ -490,27 +491,6 @@ def userInfo(request, user_id):
     while len(newslist) > 5:
         newslist.remove(newslist[len(newslist) - 1])
 
-    # print newslist
-    # for question in followingQuestions:
-    #     for person in followingPersons:
-    #         if question.date < person.date:
-    #             delta = today - question.date
-    #             followinglist .append(
-    #                 {'name': question.followingQuestion.title,
-    #                  'timeDelta': int(delta.total_seconds()/86400),
-    #                  'type': 1,
-    #                  'url': question.followingQuestion.id})
-    #             break
-    #         else:
-    #             if
-    #             delta = today - person.date
-    #             followinglist.append({
-    #                 'name': person.followingPerson.username,
-    #                 'timeDelta': int(delta.total_seconds()/86400),
-    #                 'type': 2,
-    #                 'url': person.followingPerson.id
-    #             })
-
     followingCases = publisher.followingCase.all()
     num = followingCases.count()
     isFollowing = 1
@@ -565,14 +545,24 @@ def consultion(request):
 def expert(request):
     username = request.session.get('username', '')
     userId = request.session.get('userId', '')
-    experts = Expert.objects.all()
+    experts = Expert.objects.all().order_by('h_index').reverse()
     keyword = ''
     if 'keyword' in request.GET:  # GET是一个dict，使用文本框的name作为key
         keyword = request.GET['keyword']
         experts = experts.filter(
             Q(name__icontains=keyword) | Q(university__icontains=keyword) | Q(tag__icontains=keyword))
 
-    experts = experts[:10]
+    try:
+        page = int(request.GET.get("page", 1))
+        if page < 1:
+            page = 1
+    except ValueError:
+        page = 1
+    paginator = Paginator(experts, page_size)  # 分页器
+    try:
+        experts = paginator.page(page)
+    except(EmptyPage, InvalidPage, PageNotAnInteger):
+        experts = paginator.page(1)
 
     form = SearchForm({'keyword': keyword, 'isToday': False, 'isHot': False})
     if not form.is_valid():
@@ -628,7 +618,7 @@ def answerMessage(request, user_id, message_id):
 def case(request):
     username = request.session.get('username', '')
     userId = request.session.get('userId', '')
-    cases = Case.objects.all()
+    cases = Case.objects.all().order_by('date').reverse()
     keyword = ''
     if 'keyword' in request.GET:  # GET是一个dict，使用文本框的name作为key
         keyword = request.GET['keyword']
@@ -641,7 +631,17 @@ def case(request):
             print caseType
             cases = cases.filter(caseType__icontains=caseType)
 
-    cases = cases.order_by('date').reverse()[:10]
+    try:
+        page = int(request.GET.get("page", 1))
+        if page < 1:
+            page = 1
+    except ValueError:
+        page = 1
+    paginator = Paginator(cases, page_size)  # 分页器
+    try:
+        cases = paginator.page(page)
+    except(EmptyPage, InvalidPage, PageNotAnInteger):
+        cases = paginator.page(1)
 
     form = SearchForm({'keyword': keyword, 'isToday': False, 'isHot': False})
     if not form.is_valid():
@@ -820,7 +820,19 @@ def relatedQuestions(request, question_id):
     q = Q()
     for keyword in keywords:
         q.add(Q(keyword__icontains=keyword), Q.OR)
-    relatedQuestions = Question.objects.filter(q).exclude(id=question_id)
+    relatedQuestions = Question.objects.filter(q).exclude(id=question_id).order_by('answerNum').reverse()
+
+    # try:
+    #     page = int(request.GET.get("page", 1))
+    #     if page < 1:
+    #         page = 1
+    # except ValueError:
+    #     page = 1
+    # paginator = Paginator(relatedQuestions, page_size)  # 分页器
+    # try:
+    #     relatedQuestions = paginator.page(page)
+    # except(EmptyPage, InvalidPage, PageNotAnInteger):
+    #     relatedQuestions = paginator.page(1)
 
     return render(request, 'related_question.html',
                   {'username': username, 'userId': userId, 'question': question,
@@ -833,6 +845,19 @@ def myquestions(request, user_id):
     userId = request.session.get('userId', '')
     user = User.objects.get(id=user_id)
     questions = Question.objects.filter(questioner=user).order_by('publishDate').reverse()
+
+    try:
+        page = int(request.GET.get("page", 1))
+        if page < 1:
+            page = 1
+    except ValueError:
+        page = 1
+    paginator = Paginator(questions, page_size)  # 分页器
+    try:
+        questions = paginator.page(page)
+    except(EmptyPage, InvalidPage, PageNotAnInteger):
+        questions = paginator.page(1)
+
     return render(request, 'myquestions.html',
                   {'username': username, 'userId': userId, 'user': user, 'questions': questions})
 
@@ -842,6 +867,19 @@ def myanswers(request, user_id):
     userId = request.session.get('userId', '')
     user = User.objects.get(id=user_id)
     answers = Answer.objects.filter(answerer=user).order_by('publishDate').reverse()
+
+    try:
+        page = int(request.GET.get("page", 1))
+        if page < 1:
+            page = 1
+    except ValueError:
+        page = 1
+    paginator = Paginator(answers, page_size)  # 分页器
+    try:
+        answers = paginator.page(page)
+    except(EmptyPage, InvalidPage, PageNotAnInteger):
+        answers = paginator.page(1)
+
     return render(request, 'myanswers.html',
                   {'username': username, 'userId': userId, 'user': user, 'answers': answers})
 
@@ -851,7 +889,20 @@ def mycases(request, user_id):
     userId = request.session.get('userId', '')
     user = User.objects.get(id=user_id)
     # cases = user.followingCase.all().order_by('publishDate').reverse()
-    cases = CaseFollow.objects.filter(caseFollower=user)
+    cases = CaseFollow.objects.filter(caseFollower=user).order_by('date').reverse()
+
+    try:
+        page = int(request.GET.get("page", 1))
+        if page < 1:
+            page = 1
+    except ValueError:
+        page = 1
+    paginator = Paginator(cases, page_size)  # 分页器
+    try:
+        cases = paginator.page(page)
+    except(EmptyPage, InvalidPage, PageNotAnInteger):
+        cases = paginator.page(1)
+
     return render(request, 'mycases.html', {'username': username, 'userId': userId, 'user': user, 'cases': cases})
 
 
@@ -860,7 +911,20 @@ def mysharings(request, user_id):
     userId = request.session.get('userId', '')
     user = User.objects.get(id=user_id)
     # cases = user.followingCase.all().order_by('publishDate').reverse()
-    cases = Case.objects.filter(uploader=user)
+    cases = Case.objects.filter(uploader=user).order_by('date').reverse()
+
+    try:
+        page = int(request.GET.get("page", 1))
+        if page < 1:
+            page = 1
+    except ValueError:
+        page = 1
+    paginator = Paginator(cases, page_size)  # 分页器
+    try:
+        cases = paginator.page(page)
+    except(EmptyPage, InvalidPage, PageNotAnInteger):
+        cases = paginator.page(1)
+
     return render(request, 'mysharings.html', {'username': username, 'userId': userId, 'user': user, 'cases': cases})
 
 
@@ -943,10 +1007,11 @@ def search(request):
         questions = Question.objects.filter(Q(title__icontains=keyword) | Q(keyword__icontains=keyword)).order_by(
             'publishDate').reverse()[:5]
         experts = Expert.objects.filter(tag__icontains=keyword)[:5]
+        courses = Course.objects.filter(Q(title__icontains=keyword) | Q(description__icontains=keyword))[:5]
         searchForm = GlobalSearchForm({'keyword': keyword})
         return render(request, 'globalSearch.html',
                       {'username': username, 'userId': userId, 'questions': questions, 'experts': experts,
-                       'cases': cases,
+                       'cases': cases, 'courses': courses,
                        'searchForm': searchForm})
     else:
         searchForm = GlobalSearchForm()
@@ -1067,6 +1132,18 @@ def courses(request):
             courses = courses.order_by('rank').reverse()
             order = '3'
         data.update({'order': order})
+
+    try:
+        page = int(request.GET.get("page", 1))
+        if page < 1:
+            page = 1
+    except ValueError:
+        page = 1
+    paginator = Paginator(courses, 5)  # 分页器
+    try:
+        courses = paginator.page(page)
+    except(EmptyPage, InvalidPage, PageNotAnInteger):
+        courses = paginator.page(1)
 
     form = CourseSearchForm(data)
     if not form.is_valid():

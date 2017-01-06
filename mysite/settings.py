@@ -155,3 +155,7 @@ LOGGING = {
 # EMAIL_HOST_PASSWORD = 'chashuiboshi123'        #邮箱密码
 # EMAIL_SUBJECT_PREFIX = u'[茶水博士]'            #为邮件Subject-line前缀,默认是'[django]'
 # EMAIL_USE_SSL = True                             #与SMTP服务器通信时，是否启动TLS链接(安全链接)。默认是false
+
+page_size = 10  # 每页显示的条数
+# after_range_num = 5
+# before_range_num = 6

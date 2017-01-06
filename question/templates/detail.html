@@ -350,6 +350,7 @@
                     </a>
                 </td>
             </tr>
+            {% if not relatedQuestions.count == 0 %}
             {% for question in relatedQuestions %}
             <tr>
                 <td height="30" align="left" style=" border-bottom:1px dashed #000">
@@ -364,6 +365,13 @@
                 <td height="30" colspan="2" align="left" style=" border-bottom:1px dashed #000" bgcolor="#F6F6F6"><a
                         href="relatedQuestions/">&gt;&gt;更多</a></td>
             </tr>
+            {% else %}
+            <tr>
+                <td height="30" colspan="2" align="left" style=" border-bottom:1px dashed #000" bgcolor="#F6F6F6">
+                    暂无相关问题...
+                </td>
+            </tr>
+            {% endif %}
         </table>
         <br/>
 

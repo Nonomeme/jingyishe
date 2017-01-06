@@ -395,9 +395,9 @@
             <table width="90%" border="0" cellspacing="1" cellpadding="1">
                 {% for question in questions %}
                 <tr>
-                    <td width="43" align="center" valign="bottom"><img src="/static/images/star1.jpg" alt="star1"
-                                                                       width="27"
-                                                                       height="26"/></td>
+                    <td width="43" align="center" valign="bottom">
+                        <img src="/static/images/star1.jpg" alt="star1" width="27" height="26"/>
+                    </td>
                     <td width="570" valign="bottom" height="30" style=" border-bottom:1px dashed #000"><a
                             href="/question/{{question.id}}">{{question.title}} {% if question.isSolved %}
                         【已解决】
@@ -406,6 +406,12 @@
                     <td width="128" valign="bottom" style=" border-bottom:1px dashed #000" align="right">
                         {{question.publishDate|date:"Y-m-d"}}
                     </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td width="43" align="left">&nbsp;</td>
+                    <td width="570" align="middle">oops...没有搜索结果..</td>
+                    <td width="128" height="30" align="left"></td>
                 </tr>
                 {% endfor %}
                 <tr>
@@ -460,7 +466,9 @@
                             <a href="?page={{ questions.previous_page_number }}">Previous</a>
                             {% endif %}
                             <!--{# questions.paginator.number_pages 返回总页数 #}-->
+                            {% if not questions.paginator.num_pages == 1%}
                             Page {{ questions.number }} of {{ questions.paginator.num_pages }}.
+                            {% endif %}
                             {% if questions.has_next %}
                             <a href="?page={{ questions.next_page_number }}">Next</a>
                             {% endif %}

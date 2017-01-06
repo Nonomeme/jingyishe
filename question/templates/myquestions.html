@@ -272,6 +272,22 @@
                 </td>
             </tr>
             {% endfor %}
+            <tr>
+                <td colspan="3" align="center">
+                    <p>
+                        {% if questions.has_previous %}
+                        <a href="?page={{ questions.previous_page_number }}">Previous</a>
+                        {% endif %}
+                        <!--{# questions.paginator.number_pages 返回总页数 #}-->
+                        {% if not questions.paginator.num_pages == 1%}
+                        Page {{ questions.number }} of {{ questions.paginator.num_pages }}.
+                        {% endif %}
+                        {% if questions.has_next %}
+                        <a href="?page={{ questions.next_page_number }}">Next</a>
+                        {% endif %}
+                    </p>
+                </td>
+            </tr>
         </table>
         <br/>
         <br/>

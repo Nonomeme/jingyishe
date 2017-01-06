@@ -372,33 +372,85 @@
             </div>
 
             <div class="div2">
-                <table width="80%" border="0" cellspacing="1" cellpadding="0">
+                <table width="100%" border="0" cellspacing="1" cellpadding="0">
                     {% for case in cases %}
                     <tr>
-                        <td width="29" height="30" align="center" valign="bottom">
+                        <td width="43" height="30" align="center" valign="bottom">
                             <img src="/static/images/star1.jpg" alt="star1" width="27" height="26"/>
                         </td>
-                        <td width="762" valign="bottom" class="td1">
+                        <td width="570" valign="bottom" class="td1">
                             <a href="/case/{{case.id}}/">{{case.caseType}}：{{case.title}}</a>
                         </td>
-                        <td width="144" valign="bottom" class="td1" align="right">{{case.date|date:"Y-m-d"}}</td>
+                        <td width="128" valign="bottom" class="td1" align="right">{{case.date|date:"Y-m-d"}}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td width="43" align="left">&nbsp;</td>
+                        <td width="570" align="middle">oops...没有搜索结果..</td>
+                        <td width="128" height="30" align="left"></td>
                     </tr>
                     {% endfor %}
                     <tr>
-                        <td align="left">&nbsp;</td>
-                        <td height="30" align="left">&nbsp;</td>
-                        <td align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td align="left">&nbsp;</td>
-                        <td height="30" align="left">&nbsp;</td>
-                        <td align="left">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td align="left">&nbsp;</td>
-                        <td height="30" align="left">&nbsp;</td>
-                        <td align="left">&nbsp;</td>
-                    </tr>
+                    <td align="left">&nbsp;</td>
+                    <td align="left">&nbsp;</td>
+                    <td height="30" align="left">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left">&nbsp;</td>
+                    <td align="left">&nbsp;</td>
+                    <td height="30" align="left">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left">&nbsp;</td>
+                    <td align="left">&nbsp;</td>
+                    <td height="30" align="left">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left">&nbsp;</td>
+                    <td align="left">&nbsp;</td>
+                    <td height="30" align="left">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left">&nbsp;</td>
+                    <td align="left">&nbsp;</td>
+                    <td height="30" align="left">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left">&nbsp;</td>
+                    <td align="left">&nbsp;</td>
+                    <td height="30" align="left">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left">&nbsp;</td>
+                    <td align="left">&nbsp;</td>
+                    <td height="30" align="left">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left">&nbsp;</td>
+                    <td align="left">&nbsp;</td>
+                    <td height="30" align="left">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left">&nbsp;</td>
+                    <td align="left">&nbsp;</td>
+                    <td height="30" align="left">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="center">
+                        <p>
+                            {% if cases.has_previous %}
+                            <a href="?page={{ cases.previous_page_number }}">Previous</a>
+                            {% endif %}
+                            <!--{# questions.paginator.number_pages 返回总页数 #}-->
+                            {% if not cases.paginator.num_pages == 1%}
+                            Page {{ cases.number }} of {{ cases.paginator.num_pages }}.
+                            {% endif %}
+                            {% if cases.has_next %}
+                            <a href="?page={{ cases.next_page_number }}">Next</a>
+                            {% endif %}
+                        </p>
+                    </td>
+                </tr>
                 </table>
             </div>
 

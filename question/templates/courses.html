@@ -68,7 +68,7 @@
         }
 
         #homedaohang {
-            height: auto;
+            height: 700px;
             width: 100%;
         }
 
@@ -205,31 +205,6 @@
             for (i = 0; i < (args.length - 1); i += 2) eval(args[i] + ".location='" + args[i + 1] + "'");
         }
     </script>
-    <!--<script language="javascript">-->
-    <!--function CaseCategory() {-->
-    <!--with (document.myForm) {-->
-    <!--var categorys = new Array();-->
-    <!--categorys["0"] = ["&#45;&#45;请选择所在研究方向&#45;&#45;"];-->
-    <!--categorys["统计学"] = ["抽样调查", "回归分析", "概率论与数理统计", "统计学", "最优化理论/运筹学", "数据分析", "R软件", "统计推断", "时间序列分析", "应用多元分析", "随机过程", "试验设计", "假设检验", "统计模型", "统计学习理论", "机器学习", "数据采集方法", "其他"];-->
-    <!--categorys["计算机科学"] = ["数据结构", "算法设计与分析", "面向对象设计", "C/C++", "Python", "Delphi", "PHP", "Java", "编程基础", "计算机系统", "操作系统", "数据库", "软件工程", "数据科学", "机器学习", "计算结构", "自然语言处理", "人工智能", "数据挖掘", "计算机图形学", "图像识别", "虚拟现实", "计算机视觉", "数据可视化", "其他"];-->
-    <!--categorys["人工智能"] = ["Knowledge-Based Artificial Intelligence", "Artificial Intelligence", "Computational Creativity", "Cognitive Science", "Cognitive Systems", "Cognitive Model Science & Technology", "Robot Intelligence", "其他"];-->
-    <!--categorys["数据科学"] = ["数值线性分析", "数值优化", "随机方法", "统计建模", "现代应用统计", "统计学习", "数据挖掘", "海量数据分析", "大数据应用", "大型软件开发", "并行计算", "社交网络分析", "并行和分布式数据挖掘", "其他"];-->
-    <!--categorys["机器人技术"] = ["Vision Sensors", "Sensing and Sensors", "Geometry-based Methods in Vision", "Computer Graphics", "Feedback Control Systems", "Mechanics of Manipulation", "Manipulation Algorithms", "Mobile Robot Design", "Robot Ethics", "Robotic Motion Planning", "Human-Robot Interaction", "Kinematics, Dynamic Systems and Control", "Adaptive Control and Reinforcement Learning", "其他"];-->
-
-    <!--var value = category.value;-->
-    <!--direction.options.length = 0;-->
-    <!--var option;-->
-    <!--for (i = 0; i < categorys[value].length; i++) {-->
-    <!--option = new Option(categorys[value][i], categorys[value][i]);-->
-    <!--direction.options.add(option);-->
-    <!--}-->
-    <!--if (category.value == "0")-->
-    <!--direction.disabled = true;-->
-    <!--else-->
-    <!--direction.disabled = false;-->
-    <!--}-->
-    <!--}-->
-    <!--</script>-->
 </head>
 
 <body>
@@ -269,33 +244,7 @@
         </div>
         <hr color="#0099cc" style=" margin-top: auto; margin-bottom: 2px;" size="3"/>
     </div>
-    <!--<div>-->
-    <!--<table width="100%" border="0" cellspacing="3" cellpadding="1">-->
-    <!--<tr>-->
-    <!--<td height="40px" bgcolor="#F4F4F4">-->
-    <!--<form method="post" action="" name="myForm">-->
-    <!--<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;课程选择：-->
-    <!--<select name="category" onChange="CaseCategory()">-->
-    <!--<option value="0">&#45;&#45;请选择所属领域&#45;&#45;</option>-->
-    <!--<option value="统计学">统计学</option>-->
-    <!--<option value="计算机科学">计算机科学</option>-->
-    <!--<option value="人工智能">人工智能</option>-->
-    <!--<option value="数据科学">数据科学</option>-->
-    <!--<option value="机器人技术">机器人技术</option>-->
 
-
-    <!--</select>-->
-    <!--&gt;-->
-    <!--<select name="direction">-->
-    <!--<option>&#45;&#45;请选择所在研究方向&#45;&#45;</option>-->
-    <!--</select>-->
-
-    <!--</div>-->
-    <!--</form>-->
-    <!--</td>-->
-    <!--</tr>-->
-    <!--</table>-->
-    <!--</div>-->
     <div id="tablehome">
         <form action="" method="get">
             <div id="tableinfo" class="div1">
@@ -411,7 +360,29 @@
                     <td colspan="2" valign="top" style=" border-bottom:1px solid #99cc33"><b>课程介绍：</b>{{course.description}}
                     </td>
                 </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" align="center" valign="top" style=" border-bottom:1px solid #99cc33">
+                        暂无搜索结果...
+                    </td>
+                </tr>
                 {% endfor %}
+                <tr>
+                    <td colspan="3" align="center">
+                        <p>
+                            {% if courses.has_previous %}
+                            <a href="?page={{ courses.previous_page_number }}">Previous</a>
+                            {% endif %}
+                            <!--{# questions.paginator.number_pages 返回总页数 #}-->
+                            {% if not courses.paginator.num_pages == 1%}
+                            Page {{ courses.number }} of {{ courses.paginator.num_pages }}.
+                            {% endif %}
+                            {% if courses.has_next %}
+                            <a href="?page={{ courses.next_page_number }}">Next</a>
+                            {% endif %}
+                        </p>
+                    </td>
+                </tr>
             </table>
         </div>
         <p>&nbsp;</p>

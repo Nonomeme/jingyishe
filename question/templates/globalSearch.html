@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>高维数据--全站搜索--茶水博士</title>
+    <title>全站搜索--茶水博士</title>
     <style type="text/css">
         #nav {
             width: auto;
@@ -212,21 +212,24 @@
         <br/><br/>
         <table width="100%" border="0" cellspacing="1" cellpadding="1">
             <tr>
-                <td colspan="4" align="left" valign="bottom" style=" border-bottom:#99cc33 solid 1px">
+                <td colspan="4" height="30" align="left" valign="bottom" style=" border-bottom:#99cc33 solid 1px">
                     <font color="#0099cc"><b class="textsize1">&raquo;问答</b></font>
                 </td>
             </tr>
             {% for question in questions %}
             <tr>
-                <td width="36" align="center" valign="bottom"><img src="/static/images/star1.jpg" width="27"
-                                                                   height="26"/></td>
-                <td height="30" colspan="2" valign="bottom"> {{question.title}}
-                    {% if question.isSolved %}
-                    【已解决】
-                    {% endif %}
+                <td width="5%" height="30" align="left" valign="bottom">
+                    <img src="/static/images/star1.jpg" width="27" height="26"/>
                 </td>
-                <td height="30" valign="bottom"> {{question.publishDate|date:"Y-m-d H:i"}}</td>
-                <!--<td width="793" valign="top" style=" border-bottom:1px dashed #000">7月11日，12:31，R语言蒙特卡洛模拟？【已解决】</td> -->
+                <td width="60%" height="30" colspan="2" align="left" valign="bottom">
+                    <a href="/question/{{question.id}}">{{question.title}}
+                        {% if question.isSolved %}
+                        【已解决】
+                        {% endif %}
+                    </a>
+                </td>
+                <td width="35%" height="30" align="left" valign="bottom"> {{question.publishDate|date:"Y-m-d H:i"}}
+                </td>
             </tr>
             {% endfor %}
         </table>
@@ -234,54 +237,53 @@
 
         <table width="100%" border="0" cellspacing="1" cellpadding="1">
             <tr>
-                <td height="40" colspan="4" align="left" valign="bottom" style=" border-bottom:#99cc33 solid 1px"><font
-                        color="#0099cc"><b class="textsize1">&raquo;专家</b></font></td>
+                <td colspan="4" height="30" align="left" valign="bottom" style=" border-bottom:#99cc33 solid 1px">
+                    <font color="#0099cc"><b class="textsize1">&raquo;专家</b></font>
+                </td>
             </tr>
             {% for expert in experts %}
             <tr>
-                <td width="48" align="center" valign="bottom"><img src="/static/images/star1.jpg" alt="star" width="27"
-                                                                   height="26"/></td>
-                <td width="130" valign="bottom" height="30"><a href="{{expert.link}}"
-                                                               title="{{expert.name}}"
-                                                               target="_blank">{{expert.name}}</a></td>
-                <td width="187" valign="bottom">{{expert.university}}</td>
-                <td width="495" valign="bottom"> {{expert.tag}}</td>
+                <td width="5%" height="30" align="left" valign="bottom">
+                    <img src="/static/images/star1.jpg" alt="star" width="27" height="26"/>
+                </td>
+                <td width="30%" valign="bottom" height="30">
+                    <a href="{{expert.link}}" title="{{expert.name}}" target="_blank">{{expert.name}}</a>
+                </td>
+                <td width="30%" valign="bottom">{{expert.university}}</td>
+                <td width="35%" valign="bottom"> {{expert.tag}}</td>
             </tr>
             {% endfor %}
         </table>
         <br/>
         <table width="100%" border="0" cellspacing="1" cellpadding="1">
             <tr>
-                <td colspan="3" height="40" valign="bottom" style=" border-bottom:#99cc33 solid 1px"><font
-                        color="#0099cc"><b class="textsize1">&raquo;课程</b></font></td>
+                <td colspan="4" height="30" align="left" valign="bottom" style=" border-bottom:#99cc33 solid 1px">
+                    <font color="#0099cc"><b class="textsize1">&raquo;课程</b></font>
+                </td>
             </tr>
+            {% for course in courses %}
             <tr>
-                <td width="7%" height="30" align="center" valign="bottom"><img src="/static/images/star1.jpg" alt="star"
-                                                                               width="27" height="26"/></td>
-                <td width="93%" colspan="3" valign="bottom">机器学习和数据分析</td>
+                <td width="5%" height="30" align="left" valign="bottom">
+                    <img src="/static/images/star1.jpg" alt="star" width="27" height="26"/>
+                </td>
+                <td width="95%" colspan="3" valign="bottom">
+                    <a href="{{course.link}}">{{course.title}}</a>
+                </td>
             </tr>
-            <tr>
-                <td height="30" align="center" valign="bottom"><img src="images/star1.jpg" alt="star" width="27"
-                                                                    height="26"/></td>
-                <td colspan="3" valign="bottom">数据科学实战</td>
-            </tr>
-            <tr>
-                <td height="30" align="center" valign="bottom"><img src="images/star1.jpg" alt="star" width="27"
-                                                                    height="26"/></td>
-                <td colspan="3" valign="bottom">决策数据分析</td>
-            </tr>
+            {% endfor %}
         </table>
         <br/>
         <table width="100%" border="0" cellspacing="1" cellpadding="1">
             <tr>
-                <td height="40" colspan="4" align="left" valign="bottom" style=" border-bottom:#99cc33 solid 1px"><font
-                        color="#0099cc"><b class="textsize1">&raquo;案例</b></font></td>
+                <td colspan="4" height="30" align="left" valign="bottom" style=" border-bottom:#99cc33 solid 1px">
+                    <font color="#0099cc"><b class="textsize1">&raquo;案例</b></font>
+                </td>
             </tr>
             {% for case in cases %}
             <tr>
-                <td width="7%" height="30" align="center" valign="bottom"><img src="/static/images/star1.jpg" alt="star"
-                                                                               width="27" height="26"/></td>
-                <td width="93%" colspan="3" valign="bottom">
+                <td width="5%" height="30" align="left" valign="bottom"><img src="/static/images/star1.jpg" alt="star"
+                                                                             width="27" height="26"/></td>
+                <td width="95%" colspan="3" valign="bottom">
                     <a href="/case/{{case.id}}/">{{case.caseType}}：
                         {% if case.domain == null %}
                         {% else %}

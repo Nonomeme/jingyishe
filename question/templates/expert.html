@@ -395,12 +395,19 @@
                         <div class="test">{{expert.tag}}</div>
                     </td>
                 </tr>
+                {% empty %}
+                <tr>
+                    <td width="30" align="left">&nbsp;</td>
+                    <td width="153" align="left">&nbsp;</td>
+                    <td width="226" align="left">&nbsp;</td>
+                    <td width="518" height="30" align="left">oops...没有搜索结果...</td>
+                </tr>
                 {% endfor %}
                 <tr>
-                    <td align="left">&nbsp;</td>
-                    <td align="left">&nbsp;</td>
-                    <td align="left">&nbsp;</td>
-                    <td height="30" align="left">&nbsp;</td>
+                    <td width="30" align="left">&nbsp;</td>
+                    <td width="153" align="left">&nbsp;</td>
+                    <td width="226" align="left">&nbsp;</td>
+                    <td width="518" height="30" align="left">&nbsp;</td>
                 </tr>
                 <tr>
                     <td align="left">&nbsp;</td>
@@ -454,7 +461,20 @@
                     <td align="left">&nbsp;</td>
                     <td align="left">&nbsp;</td>
                     <td align="left">&nbsp;</td>
-                    <td height="30" align="left">&nbsp;</td>
+                    <td align="left">
+                        <p>
+                            {% if experts.has_previous %}
+                            <a href="?page={{ experts.previous_page_number }}">Previous</a>
+                            {% endif %}
+                            <!--{# questions.paginator.number_pages 返回总页数 #}-->
+                            {% if not experts.paginator.num_pages == 1%}
+                            Page {{ experts.number }} of {{ experts.paginator.num_pages }}.
+                            {% endif %}
+                            {% if experts.has_next %}
+                            <a href="?page={{ experts.next_page_number }}">Next</a>
+                            {% endif %}
+                        </p>
+                    </td>
                 </tr>
             </table>
         </div>
