@@ -382,6 +382,7 @@ def latestQuestion(request):
 
     if 'isHot' in request.GET:
         isHot = True
+        questions = questions.order_by('answerNum')
 
     # page_size = 10  # 每页显示的条数
     # # after_range_num = 5
@@ -1106,20 +1107,20 @@ def courses(request):
             language = '2'
         data.update({'language': language})
 
-    if 'time' in request.GET:
-        today = datetime.date.today()
-        print today
-        if request.GET['time'] == '1':
-            courses = courses.filter(
-                Q(publishDate__year=today.year) & Q(publishDate__month=today.month) & Q(publishDate__day=today.day))
-            time = '1'
-        elif request.GET['time'] == '2':
-            courses = courses.filter(Q(courseDate__gt=(today - datetime.timedelta(7))) & Q(courseDate__lte=today))
-            time = '2'
-        elif request.GET['time'] == '3':
-            courses = courses.filter(Q(courseDate__lt=(today + datetime.timedelta(7))) & Q(courseDate__gt=today))
-            time = '3'
-        data.update({'time': time})
+    # if 'time' in request.GET:
+    #     today = datetime.date.today()
+    #     print today
+    #     if request.GET['time'] == '1':
+    #         courses = courses.filter(
+    #             Q(publishDate__year=today.year) & Q(publishDate__month=today.month) & Q(publishDate__day=today.day))
+    #         time = '1'
+    #     elif request.GET['time'] == '2':
+    #         courses = courses.filter(Q(courseDate__gt=(today - datetime.timedelta(7))) & Q(courseDate__lte=today))
+    #         time = '2'
+    #     elif request.GET['time'] == '3':
+    #         courses = courses.filter(Q(courseDate__lt=(today + datetime.timedelta(7))) & Q(courseDate__gt=today))
+    #         time = '3'
+    #     data.update({'time': time})
 
     if 'order' in request.GET:
         if request.GET['order'] == '1':
@@ -1129,7 +1130,7 @@ def courses(request):
             courses = courses.order_by('courseDate').reverse()
             order = '2'
         if request.GET['order'] == '3':
-            courses = courses.order_by('rank').reverse()
+            courses = courses.order_by('popularity').reverse()
             order = '3'
         data.update({'order': order})
 

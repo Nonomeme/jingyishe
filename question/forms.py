@@ -145,7 +145,7 @@ class CourseSearchForm(forms.Form):
                                   attrs={'style': 'width: 60; height: 40; font-size: 18px', 'size': '60',
                                          'placeholder': '请输入关键词'}))
     language = forms.ChoiceField(choices=CHOICES_FOR_LANGUAGE, widget=forms.RadioSelect, required=False)
-    time = forms.ChoiceField(choices=CHOICES_FOR_TIME, widget=forms.RadioSelect, required=False)
+    # time = forms.ChoiceField(choices=CHOICES_FOR_TIME, widget=forms.RadioSelect, required=False)
     order = forms.ChoiceField(choices=CHOICES_FOR_ORDER, widget=forms.RadioSelect, required=False)
 
 
