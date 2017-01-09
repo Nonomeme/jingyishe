@@ -1100,10 +1100,10 @@ def courses(request):
 
     if 'language' in request.GET:
         if request.GET['language'] == '1':
-            courses = courses.filter(language=1)
+            courses = courses.filter(Q(language=1) | Q(language=3))
             language = '1'
         elif request.GET['language'] == '2':
-            courses = courses.filter(language=2)
+            courses = courses.filter(Q(language=2) | Q(language=3))
             language = '2'
         data.update({'language': language})
 

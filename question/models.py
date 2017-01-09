@@ -149,7 +149,7 @@ class Course(models.Model):
     university = models.CharField(max_length=256)
     description = models.TextField()
     publishDate = models.DateTimeField(auto_now_add=True)
-    language = models.IntegerField(default=1)   #1代表中文 2代表英文
+    language = models.IntegerField(default=1)   #1代表中文 2代表英文 3代表中/英
     courseDate = models.DateTimeField(null=True)
     rank = models.FloatField(default=0)
     popularity = models.FloatField(default=0)

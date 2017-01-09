@@ -21,7 +21,7 @@ CHOICES_FOR_CASE = (
 
 
 class AnswerForm(forms.Form):
-    content = forms.CharField(widget=forms.Textarea(attrs={'placeholder': '输入回答内容', 'cols': '161', 'rows': '20'}))
+    content = forms.CharField(widget=forms.Textarea(attrs={'placeholder': '输入回答内容', 'cols': '145', 'rows': '20'}))
     isPublic = forms.ChoiceField(choices=CHOICES_FOR_ANSWER, widget=forms.RadioSelect, initial='1')
     attachedFile = forms.FileField(required=False)
 

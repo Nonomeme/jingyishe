@@ -1,11 +1,13 @@
-# coding:utf-8
+#coding=utf-8
+
 
 import os, sys
 import xlrd, datetime, time
 from xlrd import xldate_as_tuple
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
-
+reload(sys)
+sys.setdefaultencoding('utf-8')
 # sys.path.insert(0,'/Users/project/jingyishe/')
 
 # print os.path.abspath(os.path.curdir)
@@ -125,6 +127,8 @@ def courseDump():
     courseList = []
 
     # row = table.row_values(1)
+
+
     # title = row[1]
     # university = row[2]
     # description = row[3]
@@ -132,12 +136,12 @@ def courseDump():
     # link = row[4]
     # picture = row[5]
     # language = 1
-    # if row[7] == u'英语':
+    # if cmp(row[7],u'英语'):
     #     language = 2
     # rank = float(row[9])
     # popularity = float(row[10])
-    # courseDate = datetime.datetime.strptime(datestr, "%Y/%m/%d")
-
+    # # courseDate = datetime.datetime.strptime(datestr, "%Y/%m/%d")
+    # print language
     # print title
     # print university
     # print description
@@ -150,6 +154,9 @@ def courseDump():
     # print language
     # print rank
     # print popularity
+
+
+
     for rownum in range(1, nrows):
         row = table.row_values(rownum)
         if row:
@@ -159,9 +166,11 @@ def courseDump():
             publishDate = datetime.datetime.now()
             link = row[4]
             picture = row[5]
-            language = 1
-            if row[7] == u'英语':
-                language = 2
+            try:
+                language = int(row[7])
+            except:
+                language = 1
+                print title,row[7]
             rank = float(row[9])
             popularity = float(row[10])
 
@@ -303,7 +312,7 @@ def answerModify():
             else:
                 question = Question.objects.get(id=questionId)
                 question.answerNum = answerCount
-                print questionId,answerCount
+                print questionId, answerCount
                 question.save()
                 answerCount = 1
                 questionId = row[1]
@@ -315,12 +324,12 @@ def answerModify():
 
 
 if __name__ == "__main__":
-    caseDump()
-    expertDump()
+    # caseDump()
+    # expertDump()
     courseDump()
-    UserDump()
-    userModify()
-    questionDump()
-    answerDump()
-    answerModify()
+    # UserDump()
+    # userModify()
+    # questionDump()
+    # answerDump()
+    # answerModify()
     print('Done!')
